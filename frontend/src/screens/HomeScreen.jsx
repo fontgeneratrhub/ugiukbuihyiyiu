@@ -1,10 +1,14 @@
 import React from "react";
 
+import Carousel from "../components/Home/Carousel";
+import Services from "../components/Home/Services";
+
 const HomeScreen = () => {
   return (
-    <section className="h-screen flex items-center justify-center">
-      HomeScreen
-    </section>
+    <>
+      <Carousel />
+      <Services />
+    </>
   );
 };
 
