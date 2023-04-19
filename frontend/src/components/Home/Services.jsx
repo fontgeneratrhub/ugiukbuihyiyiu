@@ -40,9 +40,9 @@ const Services = () => {
           {services.map((service) => (
             <div
               key={service.id}
-              className="flex flex-col items-center justify-center m-4 rounded-lg p-8 border border-gray-500"
+              className="flex flex-col flex-1 items-center justify-center m-4 rounded-lg p-8 border bg-gray-50 border-gray-500"
             >
-              <div className="flex items-center justify-center bg-gray-800 text-white text-4xl p-10 rounded-full mb-6">
+              <div className="flex w-1/2 h-1/2 items-center justify-center bg-gray-800 text-white text-4xl p-10 rounded-full mb-6">
                 {service.icon}
               </div>
               <h3 className="text-2xl font-bold my-3">{service.title}</h3>
