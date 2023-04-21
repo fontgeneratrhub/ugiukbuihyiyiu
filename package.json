@@ -1,0 +1,38 @@
+{
+  "name": "kariger.com",
+  "version": "1.0.0",
+  "description": "A Technician Finding App - MERN",
+  "private": true,
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js",
+    "client": "npm run dev --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "install": "cd frontend && npm install && cd .. && cd backend && npm install && cd .."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/junaidahmadalvi/kariger.com.git"
+  },
+  "keywords": [
+    "MERN",
+    "MongoDB",
+    "Express",
+    "React",
+    "Node"
+  ],
+  "author": "Junaid Ahmad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/junaidahmadalvi/kariger.com/issues"
+  },
+  "homepage": "https://github.com/junaidahmadalvi/kariger.com#readme",
+  "dependencies": {
+    "concurrently": "^6.4.0"
+  },
+  "devDependencies": {
+    "colors": "^1.4.0",
+    "eslint": "^8.38.0",
+    "nodemon": "^2.0.22"
+  }
+}

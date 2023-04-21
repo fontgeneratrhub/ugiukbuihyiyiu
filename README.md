@@ -65,7 +65,7 @@ cd kariger.com
 Install the dependencies by running the following command:
 
 ```bash
-npm install
+npm run install
 ```
 
 Start the development server:

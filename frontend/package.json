@@ -1,13 +1,20 @@
 {
   "name": "frontend",
+  "description": "Frontend for Kariger.com app",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
+  "keywords": [
+    "react",
+    "vite",
+    "javascript"
+  ],
+  "author": "Muhammad Saad",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",

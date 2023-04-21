@@ -1,0 +1,49 @@
+# Logs and databases
+*.log
+*.sqlite
+*.sqlite3
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# IDE and editor generated files
+.idea/
+.vscode/
+*.swp
+*~
+
+# Dependency directories
+node_modules/
+jspm_packages/
+bower_components/
+
+# Distribution files
+/dist/
+/build/
+/public/assets/
+/public/bundles/
+/public/uploads/
+
+# Configuration files
+.env
+.env.local
+.env.*.local
+.env.test
+.env.production
+
+# Miscellaneous
+.sass-cache/
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore all .js files in the /node_modules directory
+/node_modules/**/*.js
+
+# Ignore all .test.js files in the /test directory
+/test/**/*.test.js
+
+# Ignore all .snap files in the root directory
+*.snap
