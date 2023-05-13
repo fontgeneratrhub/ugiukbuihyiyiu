@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import Button from "./Button";
 
 const NavbarCmp = () => {
   // For the Dropdown in Nav
@@ -148,12 +149,13 @@ const NavbarCmp = () => {
           <div className="flex justify-end mr-5">
             {userInfo ? (
               <div className="relative" ref={dropdownRef}>
-                <button
+                <Button
+                  variant="secondary"
                   onClick={() => setDropIsOpen(!dropIsOpen)}
-                  className="bg-gray-600 block rounded px-3 py-2 text-white hover:bg-gray-700 "
+                  className="text-white rounded-md"
                 >
                   {userInfo.displayName}
-                </button>
+                </Button>
                 {dropIsOpen && (
                   <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="p-1">
@@ -175,9 +177,9 @@ const NavbarCmp = () => {
               </div>
             ) : (
               <Link to="/login">
-                <button className="bg-teal-600  hover:bg-teal-700  text-white py-2 px-4 rounded">
+                <Button variant="primary" className="text-white rounded-md">
                   Login / Register
-                </button>
+                </Button>
               </Link>
             )}
           </div>

@@ -161,7 +161,7 @@ const AdminLoginScreen = () => {
             <Button
               type="submit"
               variant="primary"
-              classNames="w-full rounded-full"
+              className="w-full rounded-full"
             >
               Login
             </Button>

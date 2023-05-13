@@ -310,7 +310,7 @@ const TechRegisterScreen = () => {
             <Button
               type="submit"
               variant="primary"
-              classNames="w-full rounded-md"
+              className="w-full rounded-md"
             >
               Register
             </Button>

@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 
-const TechLoginScreen = () => {
+const UserLoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
 
   const submitHandler = (e) => {
     e.preventDefault();
     console.log("SuccessFully Logged in");
-    // Check if username and password are valid and allow access to admin dashboard
+    // Check if username and password are valid and allow access to User dashboard
   };
 
   const forgetPwdHandler = () => {
@@ -23,8 +22,9 @@ const TechLoginScreen = () => {
     <section className="min-h-screen flex flex-col justify-center items-center bg-gray-800 text-white p-20">
       <div className="mx-auto max-w-screen-xl w-full flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl text-center font-bold mb-4">
-          Welcome to Technician Portal!
+          Welcome to Kariger.com!
         </h1>
+
         <div className="flex flex-col items-center justify-evenly md:flex-row">
           <div className="w-full max-w-2xl flex flex-col items-center justify-center my-4 mx-auto p-4 sm:p-6 lg:p-8">
             <img
@@ -138,10 +138,6 @@ const TechLoginScreen = () => {
                   <input
                     type="checkbox"
                     id="remember"
-                    checked={rememberMe}
-                    onChange={(e) => {
-                      setRememberMe(e.target.checked);
-                    }}
                     className="h-4 w-4 text-green-500 focus:ring-green-400 border-gray-300 rounded"
                   />
                   <label
@@ -172,7 +168,7 @@ const TechLoginScreen = () => {
 
             <p className="text-center text-sm text-gray-400">
               No account?{" "}
-              <Link className="underline text-white" to="/technician/register">
+              <Link className="underline text-white" to="/register">
                 Sign up
               </Link>
             </p>
@@ -183,4 +179,4 @@ const TechLoginScreen = () => {
   );
 };
 
-export default TechLoginScreen;
+export default UserLoginScreen;

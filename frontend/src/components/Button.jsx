@@ -3,7 +3,7 @@ import React from "react";
 const Button = ({
   variant,
   children,
-  classNames: additionalClassNames,
+  className: additionalClassNames,
   ...props
 }) => {
   let classes = "";

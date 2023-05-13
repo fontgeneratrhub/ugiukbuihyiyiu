@@ -191,11 +191,7 @@ const AdminRegisterScreen = () => {
             </div>
           </div>
 
-          <Button
-            type="submit"
-            variant="primary"
-            classNames="w-full rounded-md"
-          >
+          <Button type="submit" variant="primary" className="w-full rounded-md">
             Register
           </Button>
 
