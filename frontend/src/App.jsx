@@ -7,6 +7,8 @@ import AdminDashboard from "./screens/Admin/AdminDashboard";
 import AdminLoginScreen from "./screens/Admin/AdminLoginScreen";
 import AdminRegisterScreen from "./screens/Admin/AdminRegisterScreen";
 import HomeScreen from "./screens/HomeScreen";
+import TechLoginScreen from "./screens/Technician/TechLoginScreen";
+import TechRegisterScreen from "./screens/Technician/TechRegisterScreen";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
       <NavbarCmp />
       <Routes>
         <Route path="/" element={<HomeScreen />} />
+        <Route path="/technician/login" element={<TechLoginScreen />} />
+        <Route path="/technician/register" element={<TechRegisterScreen />} />
         <Route path="/admin/login" element={<AdminLoginScreen />} />
         <Route path="/admin/register" element={<AdminRegisterScreen />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />

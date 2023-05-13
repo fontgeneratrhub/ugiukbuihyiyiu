@@ -18,12 +18,12 @@ const AdminRegisterScreen = () => {
 
   return (
     <section className="min-h-screen flex flex-col justify-center items-center bg-gray-800 text-white p-20">
-      <div className="mx-auto max-w-screen-xl w-3/4 flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold mb-4">
+      <div className="mx-auto max-w-screen-xl w-full flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
+        <h1 className="text-4xl text-center font-bold mb-4">
           Welcome to Admin Register Portal!
         </h1>
         <form
-          className="max-w-lg w-full flex flex-col items-center justify-center rounded-lg border border-gray-400 my-4 mx-auto p-4 sm:p-6 lg:p-8"
+          className="w-full max-w-2xl flex flex-col items-center justify-center rounded-lg border border-gray-400 my-4 mx-auto p-4 sm:p-6 lg:p-8"
           onSubmit={submitHandler}
         >
           <p className="text-center text-xl leading-relaxed pb-4">
@@ -200,7 +200,7 @@ const AdminRegisterScreen = () => {
           </Button>
 
           <p className="text-center text-sm text-gray-400">
-            Already hav an Account?{" "}
+            Already have an Account?{" "}
             <Link className="underline text-white" to="/admin/login">
               Sign in
             </Link>
