@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 
-const AdminRegisterScreen = () => {
+const UserRegisterScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,7 +20,7 @@ const AdminRegisterScreen = () => {
     <section className="min-h-screen flex flex-col justify-center items-center bg-gray-800 text-white p-20">
       <div className="mx-auto max-w-screen-xl w-full flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl text-center font-bold mb-4">
-          Welcome to Admin Register Portal!
+          Welcome to Kariger.com Register Portal!
         </h1>
         <div className="flex flex-col items-center justify-evenly md:flex-row">
           <div className="w-full max-w-2xl flex flex-col items-center justify-center my-4 mx-auto p-4 sm:p-6 lg:p-8">
@@ -209,7 +209,7 @@ const AdminRegisterScreen = () => {
 
             <p className="text-center text-sm text-gray-400">
               Already have an Account?{" "}
-              <Link className="underline text-white" to="/admin/login">
+              <Link className="underline text-white" to="/login">
                 Sign in
               </Link>
             </p>
@@ -220,4 +220,4 @@ const AdminRegisterScreen = () => {
   );
 };
 
-export default AdminRegisterScreen;
+export default UserRegisterScreen;
