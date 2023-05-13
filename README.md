@@ -1,4 +1,4 @@
-# Kariger.com - Find any Kariger Nearby
+# Kariger.com - Find any Karigers Nearby
 
 > A MERN Web Application that lets the User to Make Appointments with a Kariger nearby to solve his daily life problems..
 
@@ -45,7 +45,15 @@ KAriger.com uses a number of open source projects to work properly:
 - [React Router] - A library for managing routing in React applications.
 - [Redux.Js] - A predictable state container for JavaScript apps.
 - [TailwindCSS] - A utility-first CSS framework for designing responsive and customizable UI components.
-- [Vite.js] - BoilerPlate for React Application
+- [Vite.Js] - BoilerPlate for React Application
+- [Node.js] - Evented I/O for the backend
+- [Express] - Fast node.js network app framework
+- [MongoDB] - A document-oriented NoSQL database used for high volume data storage.
+- [Mongoose] - An Object Data Modeling (ODM) library for MongoDB and Node. js.
+- [JWT] - JSON Web Token (JWT) is a compact URL-safe means of representing claims to be transferred between two parties.
+- [Bcrypt] - A library to help you hash passwords.
+- [GitHub] - GitHub, Inc. is a provider of Internet hosting for software development and version control using Git.
+- [Postman] - Postman is a developer tool that lets you write, test, and document your APIs.
 
 ## Getting Started
 
