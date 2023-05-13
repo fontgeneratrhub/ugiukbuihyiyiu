@@ -6,17 +6,17 @@ const Carousel = () => {
   const images = [
     {
       id: 1,
-      url: "https://picsum.photos/id/1018/500/300",
+      url: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f",
       alt: "Image 1",
     },
     {
       id: 2,
-      url: "https://picsum.photos/id/1024/500/300",
+      url: "https://images.unsplash.com/photo-1516216628859-9bccecab13ca",
       alt: "Image 2",
     },
     {
       id: 3,
-      url: "https://picsum.photos/id/1035/500/300",
+      url: "https://images.unsplash.com/photo-1530124566582-a618bc2615dc",
       alt: "Image 3",
     },
   ];
