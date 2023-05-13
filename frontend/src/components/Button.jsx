@@ -19,7 +19,7 @@ const Button = ({
       break;
     case "outline":
       classes =
-        "bg-transparent hover:bg-gray-600 text-md font-medium py-3 px-4 my-4 border border-gray-500 text-gray-500 hover:text-white";
+        "bg-transparent hover:bg-white text-md font-medium py-3 px-4 my-4 border border-gray-200 text-gray-500 text-white hover:text-gray-600 transition-all duration-300";
       break;
     case "danger":
       classes =

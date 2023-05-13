@@ -2,14 +2,14 @@ import React from "react";
 
 import Carousel from "../components/Home/Carousel";
 import Features from "../components/Home/Features";
-import Services from "../components/Home/Services";
+import Jumbotron from "../components/Home/Jumbotron";
 import Testimonials from "../components/Home/Testimonials";
 
 const HomeScreen = () => {
   return (
     <>
+      <Jumbotron />
       <Carousel />
-      <Services />
       <Features />
       <Testimonials />
     </>
