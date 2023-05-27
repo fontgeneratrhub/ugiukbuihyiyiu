@@ -28,9 +28,9 @@ const Features = () => {
     },
   ];
   return (
-    <section className="min-h-screen flex justify-center items-center bg-gradient-to-br from-gray-800 to-gray-700 text-white p-20">
+    <section className="min-h-screen flex justify-center items-center bg-gradient-to-br from-gray-800 to-gray-700 text-white p-10 sm:p-20">
       <div className="flex flex-col items-center justify-center mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-5xl font-bold mb-10">Why Choose Us?</h1>
+        <h1 className="text-5xl font-bold text-center mb-10">Why Choose Us?</h1>
         <div className="flex flex-col sm:flex-row justify-center">
           {benefits.map((benefit) => (
             <div

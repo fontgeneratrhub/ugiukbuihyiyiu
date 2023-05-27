@@ -39,24 +39,65 @@ const NavbarCmp = () => {
   // set dummy user
 
   const [userInfo, setUserInfo] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isTechnician, setIsTechnician] = useState(false);
 
-  useEffect(() => {
-    setUserInfo({
-      displayName: "John Doe",
-      email: "john@example.com",
+  // create dummy array of user object
+  const users = [
+    {
+      id: "1",
+      displayName: "Admin",
+      email: "admin@kariger.com",
       emailVerified: true,
-      isAnonymous: false,
+      isAdmin: true,
+      isTechnician: false,
+      phoneNumber: null,
       metadata: {
         creationTime: "2021-05-31T18:00:00.000Z",
         lastSignInTime: "2021-05-31T18:00:00.000Z",
       },
-      phoneNumber: null,
       photoURL: null,
-    });
+    },
+    {
+      id: "2",
+      displayName: "Jane Doe",
+      email: "jane@kariger.com",
+      emailVerified: true,
+      isAdmin: false,
+      isTechnician: true,
+      phoneNumber: null,
+      metadata: {
+        creationTime: "2021-05-31T18:00:00.000Z",
+        lastSignInTime: "2021-05-31T18:00:00.000Z",
+      },
+      photoURL: null,
+    },
+    {
+      id: "3",
+      displayName: "John Doe",
+      email: "john@kariger.com",
+      emailVerified: true,
+      isAdmin: false,
+      isTechnician: false,
+      phoneNumber: null,
+      metadata: {
+        creationTime: "2021-05-31T18:00:00.000Z",
+        lastSignInTime: "2021-05-31T18:00:00.000Z",
+      },
+      photoURL: null,
+    },
+  ];
+
+  // set dummy user
+  useEffect(() => {
+    setUserInfo(users[0]);
+    setIsAdmin(users[0].isAdmin);
+    setIsTechnician(users[0].isTechnician);
   }, []);
 
   const logoutHandler = () => {
     setUserInfo(null);
+    setDropIsOpen(!dropIsOpen);
   };
 
   return (
@@ -160,8 +201,22 @@ const NavbarCmp = () => {
                   <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="p-1">
                       <Link
+                        to={
+                          isAdmin
+                            ? "/admin/dashboard"
+                            : isTechnician
+                            ? "/technician/dashboard"
+                            : "/user/dashboard"
+                        }
+                        className="text-gray-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base hover:font-bold"
+                        onClick={() => setDropIsOpen(!dropIsOpen)}
+                      >
+                        Dashboard
+                      </Link>
+                      <Link
                         to="/profile"
                         className="text-gray-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base hover:font-bold"
+                        onClick={() => setDropIsOpen(!dropIsOpen)}
                       >
                         Profile
                       </Link>
@@ -177,9 +232,9 @@ const NavbarCmp = () => {
               </div>
             ) : (
               <Link to="/login">
-                <Button variant="primary" className="text-white rounded-md">
+                <button className="bg-green-500 hover:bg-green-600 font-medium text-white rounded-md text-sm my-2 px-2 py-2 sm:text-md sm:my-4 sm:py-3 sm:px-4">
                   Login / Register
-                </Button>
+                </button>
               </Link>
             )}
           </div>
@@ -192,18 +247,21 @@ const NavbarCmp = () => {
           <Link
             to="/"
             className="text-gray-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-bold"
+            onClick={() => setIsOpen(!isOpen)}
           >
             Home
           </Link>
           <Link
             to="/technicians"
             className="text-gray-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-bold"
+            onClick={() => setIsOpen(!isOpen)}
           >
             Technicians
           </Link>
           <Link
             to="/contact"
             className="text-gray-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-bold"
+            onClick={() => setIsOpen(!isOpen)}
           >
             Contact-Us
           </Link>
