@@ -11,9 +11,7 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
   // const { userInfo } = userLogin;
 
   // const allOrders = useSelector((state) => state.allOrders);
-  // const userOrders = useSelector((state) => state.userOrders);
-  // const technicianOrders = useSelector((state) => state.technicianOrders);
-  // const userReviews = useSelector((state) => state.userReviews);
+  // const { loading, error, orders } = allOrders;
 
   return (
     <div className="min-h-screen w-10/12 bg-gradient-to-br from-gray-800 to-gray-700 p-4">
@@ -78,6 +76,16 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
               )}
             </div>
           )}
+
+          {menuItems[selectedItem].name === "Reviews" && (
+            <div>
+              <h2 className="text-2xl font-semibold mb-2">Users</h2>
+              {users.map((user) => (
+                <div key={user.id}>{user.name}</div>
+              ))}
+            </div>
+          )}
+
           {menuItems[selectedItem].name === "Profile" && (
             <div>
               <h2 className="text-2xl font-semibold mb-2">Profile</h2>
