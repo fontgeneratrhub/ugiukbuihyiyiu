@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from "react";
 
+import carousel1 from "../../images/jeriden-villegas-VLPUm5wP5Z0-unsplash.jpg";
+import carousel2 from "../../images/kenny-eliason-60krlMMeWxU-unsplash.jpg";
+import carousel3 from "../../images/sol-tZw3fcjUIpM-unsplash.jpg";
+
 const Carousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const images = [
     {
       id: 1,
-      url: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f",
+      url: carousel1,
       alt: "Image 1",
     },
     {
       id: 2,
-      url: "https://images.unsplash.com/photo-1516216628859-9bccecab13ca",
+      url: carousel2,
       alt: "Image 2",
     },
     {
       id: 3,
-      url: "https://images.unsplash.com/photo-1530124566582-a618bc2615dc",
+      url: carousel3,
       alt: "Image 3",
     },
   ];

@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
+import image1 from "../../images/jeriden-villegas-VLPUm5wP5Z0-unsplash.jpg";
+
 import Button from "../Button";
 
 const Jumbotron = () => {
@@ -24,11 +27,7 @@ const Jumbotron = () => {
           </Link>
         </div>
         <div className="w-full lg:w-1/2 px-4">
-          <img
-            className="rounded-lg shadow-lg"
-            src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f"
-            alt="Technician"
-          />
+          <img className="rounded-lg shadow-lg" src={image1} alt="Technician" />
         </div>
       </div>
     </section>
