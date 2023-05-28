@@ -29,7 +29,7 @@ const SideBar = ({ menuItems, selectedItem, handleItemClick }) => {
       <nav className="text-sm">
         <ul>
           {menuItems.map((item, index) => (
-            <li key={index} className="mb-2">
+            <li key={index} className="mb-3">
               <button
                 onClick={() => handleButtonClick(index, item.name)}
                 className={`flex flex-row items-center ${
