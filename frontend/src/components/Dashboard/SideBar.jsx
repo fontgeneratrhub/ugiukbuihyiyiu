@@ -5,8 +5,6 @@ import userAVI from "../../images/User-avatar.svg.png";
 const SideBar = ({ menuItems, selectedItem, handleItemClick }) => {
   const handleClick = (index, name) => {
     handleItemClick(index);
-
-    // Use REdux to Compare
   };
   return (
     <div className="min-h-screen w-1/6 bg-gray-900 flex flex-col items-center shadow-md p-4">
@@ -31,7 +29,7 @@ const SideBar = ({ menuItems, selectedItem, handleItemClick }) => {
           {menuItems.map((item, index) => (
             <li key={index} className="mb-3">
               <button
-                onClick={() => handleButtonClick(index, item.name)}
+                onClick={() => handleClick(index, item.name)}
                 className={`flex flex-row items-center ${
                   selectedItem === index ? "text-white" : "text-gray-400"
                 } hover:text-white`}

@@ -21,7 +21,7 @@ const SortDropdown = ({ sortOptions, sortOption, handleSort }) => {
   }, [dropdownRef]);
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative flex justify-center" ref={dropdownRef}>
       <Button
         variant="secondary"
         onClick={() => setDropIsOpen(!dropIsOpen)}
@@ -32,7 +32,7 @@ const SortDropdown = ({ sortOptions, sortOption, handleSort }) => {
       <div
         className={`${
           dropIsOpen ? "block" : "hidden"
-        } origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none`}
+        } origin-top absolute mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none`}
       >
         <div
           className="p-1"

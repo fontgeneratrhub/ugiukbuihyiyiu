@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const MainContent = ({ variant, selectedItem, menuItems }) => {
   // const admins = useSelector((state) => state.admins);
@@ -83,15 +83,6 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
               {users.map((user) => (
                 <div key={user.id}>{user.name}</div>
               ))}
-            </div>
-          )}
-
-          {menuItems[selectedItem].name === "Profile" && (
-            <div>
-              <h2 className="text-2xl font-semibold mb-2">Profile</h2>
-              <div>{userInfo.name}</div>
-              <div>{userInfo.email}</div>
-              <div>{userInfo.role}</div>
             </div>
           )}
         </div>

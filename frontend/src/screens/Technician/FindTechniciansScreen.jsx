@@ -200,8 +200,7 @@ const FindTechniciansScreen = () => {
               <Message type="error">No technicians found.</Message>
             ) : (
               filteredTechnicians.map((technician) => (
-                <Link
-                  to={`/technicians/${technician.id}`}
+                <div
                   key={technician.id}
                   className="sm:w-1/4 w-full bg-gray-900 flex flex-col justify-center items-center text-justify rounded-lg shadow-lg mb-4 sm:m-2  px-6 py-2 border-2 border-transparent hover:shadow-xl hover:border-gray-700 transition-colors duration-300"
                 >
@@ -214,27 +213,31 @@ const FindTechniciansScreen = () => {
                     {technician.name}
                   </h2>
                   <h2 className="text-gray-300 text-sm font-light mb-2">
+                    <i className="fas fa-map-marker-alt mr-2"></i>
                     Location: {technician.location}
                   </h2>
                   <h2 className="text-gray-300 text-sm font-light mb-2">
+                    <i className="fas fa-layer-group mr-2"></i>
                     Category: {technician.category}
                   </h2>
                   <h2 className="text-yellow-400 text-lg font-bold mb-2">
+                    <i className="fas fa-star mr-2"></i>
                     Rating: {technician.rating}
                   </h2>
                   <h2 className="text-gray-300 text-sm font-light mb-2">
+                    <i className="fas fa-clock mr-2"></i>
                     Experience: {technician.experience}
                   </h2>
                   <p className="text-gray-300 text-sm">
                     {technician.description}
                   </p>
 
-                  <Link to={`/technicians/${technician.id}`}>
+                  <Link to={`/technician/${technician.id}`}>
                     <Button variant="outline" className="rounded-md">
                       View Profile
                     </Button>
                   </Link>
-                </Link>
+                </div>
               ))
             )}
           </div>

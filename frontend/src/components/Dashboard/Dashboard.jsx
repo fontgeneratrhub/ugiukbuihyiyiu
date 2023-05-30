@@ -7,10 +7,6 @@ const Dashboard = ({ variant }) => {
   const menuItems = {
     admin: [
       {
-        name: "Profile",
-        icon: "fas fa-address-card",
-      },
-      {
         name: "Admins",
         icon: "fas fa-user",
       },
@@ -29,10 +25,6 @@ const Dashboard = ({ variant }) => {
     ],
     technician: [
       {
-        name: "Profile",
-        icon: "fas fa-address-card",
-      },
-      {
         name: "Orders",
         icon: "fas fa-clipboard-list",
       },
@@ -42,10 +34,6 @@ const Dashboard = ({ variant }) => {
       },
     ],
     user: [
-      {
-        name: "Profile",
-        icon: "fas fa-address-card",
-      },
       {
         name: "Orders",
         icon: "fas fa-clipboard-list",

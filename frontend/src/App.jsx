@@ -7,6 +7,7 @@ import AdminDashboard from "./screens/Admin/AdminDashboard";
 import AdminLoginScreen from "./screens/Admin/AdminLoginScreen";
 import AdminRegisterScreen from "./screens/Admin/AdminRegisterScreen";
 import HomeScreen from "./screens/HomeScreen";
+import ProfileScreen from "./screens/ProfileScreen";
 import FindTechniciansScreen from "./screens/Technician/FindTechniciansScreen";
 import TechDashboard from "./screens/Technician/TechDashboard";
 import TechLoginScreen from "./screens/Technician/TechLoginScreen";
@@ -24,12 +25,13 @@ function App() {
         <Route path="/" element={<HomeScreen />} exact />
         <Route path="/login" element={<UserLoginScreen />} />
         <Route path="/register" element={<UserRegisterScreen />} />
+        <Route path="/profile" element={<ProfileScreen />} />
         <Route path="/dashboard" element={<UserDashboard />} />
         <Route path="/technicians" element={<FindTechniciansScreen />} />
         <Route path="/technician/login" element={<TechLoginScreen />} />
         <Route path="/technician/register" element={<TechRegisterScreen />} />
         <Route path="/technician/dashboard" element={<TechDashboard />} />
-        <Route path="/technician/profile/:id" element={<TechProfileScreen />} />
+        <Route path="/technician/:id" element={<TechProfileScreen />} />
         <Route path="/admin/login" element={<AdminLoginScreen />} />
         <Route path="/admin/register" element={<AdminRegisterScreen />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
