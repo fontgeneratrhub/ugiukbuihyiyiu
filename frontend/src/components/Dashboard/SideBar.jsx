@@ -9,7 +9,7 @@ const SideBar = ({ menuItems, selectedItem, handleItemClick }) => {
     // Use REdux to Compare
   };
   return (
-    <div className="min-h-screen w-1/6 bg-gray-900 flex flex-col items-center p-4">
+    <div className="min-h-screen w-1/6 bg-gray-900 flex flex-col items-center shadow-md p-4">
       <div className="flex flex-col items-center  mb-4">
         <img
           className="w-full rounded-full mr-3"
@@ -17,12 +17,12 @@ const SideBar = ({ menuItems, selectedItem, handleItemClick }) => {
           alt="User Avatar"
         />
         <h2 className="text-white text-xl font-semibold mb-2 hidden md:block">
-          Jane Dow
+          Jane Doe
         </h2>
       </div>
 
       <h2 className="text-xl font-semibold mb-4 flex flex-row items-center">
-        <i class="fa-solid fa-gauge-high mr-2"></i>
+        <i className="fas fa-gauge-high mr-2"></i>
         <span className="hidden md:block">Dashboard</span>
       </h2>
 

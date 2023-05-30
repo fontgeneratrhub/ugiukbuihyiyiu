@@ -100,6 +100,37 @@ const NavbarCmp = () => {
     setDropIsOpen(!dropIsOpen);
   };
 
+  const dashboardLink = isAdmin
+    ? "/admin/dashboard"
+    : isTechnician
+    ? "/technician/dashboard"
+    : "/user/dashboard";
+
+  const sortOptions = {
+    displayName: "asad",
+    menuItems: [
+      {
+        label: "Dashboard",
+        value: "dashboard",
+        icon: "fas fa-gauge-high",
+        link: dashboardLink,
+      },
+      {
+        label: "Profile",
+        value: "profile",
+        icon: "fas fa-address-card",
+        link: "/profile",
+      },
+      {
+        label: "Logout",
+        value: "logout",
+        icon: "fas fa-right-from-bracket",
+        link: "#",
+        onClickFunc: logoutHandler,
+      },
+    ],
+  };
+
   return (
     <nav
       className={`fixed bg-gray-900 w-screen shadow-md z-50 transition-all duration-500 ${
@@ -165,7 +196,6 @@ const NavbarCmp = () => {
             </div>
             <div className="hidden sm:block sm:ml-6">
               <div className="flex space-x-4">
-                {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                 <Link
                   to="/"
                   className="block mt-4 lg:inline-block lg:mt-0 p-2 rounded text-gray-200  hover:bg-gray-700  hover:text-white "
@@ -211,20 +241,20 @@ const NavbarCmp = () => {
                         className="text-gray-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base hover:font-bold"
                         onClick={() => setDropIsOpen(!dropIsOpen)}
                       >
-                        Dashboard
+                        <i className="fas fa-gauge-high mr-2"></i>Dashboard
                       </Link>
                       <Link
                         to="/profile"
                         className="text-gray-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base hover:font-bold"
                         onClick={() => setDropIsOpen(!dropIsOpen)}
                       >
-                        Profile
+                        <i className="fas fa-address-card mr-2"></i>Profile
                       </Link>
                       <Link
                         onClick={logoutHandler}
                         className="text-gray-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base hover:font-bold"
                       >
-                        Logout
+                        <i className="fas fa-right-from-bracket mr-2"></i>Logout
                       </Link>
                     </div>
                   </div>
@@ -233,7 +263,8 @@ const NavbarCmp = () => {
             ) : (
               <Link to="/login">
                 <button className="bg-green-500 hover:bg-green-600 font-medium text-white rounded-md text-sm my-2 px-2 py-2 sm:text-md sm:my-4 sm:py-3 sm:px-4">
-                  Login / Register
+                  <i className="fas fa-right-to-bracket mr-2"></i>
+                  Login<span className="hidden sm:inline"> / Register</span>
                 </button>
               </Link>
             )}
