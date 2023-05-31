@@ -7,7 +7,10 @@ import App from "./App";
 import "./index.css";
 import store from "./redux/store";
 
-axios.defaults.baseURL = "https://kariger-com.vercel.app";
+// for Development(Local) Server
+// axios.defaults.baseURL = "https://localhost:4000";
+
+axios.defaults.baseURL = "https://kariger-com.vercel.app"; //for Production(Vercal) Server
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
