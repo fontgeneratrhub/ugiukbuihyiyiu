@@ -1,221 +1,226 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
+import { register } from "../../redux/actions/userActions";
+
 import Button from "../../components/Button";
+import Loader from "../../components/Loader";
+import Message from "../../components/Message";
 
 const UserRegisterScreen = () => {
+  const location = useLocation();
+  const history = useNavigate();
+  const dispatch = useDispatch();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [message, setMessage] = useState(null);
+
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, error, userInfo } = userRegister;
+
+  // const redirect = location.search ? location.search.split("=")[1] : "/";
+
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     history(redirect);
+  //   }
+  // }, [userInfo, history, redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("SuccessFully Registered");
-    // Check if Form is valid then Create Account and Login Automatically!
+    if (password != confirmPassword) {
+      setMessage("Passwords Don't Match");
+    } else {
+      dispatch(register(name, email, password, confirmPassword));
+    }
   };
 
   return (
     <section className="min-h-screen flex flex-col justify-center items-center bg-gray-800 text-white p-20">
-      <div className="mx-auto max-w-screen-xl w-full flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl text-center font-bold mb-4">
-          Welcome to Kariger.com Register Portal!
-        </h1>
-        <div className="flex flex-col items-center justify-evenly md:flex-row">
-          <div className="w-full max-w-2xl flex flex-col items-center justify-center my-4 mx-auto p-4 sm:p-6 lg:p-8">
-            <img
-              src="https://socialplus.net/assets/img/svg/undraw_outer_space_re_u9vd.svg"
-              class="w-full"
-              alt="Phone image"
-            />
-          </div>
-          <form
-            className="w-full max-w-2xl flex flex-col items-center justify-center rounded-lg border border-gray-400 my-4 mx-auto p-4 sm:p-6 lg:p-8"
-            onSubmit={submitHandler}
-          >
-            <p className="text-center text-xl leading-relaxed pb-4">
-              Create New Account
-            </p>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="mx-auto max-w-screen-xl w-full flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
+          <h1 className="text-4xl text-center font-bold mb-4">
+            Welcome to Kariger.com Register Portal!
+          </h1>
 
-            <div className="w-full">
-              <label htmlFor="name" className="sr-only">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                value={name}
-                placeholder="Enter Name"
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-                required
-                className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+          <div className="flex flex-col items-center justify-evenly md:flex-row">
+            <div className="w-full max-w-2xl flex flex-col items-center justify-center my-4 mx-auto p-4 sm:p-6 lg:p-8">
+              <img
+                src="https://socialplus.net/assets/img/svg/undraw_outer_space_re_u9vd.svg"
+                class="w-full"
+                alt="Phone image"
               />
             </div>
-
-            <div className="w-full my-4">
-              <label htmlFor="email" className="sr-only">
-                Email
-              </label>
-
-              <div className="relative flex justify-center items-center w-full">
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  placeholder="Enter Email Address"
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                  required
-                  className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
-                />
-                <span className="absolute inset-y-0 right-0 grid place-content-center px-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </div>
-
-            <div className="w-full">
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
-              <div className="relative flex justify-center items-center w-full">
-                <input
-                  type="password"
-                  id="password"
-                  value={password}
-                  placeholder="Enter Password"
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                  required
-                  className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
-                />
-                <button
-                  className="absolute inset-y-0 right-0 grid place-content-center px-4"
-                  onClick={() => {
-                    setShowPassword(!showPassword);
-                  }}
-                >
-                  {showPassword ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      fill="none"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-4 w-4 text-gray-400 cursor-pointer"
-                    >
-                      <path d="M12 18c3.68 0 6.904-2.02 8.605-5.007a.5.5 0 0 0-.009-.527C18.912 9.225 15.668 6 12 6S5.088 9.225 3.404 12.466a.5.5 0 0 0-.009.527C5.096 15.98 8.32 18 12 18z" />
-                      <path d="M12 8.5c1.932 0 3.5 1.567 3.5 3.5s-1.568 3.5-3.5 3.5-3.5-1.567-3.5-3.5 1.568-3.5 3.5-3.5z" />
-                    </svg>
-                  ) : (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      fill="none"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-4 w-4 text-gray-400 cursor-pointer"
-                    >
-                      <path d="M12 15.5c-1.932 0-3.5-1.567-3.5-3.5s1.568-3.5 3.5-3.5 3.5 1.567 3.5 3.5-1.568 3.5-3.5 3.5zM12 8.5c3.68 0 6.904 2.02 8.605 5.007a.5.5 0 0 1-.009.527C18.912 14.775 15.668 18 12 18s-6.912-2.225-8.596-5.466a.5.5 0 0 1-.009-.527C5.096 10.02 8.32 8 12 8z" />
-                    </svg>
-                  )}
-                </button>
-              </div>
-            </div>
-
-            <div className="w-full my-4">
-              <label htmlFor="confirmPassword" className="sr-only">
-                Confirm Password
-              </label>
-              <div className="relative flex justify-center items-center w-full">
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  value={confirmPassword}
-                  placeholder="Confirm Password"
-                  onChange={(e) => {
-                    setConfirmPassword(e.target.value);
-                  }}
-                  required
-                  className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
-                />
-                <button
-                  className="absolute inset-y-0 right-0 grid place-content-center px-4"
-                  onClick={() => {
-                    setShowConfirmPassword(!showConfirmPassword);
-                  }}
-                >
-                  {showConfirmPassword ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      fill="none"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-4 w-4 text-gray-400 cursor-pointer"
-                    >
-                      <path d="M12 18c3.68 0 6.904-2.02 8.605-5.007a.5.5 0 0 0-.009-.527C18.912 9.225 15.668 6 12 6S5.088 9.225 3.404 12.466a.5.5 0 0 0-.009.527C5.096 15.98 8.32 18 12 18z" />
-                      <path d="M12 8.5c1.932 0 3.5 1.567 3.5 3.5s-1.568 3.5-3.5 3.5-3.5-1.567-3.5-3.5 1.568-3.5 3.5-3.5z" />
-                    </svg>
-                  ) : (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      fill="none"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-4 w-4 text-gray-400 cursor-pointer"
-                    >
-                      <path d="M12 15.5c-1.932 0-3.5-1.567-3.5-3.5s1.568-3.5 3.5-3.5 3.5 1.567 3.5 3.5-1.568 3.5-3.5 3.5zM12 8.5c3.68 0 6.904 2.02 8.605 5.007a.5.5 0 0 1-.009.527C18.912 14.775 15.668 18 12 18s-6.912-2.225-8.596-5.466a.5.5 0 0 1-.009-.527C5.096 10.02 8.32 8 12 8z" />
-                    </svg>
-                  )}
-                </button>
-              </div>
-            </div>
-
-            <Button
-              type="submit"
-              variant="primary"
-              className="w-full rounded-md"
+            <form
+              className="w-full max-w-2xl flex flex-col items-center justify-center rounded-lg border border-gray-400 my-4 mx-auto p-4 sm:p-6 lg:p-8"
+              onSubmit={submitHandler}
             >
-              Register
-            </Button>
+              <p className="text-center text-xl leading-relaxed ">
+                Create New Account
+              </p>
 
-            <p className="text-center text-sm text-gray-400">
-              Already have an Account?{" "}
-              <Link className="underline text-white" to="/login">
-                Sign in
-              </Link>
-            </p>
-          </form>
+              {message && <Message type="error">{message}</Message>}
+              {error && <Message type="error">{error}</Message>}
+
+              <div className="w-full mt-4">
+                <label htmlFor="name" className="sr-only">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  placeholder="Enter Name"
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                  required
+                  className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                />
+              </div>
+
+              <div className="w-full my-4">
+                <label htmlFor="email" className="sr-only">
+                  Email
+                </label>
+
+                <div className="relative flex justify-center items-center w-full">
+                  <input
+                    type="email"
+                    id="email"
+                    value={email}
+                    placeholder="Enter Email Address"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    required
+                    className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                  />
+                  <span className="absolute inset-y-0 right-0 grid place-content-center px-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                      />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+
+              <div className="w-full">
+                <label htmlFor="password" className="sr-only">
+                  Password
+                </label>
+                <div className="relative flex justify-center items-center w-full">
+                  <input
+                    type="password"
+                    id="password"
+                    value={password}
+                    placeholder="Enter Password"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                    required
+                    className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                  />
+                  <span className="absolute inset-y-0 right-0 grid place-content-center px-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+
+              <div className="w-full my-4">
+                <label htmlFor="confirmPassword" className="sr-only">
+                  Confirm Password
+                </label>
+                <div className="relative flex justify-center items-center w-full">
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    value={confirmPassword}
+                    placeholder="Confirm Password"
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                    }}
+                    required
+                    className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                  />
+                  <span className="absolute inset-y-0 right-0 grid place-content-center px-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+
+              <Button
+                type="submit"
+                variant="primary"
+                className="w-full rounded-md"
+              >
+                Register
+              </Button>
+
+              <p className="text-center text-sm text-gray-400">
+                Already have an Account?{" "}
+                <Link className="underline text-white" to="/login">
+                  Sign in
+                </Link>
+              </p>
+            </form>
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 };

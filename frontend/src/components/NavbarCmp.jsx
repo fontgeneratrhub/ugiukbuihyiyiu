@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "./Button";
+
+import { logout } from ".././redux/actions/userActions.js";
 
 const NavbarCmp = () => {
   // For the Dropdown in Nav
@@ -36,99 +39,19 @@ const NavbarCmp = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [prevScrollPos, visible, setVisible]);
 
-  // set dummy user
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const location = useLocation();
 
-  const [userInfo, setUserInfo] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isTechnician, setIsTechnician] = useState(false);
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
-  // create dummy array of user object
-  const users = [
-    {
-      id: "1",
-      displayName: "Admin",
-      email: "admin@kariger.com",
-      emailVerified: true,
-      isAdmin: true,
-      isTechnician: false,
-      phoneNumber: null,
-      metadata: {
-        creationTime: "2021-05-31T18:00:00.000Z",
-        lastSignInTime: "2021-05-31T18:00:00.000Z",
-      },
-      photoURL: null,
-    },
-    {
-      id: "2",
-      displayName: "Jane Doe",
-      email: "jane@kariger.com",
-      emailVerified: true,
-      isAdmin: false,
-      isTechnician: true,
-      phoneNumber: null,
-      metadata: {
-        creationTime: "2021-05-31T18:00:00.000Z",
-        lastSignInTime: "2021-05-31T18:00:00.000Z",
-      },
-      photoURL: null,
-    },
-    {
-      id: "3",
-      displayName: "John Doe",
-      email: "john@kariger.com",
-      emailVerified: true,
-      isAdmin: false,
-      isTechnician: false,
-      phoneNumber: null,
-      metadata: {
-        creationTime: "2021-05-31T18:00:00.000Z",
-        lastSignInTime: "2021-05-31T18:00:00.000Z",
-      },
-      photoURL: null,
-    },
-  ];
-
-  // set dummy user
-  useEffect(() => {
-    setUserInfo(users[0]);
-    setIsAdmin(users[0].isAdmin);
-    setIsTechnician(users[0].isTechnician);
-  }, []);
+  const redirect = location.search ? location.search.split("=")[1] : "/";
 
   const logoutHandler = () => {
-    setUserInfo(null);
+    dispatch(logout());
+    navigate(redirect);
     setDropIsOpen(!dropIsOpen);
-  };
-
-  const dashboardLink = isAdmin
-    ? "/admin/dashboard"
-    : isTechnician
-    ? "/technician/dashboard"
-    : "/user/dashboard";
-
-  const sortOptions = {
-    displayName: "asad",
-    menuItems: [
-      {
-        label: "Dashboard",
-        value: "dashboard",
-        icon: "fas fa-gauge-high",
-        link: dashboardLink,
-      },
-      {
-        label: "Profile",
-        value: "profile",
-        icon: "fas fa-address-card",
-        link: "/profile",
-      },
-      {
-        label: "Logout",
-        value: "logout",
-        icon: "fas fa-right-from-bracket",
-        link: "#",
-        onClickFunc: logoutHandler,
-      },
-    ],
   };
 
   return (
