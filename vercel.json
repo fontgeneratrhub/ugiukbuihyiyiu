@@ -2,14 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "backend/main.js",
+      "src": "./backend/main.js",
       "use": "@vercel/node",
       "config": {
         "maxLambdaSize": "50mb"
       }
     },
     {
-      "src": "frontend/dist",
+      "src": "./frontend/dist",
       "use": "@vercel/static-build"
     }
   ],
