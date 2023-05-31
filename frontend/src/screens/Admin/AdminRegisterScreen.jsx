@@ -6,9 +6,8 @@ const AdminRegisterScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [secretCode, setSecretCode] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -107,41 +106,9 @@ const AdminRegisterScreen = () => {
                   required
                   className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
                 />
-                <button
-                  className="absolute inset-y-0 right-0 grid place-content-center px-4"
-                  onClick={() => {
-                    setShowPassword(!showPassword);
-                  }}
-                >
-                  {showPassword ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      fill="none"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-4 w-4 text-gray-400 cursor-pointer"
-                    >
-                      <path d="M12 18c3.68 0 6.904-2.02 8.605-5.007a.5.5 0 0 0-.009-.527C18.912 9.225 15.668 6 12 6S5.088 9.225 3.404 12.466a.5.5 0 0 0-.009.527C5.096 15.98 8.32 18 12 18z" />
-                      <path d="M12 8.5c1.932 0 3.5 1.567 3.5 3.5s-1.568 3.5-3.5 3.5-3.5-1.567-3.5-3.5 1.568-3.5 3.5-3.5z" />
-                    </svg>
-                  ) : (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      fill="none"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-4 w-4 text-gray-400 cursor-pointer"
-                    >
-                      <path d="M12 15.5c-1.932 0-3.5-1.567-3.5-3.5s1.568-3.5 3.5-3.5 3.5 1.567 3.5 3.5-1.568 3.5-3.5 3.5zM12 8.5c3.68 0 6.904 2.02 8.605 5.007a.5.5 0 0 1-.009.527C18.912 14.775 15.668 18 12 18s-6.912-2.225-8.596-5.466a.5.5 0 0 1-.009-.527C5.096 10.02 8.32 8 12 8z" />
-                    </svg>
-                  )}
-                </button>
+                <span className="absolute inset-y-0 right-0 grid place-content-center px-4">
+                  <i className="fas fa-lock h-4 w-4 text-gray-400"></i>
+                </span>
               </div>
             </div>
 
@@ -161,41 +128,31 @@ const AdminRegisterScreen = () => {
                   required
                   className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
                 />
-                <button
-                  className="absolute inset-y-0 right-0 grid place-content-center px-4"
-                  onClick={() => {
-                    setShowConfirmPassword(!showConfirmPassword);
+                <span className="absolute inset-y-0 right-0 grid place-content-center px-4">
+                  <i className="fas fa-lock h-4 w-4 text-gray-400"></i>
+                </span>
+              </div>
+            </div>
+
+            <div className="w-full">
+              <label htmlFor="secretCode" className="sr-only">
+                Secret Code
+              </label>
+              <div className="relative flex justify-center items-center w-full">
+                <input
+                  type="text"
+                  id="secretCode"
+                  value={secretCode}
+                  placeholder="Enter Secret Code"
+                  onChange={(e) => {
+                    setSecretCode(e.target.value);
                   }}
-                >
-                  {showConfirmPassword ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      fill="none"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-4 w-4 text-gray-400 cursor-pointer"
-                    >
-                      <path d="M12 18c3.68 0 6.904-2.02 8.605-5.007a.5.5 0 0 0-.009-.527C18.912 9.225 15.668 6 12 6S5.088 9.225 3.404 12.466a.5.5 0 0 0-.009.527C5.096 15.98 8.32 18 12 18z" />
-                      <path d="M12 8.5c1.932 0 3.5 1.567 3.5 3.5s-1.568 3.5-3.5 3.5-3.5-1.567-3.5-3.5 1.568-3.5 3.5-3.5z" />
-                    </svg>
-                  ) : (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      fill="none"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-4 w-4 text-gray-400 cursor-pointer"
-                    >
-                      <path d="M12 15.5c-1.932 0-3.5-1.567-3.5-3.5s1.568-3.5 3.5-3.5 3.5 1.567 3.5 3.5-1.568 3.5-3.5 3.5zM12 8.5c3.68 0 6.904 2.02 8.605 5.007a.5.5 0 0 1-.009.527C18.912 14.775 15.668 18 12 18s-6.912-2.225-8.596-5.466a.5.5 0 0 1-.009-.527C5.096 10.02 8.32 8 12 8z" />
-                    </svg>
-                  )}
-                </button>
+                  required
+                  className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                />
+                <span className="absolute inset-y-0 right-0 grid place-content-center px-4">
+                  <i className="fas fa-key h-4 w-4 text-gray-400"></i>
+                </span>
               </div>
             </div>
 
