@@ -9,22 +9,14 @@
       }
     },
     {
-      "src": "frontend",
-      "use": "@vercel/static-build",
-      "config": {
-        "buildCommand": "npm run build",
-        "outputDirectory": "frontend/dist"
-      }
+      "src": "frontend/dist",
+      "use": "@vercel/static-build"
     }
   ],
-  "routes": [
+  "rewrties": [
     {
       "src": "/(.*)",
       "dest": "backend/main.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "frontend/index.html"
     }
   ]
 }
