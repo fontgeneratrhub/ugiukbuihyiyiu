@@ -52,11 +52,17 @@ const NavbarCmp = () => {
   const adminUserLogin = useSelector((state) => state.adminUserLogin);
   const { userInfo: adminUserInfo } = adminUserLogin;
 
+  const technicianUserLogin = useSelector((state) => state.technicianUserLogin);
+  const { userInfo: techUserInfo } = technicianUserLogin;
+
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
     if (adminUserInfo) {
       setisAdmin(true);
+    }
+    if (techUserInfo) {
+      setIsTechnician(true);
     }
   }, [adminUserInfo]);
 
@@ -152,31 +158,35 @@ const NavbarCmp = () => {
             </div>
           </div>
           <div className="flex justify-end mr-5">
-            {adminUserInfo || userInfo ? (
+            {adminUserInfo || techUserInfo || userInfo ? (
               <div className="relative" ref={dropdownRef}>
                 <Button
                   variant="secondary"
                   onClick={() => setDropIsOpen(!dropIsOpen)}
                   className="text-white rounded-md"
                 >
-                  {adminUserInfo ? adminUserInfo.user.name : userInfo.user.name}
+                  {adminUserInfo
+                    ? adminUserInfo.user.name
+                    : techUserInfo
+                    ? techUserInfo.user.name
+                    : userInfo.user.name}
                 </Button>
                 {dropIsOpen && (
                   <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="p-1">
-                      {/* <Link
+                      <Link
                         to={
                           isAdmin
                             ? "/admin/dashboard"
                             : isTechnician
                             ? "/technician/dashboard"
-                            : "/user/dashboard"
+                            : "/dashboard"
                         }
                         className="text-gray-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base hover:font-bold"
                         onClick={() => setDropIsOpen(!dropIsOpen)}
                       >
                         <i className="fas fa-gauge-high mr-2"></i>Dashboard
-                      </Link> */}
+                      </Link>
                       <Link
                         to="/profile"
                         className="text-gray-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base hover:font-bold"
