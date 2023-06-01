@@ -2,21 +2,30 @@
   "version": 2,
   "builds": [
     {
-      "src": "./backend/main.js",
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "npm run build",
+        "distDir": "frontend/dist",
+        "base": "/frontend"
+      }
+    },
+    {
+      "src": "backend/main.js",
       "use": "@vercel/node",
       "config": {
         "maxLambdaSize": "50mb"
       }
-    },
-    {
-      "src": "./frontend/dist",
-      "use": "@vercel/static-build"
     }
   ],
   "routes": [
     {
+      "src": "/frontend/(.*)",
+      "dest": "/frontend/dist/$1"
+    },
+    {
       "src": "/(.*)",
-      "dest": "backend/main.js"
+      "dest": "/backend/main.js"
     }
   ]
 }

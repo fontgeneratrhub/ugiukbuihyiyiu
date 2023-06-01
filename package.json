@@ -4,8 +4,8 @@
   "description": "A Technician Finding App - MERN",
   "private": true,
   "scripts": {
-    "start": "cd backend && node main.js && cd..",
-    "server": "cd backend && nodemon main.js && cd..",
+    "start": "node backend/main --prefix backend",
+    "server": "nodemon backend/main --prefix backend",
     "client": "npm run dev --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "install": "cd frontend && npm install && cd .. && cd backend && npm install && cd .."

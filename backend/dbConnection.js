@@ -1,17 +1,16 @@
 const mongoose = require("mongoose");
-const env = require("dotenv").config();
 
-function connection() {
+const connection = async () => {
   try {
-    mongoose.connect(process.env.DB),
-      {
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        strictQuery: true,
-      };
-    console.log(" Connection Build");
+    const conn = await mongoose.connect(process.env.DB, {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+    });
+    console.log(`MongoDB Connection Build: ${conn.connection.host}`);
   } catch (error) {
-    console.log("Error: Connection not build");
+    console.log(`Error: ${error.message}`);
+    process.exit(1);
   }
-}
+};
+
 module.exports = connection;

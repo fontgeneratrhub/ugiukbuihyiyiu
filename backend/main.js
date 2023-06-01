@@ -18,9 +18,7 @@ const adminRoutes = require("./routes/adminRoutes");
 const techCategoryRoutes = require("./routes/techCategoryRoutes");
 const technicianRoutes = require("./routes/technicianRoutes");
 
-require("./dbConnection");
-
-const PORT = process.env.PORT;
+connection();
 
 // middlewares
 
@@ -44,11 +42,12 @@ app.use("/api/category", techCategoryRoutes);
 
 // Technician route
 app.use("/api/technician", technicianRoutes);
-// console.log(PORT, "port");
-// const port = 4000;
-app.listen(PORT || 4000, () => {
-  console.log(`Server is listening on ${PORT}`);
-});
+
+const PORT = process.env.PORT || 4000;
+app.listen(
+  PORT,
+  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
+);
 
 //  userController.getAllUser );
 

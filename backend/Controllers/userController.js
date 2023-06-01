@@ -23,9 +23,9 @@ module.exports = {
 
       // check all fields are filled or not
       if (!name || !email || !password || !confirmPassword) {
-        return res
-          .status(400)
-          .json({ status: "failed", message: "All fields are Required" });
+        return res.status(400).send({
+          message: "All fields are Required",
+        });
       } else {
         // Check email formate vaildation
         if (emailvalidator.validate(req.body.email)) {
@@ -34,16 +34,16 @@ module.exports = {
 
           user = await User.findOne({ email: email });
           if (user) {
-            res.send({ status: "failed", message: "Email already exist" });
+            res.send({ message: "Email already exists" });
             console.log("Email already exist");
           } else {
             // check password and confirm are same Or not
             if (password !== confirmPassword) {
-              res
-                .status(400)
-                .json({ message: "Password must match with Confirm Password" });
+              res.status(400).send({
+                message: "Password must match with Confirm Password",
+              });
             } else {
-              // encrypt the user passsword for securituy and save New User successfully
+              // encrypt the user passsword for securituy and save New User Successfully
 
               const salt = await bcrypt.genSalt(Number(process.env.SALT));
               const hashpswd = await bcrypt.hash(password, salt);
@@ -54,20 +54,31 @@ module.exports = {
               });
               await newUser.save();
               console.log("User Added");
+
+              // Generate JWT Token
+              const token = jwt.sign(
+                { userID: newUser._id },
+                process.env.JWT_SECRET_KEY,
+                { expiresIn: "2d" }
+              );
+
               res.send({
-                status: "success",
                 message: "Registered Successfully",
+                token: token,
+                user: newUser,
               });
             }
           }
         } else {
-          res.status(400).send({ status: "failed", message: "Invalid Email" });
+          res.status(400).send({
+            message: "Invalid Email",
+          });
           console.log("Invalid Email");
         }
       }
     } catch (e) {
       console.log(e);
-      res.status(400).send({ message: "Server Error", Error: e });
+      res.status(500).send({ message: "Server Error", Error: e });
     }
   },
 
@@ -81,9 +92,9 @@ module.exports = {
       //   if (email && password) {
 
       if (!email || !password) {
-        return res
-          .status(400)
-          .json({ status: "failed", message: "All fields are Required" });
+        return res.status(400).send({
+          message: "All fields are Required",
+        });
       } else {
         if (emailvalidator.validate(req.body.email)) {
           let user = connection();
@@ -91,6 +102,7 @@ module.exports = {
           if (user != null) {
             const isMatch = await bcrypt.compare(password, user.password);
             console.log("Password match", isMatch);
+
             if (user.email === email && isMatch) {
               // Generate JWT Token
               const token = jwt.sign(
@@ -99,32 +111,34 @@ module.exports = {
                 { expiresIn: "2d" }
               );
 
-              res.send({
-                status: "success",
+              res.status(200).send({
                 message: "Login Success",
                 token: token,
-                id: user.id,
+                user: user,
               });
             } else {
-              res.send({
-                status: "failed",
+              res.status(400).send({
                 message: "Email or password is not Valid",
               });
             }
           } else {
-            res.send({
-              status: "failed",
+            res.status(400).send({
               message: "Email or password is not Valid",
             });
           }
         } else {
-          res.status(400).send({ status: "failed", message: "Invalid Email" });
+          res.status(400).send({
+            message: "Invalid Email",
+          });
           console.log("Invalid Email");
         }
       }
     } catch (e) {
       console.log(e);
-      res.status(400).send({ message: "Server Error", Error: e });
+      res.status(500).send({
+        message: "Server Error",
+        Error: e,
+      });
     }
   },
 
@@ -139,16 +153,18 @@ module.exports = {
       });
 
       if (updateResult) {
-        res.status(400).send({
-          status: "success",
+        res.status(200).send({
           message: "User updated",
           User: updateResult,
         });
       } else {
-        res.status(400).send({ status: "failed", message: "User not found" });
+        res.status(400).send({ message: "User not found" });
       }
     } catch (e) {
-      res.status(404).send(e);
+      res.status(500).send({
+        message: "Server Error",
+        Error: e,
+      });
     }
   },
 
@@ -158,16 +174,18 @@ module.exports = {
       let deletedResult = connection();
       deletedResult = await User.findByIdAndDelete(_id);
       if (deletedResult) {
-        res.status(400).send({
-          status: "success",
+        res.status(200).send({
           message: "User deleted",
           User: deletedResult,
         });
       } else {
-        res.status(400).send({ status: "failed", message: "User not found" });
+        res.status(400).send({ message: "User not found" });
       }
     } catch (e) {
-      res.status(404).send(e);
+      res.status(500).send({
+        message: "Server Error",
+        Error: e,
+      });
     }
   },
 
@@ -180,7 +198,7 @@ module.exports = {
 
   //      try {
   //      await jwt.destroy(token);
-  //      res.status(200).json({ message: 'your are successfully deleted' });
+  //      res.status(200).json({ message: 'your are Successfully deleted' });
   //      } catch {
   //      res.status(200).json({ message: 'something wrong' });
   //      }

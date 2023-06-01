@@ -1,8 +1,6 @@
 import React from "react";
 
-const Message = ({ type, children }) => {
-  const [errorCode, errorMessage] = children.split(": ");
-
+const Message = ({ children }) => {
   const successStyles =
     "bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative";
   const warningStyles =
@@ -26,38 +24,42 @@ const Message = ({ type, children }) => {
     info: "fas fa-info-circle",
   };
 
+  const getStatusText = (status) => {
+    if (status >= 200 && status <= 299) {
+      return "Success";
+    } else if (status >= 400 && status <= 499) {
+      return "Client Error";
+    } else if (status >= 500 && status <= 599) {
+      return "Server Error";
+    } else {
+      return "Unknown Status";
+    }
+  };
+
   let alertStyle = "";
   let icon = "";
 
-  switch (type) {
-    case "success":
-      alertStyle = styles.success;
-      icon = iconStyles.success;
-      break;
-    case "warning":
-      alertStyle = styles.warning;
-      icon = iconStyles.warning;
-      break;
-    case "error":
-      alertStyle = styles.error;
-      icon = iconStyles.error;
-
-      break;
-    case "info":
-      alertStyle = styles.info;
-      icon = iconStyles.info;
-      break;
-    default:
-      alertStyle = styles.info;
-      icon = iconStyles.info;
-      break;
+  if (children.status >= 200 && children.status <= 299) {
+    alertStyle = styles.success;
+    icon = iconStyles.success;
+  } else if (children.status >= 400 && children.status <= 499) {
+    alertStyle = styles.warning;
+    icon = iconStyles.warning;
+  } else if (children.status >= 500 && children.status <= 599) {
+    alertStyle = styles.error;
+    icon = iconStyles.error;
+  } else {
+    alertStyle = styles.info;
+    icon = iconStyles.info;
   }
 
   return (
     <div className={alertStyle} role="alert">
       <i className={`${icon} mr-2`}></i>
-      <strong className="font-bold mr-2">{errorCode}:</strong>
-      <span className="block sm:inline">{errorMessage}</span>
+      <strong className="font-bold mr-2">
+        {getStatusText(children.status)}:
+      </strong>
+      <span className="block sm:inline">{children.message}</span>
     </div>
   );
 };

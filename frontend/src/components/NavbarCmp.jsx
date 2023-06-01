@@ -42,18 +42,25 @@ const NavbarCmp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
+  const [isAdmin, setisAdmin] = useState(false);
+  const [isTechnician, setIsTechnician] = useState(false);
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
+  // if (adminUserInfo) {
+  //   setisAdmin(true);
+  // } else if (technicianUserInfo) {
+  //   setIsTechnician(false);
+  // }
+
   const logoutHandler = () => {
     dispatch(logout());
     navigate(redirect);
     setDropIsOpen(!dropIsOpen);
   };
-
   return (
     <nav
       className={`fixed bg-gray-900 w-screen shadow-md z-50 transition-all duration-500 ${
@@ -148,12 +155,12 @@ const NavbarCmp = () => {
                   onClick={() => setDropIsOpen(!dropIsOpen)}
                   className="text-white rounded-md"
                 >
-                  {userInfo.displayName}
+                  {userInfo.user.name}
                 </Button>
                 {dropIsOpen && (
                   <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="p-1">
-                      <Link
+                      {/* <Link
                         to={
                           isAdmin
                             ? "/admin/dashboard"
@@ -165,7 +172,7 @@ const NavbarCmp = () => {
                         onClick={() => setDropIsOpen(!dropIsOpen)}
                       >
                         <i className="fas fa-gauge-high mr-2"></i>Dashboard
-                      </Link>
+                      </Link> */}
                       <Link
                         to="/profile"
                         className="text-gray-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base hover:font-bold"

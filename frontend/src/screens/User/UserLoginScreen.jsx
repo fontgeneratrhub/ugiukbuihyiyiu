@@ -14,7 +14,7 @@ const UserLoginScreen = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const location = useLocation();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -24,18 +24,18 @@ const UserLoginScreen = () => {
 
   useEffect(() => {
     if (userInfo) {
-      history(redirect);
+      navigate(redirect);
     }
-  }, [userInfo, history, redirect]);
+  }, [userInfo, navigate, redirect]);
 
   const submitHandler = (e) => {
-    e.preventDefault(); //Dispatch Login
+    e.preventDefault();
+    //Dispatch Login
     dispatch(login(email, password));
   };
 
   const forgetPwdHandler = () => {
     console.log("Forget Password");
-    // Send email to user to reset password
   };
 
   return (
@@ -69,7 +69,7 @@ const UserLoginScreen = () => {
                   </span>
                 </p>
 
-                {error && <Message variant="danger">{error}</Message>}
+                {error && <Message>{error}</Message>}
                 <div className="w-full my-4">
                   <label htmlFor="email" className="sr-only">
                     Email

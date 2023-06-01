@@ -10,7 +10,7 @@ import Message from "../../components/Message";
 
 const UserRegisterScreen = () => {
   const location = useLocation();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [name, setName] = useState("");
@@ -22,16 +22,19 @@ const UserRegisterScreen = () => {
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
 
-  // const redirect = location.search ? location.search.split("=")[1] : "/";
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo: userInfoLogin } = userLogin;
 
-  // useEffect(() => {
-  //   if (userInfo) {
-  //     history(redirect);
-  //   }
-  // }, [userInfo, history, redirect]);
+  const redirect = location.search ? location.search.split("=")[1] : "/";
+
+  useEffect(() => {
+    if (userInfoLogin || userInfo) {
+      navigate(redirect);
+    }
+  }, [userInfo, navigate, redirect]);
 
   const submitHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault(); //Dispatch Register
     if (password != confirmPassword) {
       setMessage("Passwords Don't Match");
     } else {
@@ -53,7 +56,7 @@ const UserRegisterScreen = () => {
             <div className="w-full max-w-2xl flex flex-col items-center justify-center my-4 mx-auto p-4 sm:p-6 lg:p-8">
               <img
                 src="https://socialplus.net/assets/img/svg/undraw_outer_space_re_u9vd.svg"
-                class="w-full"
+                className="w-full"
                 alt="Phone image"
               />
             </div>
@@ -66,7 +69,11 @@ const UserRegisterScreen = () => {
               </p>
 
               {message && <Message type="error">{message}</Message>}
-              {error && <Message type="error">{error}</Message>}
+              {error && (
+                <Message type="error">
+                  {error.status}: {error.message}
+                </Message>
+              )}
 
               <div className="w-full mt-4">
                 <label htmlFor="name" className="sr-only">
