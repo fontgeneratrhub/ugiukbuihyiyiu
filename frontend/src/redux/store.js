@@ -13,6 +13,7 @@ import {
 import {
   technicianUserLoginReducer,
   technicianUserRegisterReducer,
+  categoryListReducer,
 } from "./reducers/technicianReducers.js";
 import {
   logoutReducer,
@@ -28,6 +29,7 @@ const reducer = combineReducers({
   technicianUserLogin: technicianUserLoginReducer,
   technicianUserRegister: technicianUserRegisterReducer,
   logout: logoutReducer,
+  categoryList: categoryListReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

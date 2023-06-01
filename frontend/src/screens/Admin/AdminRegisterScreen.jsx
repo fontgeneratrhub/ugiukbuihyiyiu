@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
+import { adminRegister } from "../../redux/actions/adminActions.js";
+
 import Button from "../../components/Button";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
-
-import { adminRegister } from "../../redux/actions/adminActions.js";
 
 const AdminRegisterScreen = () => {
   const [name, setName] = useState("");
