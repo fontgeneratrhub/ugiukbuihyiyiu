@@ -15,7 +15,7 @@ module.exports = {
   addUser: async (req, res) => {
     try {
       let { name, email, password, confirmPassword } = req.body;
-      let user = connection();
+      // let user = connection();
       // console.log(name, 'name');
       // console.log(email, 'email');
       // console.log(password, 'password');
@@ -30,11 +30,17 @@ module.exports = {
         // Check email formate vaildation
         if (emailvalidator.validate(req.body.email)) {
           // check entered email is sexist in our database or not
-          let user = connection();
+          // let user = connection();
 
-          user = await User.findOne({ email: email });
+          let user = await User.findOne({ email: email });
           if (user) {
+<<<<<<< Updated upstream
             res.send({ message: "Email already exists" });
+=======
+            res
+              .status(400)
+              .send({ status: "failed", message: "Email already exist" });
+>>>>>>> Stashed changes
             console.log("Email already exist");
           } else {
             // check password and confirm are same Or not
@@ -54,6 +60,7 @@ module.exports = {
               });
               await newUser.save();
               console.log("User Added");
+<<<<<<< Updated upstream
 
               // Generate JWT Token
               const token = jwt.sign(
@@ -65,6 +72,11 @@ module.exports = {
               res.send({
                 message: "Registered Successfully",
                 token: token,
+=======
+              res.status(200).send({
+                status: "success",
+                message: "Registered Successfully",
+>>>>>>> Stashed changes
                 user: newUser,
               });
             }
@@ -92,13 +104,19 @@ module.exports = {
       //   if (email && password) {
 
       if (!email || !password) {
+<<<<<<< Updated upstream
         return res.status(400).send({
           message: "All fields are Required",
         });
+=======
+        return res
+          .status(400)
+          .send({ status: "failed", message: "All fields are Required" });
+>>>>>>> Stashed changes
       } else {
         if (emailvalidator.validate(req.body.email)) {
-          let user = connection();
-          user = await User.findOne({ email: email });
+          // let user = connection();
+          let user = await User.findOne({ email: email });
           if (user != null) {
             const isMatch = await bcrypt.compare(password, user.password);
             console.log("Password match", isMatch);
@@ -112,17 +130,29 @@ module.exports = {
               );
 
               res.status(200).send({
+<<<<<<< Updated upstream
+=======
+                status: "success",
+>>>>>>> Stashed changes
                 message: "Login Success",
                 token: token,
                 user: user,
               });
             } else {
               res.status(400).send({
+<<<<<<< Updated upstream
+=======
+                status: "failed",
+>>>>>>> Stashed changes
                 message: "Email or password is not Valid",
               });
             }
           } else {
             res.status(400).send({
+<<<<<<< Updated upstream
+=======
+              status: "failed",
+>>>>>>> Stashed changes
               message: "Email or password is not Valid",
             });
           }
@@ -135,10 +165,14 @@ module.exports = {
       }
     } catch (e) {
       console.log(e);
+<<<<<<< Updated upstream
       res.status(500).send({
         message: "Server Error",
         Error: e,
       });
+=======
+      res.status(500).send({ message: "Server Error", Error: e });
+>>>>>>> Stashed changes
     }
   },
 
@@ -146,14 +180,18 @@ module.exports = {
     try {
       const _id = req.params.id;
       console.log(_id);
-      let updateResult = connection();
+      // let updateResult = connection();
 
-      updateResult = await User.findByIdAndUpdate(_id, req.body, {
+      let updateResult = await User.findByIdAndUpdate(_id, req.body, {
         new: true,
       });
 
       if (updateResult) {
         res.status(200).send({
+<<<<<<< Updated upstream
+=======
+          status: "success",
+>>>>>>> Stashed changes
           message: "User updated",
           User: updateResult,
         });
@@ -161,18 +199,22 @@ module.exports = {
         res.status(400).send({ message: "User not found" });
       }
     } catch (e) {
+<<<<<<< Updated upstream
       res.status(500).send({
         message: "Server Error",
         Error: e,
       });
+=======
+      res.status(500).send(e);
+>>>>>>> Stashed changes
     }
   },
 
   deleteUser: async (req, res) => {
     try {
       const _id = req.params.id;
-      let deletedResult = connection();
-      deletedResult = await User.findByIdAndDelete(_id);
+      // let deletedResult = connection();
+      let deletedResult = await User.findByIdAndDelete(_id);
       if (deletedResult) {
         res.status(200).send({
           message: "User deleted",
@@ -182,10 +224,14 @@ module.exports = {
         res.status(400).send({ message: "User not found" });
       }
     } catch (e) {
+<<<<<<< Updated upstream
       res.status(500).send({
         message: "Server Error",
         Error: e,
       });
+=======
+      res.status(500).send(e);
+>>>>>>> Stashed changes
     }
   },
 

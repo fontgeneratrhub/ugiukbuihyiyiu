@@ -9,18 +9,20 @@ module.exports = {
   addCategory: async (req, res) => {
     try {
       let { title } = req.body;
-      let category = connection();
+      // let category = connection();
 
       // check all fields are filled or not
       if (!title) {
         return res
           .status(400)
-          .json({ status: "failed", message: "please fill the field" });
+          .send({ status: "failed", message: "please fill the field" });
       } else {
         // check entered category is exist in our database or not
-        result = await TechCategory.findOne({ title: title });
+        let result = await TechCategory.findOne({ title: title });
         if (result) {
-          res.send({ status: "failed", message: "category already exist" });
+          res
+            .status(400)
+            .send({ status: "failed", message: "category already exist" });
           console.log("category already exist");
         } else {
           const newCategory = new TechCategory({
@@ -28,33 +30,35 @@ module.exports = {
           });
           await newCategory.save();
           console.log("category Added");
-          res.send({
+          res.status(200).send({
             status: "success",
             message: "Category added Successfully",
+            category: newCategory,
           });
         }
       }
     } catch (e) {
       console.log(e);
-      res.status(400).send({ message: "Server Error", Error: e });
+      res.status(500).send({ message: "Server Error", Error: e });
     }
   },
 
   // show Category
   getCategory: async (req, res) => {
     try {
-      let categories = connection();
-      categories = await TechCategory.find();
+      // let categories = connection();
+      let categories = await TechCategory.find();
       // console.log(getresult);
 
       if (categories) {
-        res.status(400).send({ status: "success", categories });
+        res.status(200).send({ status: "success", category: categories });
       } else {
         res
           .status(400)
           .send({ status: "failed", message: "No Category found" });
       }
     } catch (e) {
+      res.status(500).send({ message: "Server Error", Error: e });
       console.log(e);
     }
   },
@@ -63,17 +67,17 @@ module.exports = {
     try {
       const _id = req.params.cid;
       console.log(_id);
-      let updateResult = connection();
+      // let updateResult = connection();
 
-      updateResult = await TechCategory.findByIdAndUpdate(_id, req.body, {
+      let updateResult = await TechCategory.findByIdAndUpdate(_id, req.body, {
         new: true,
       });
 
       if (updateResult) {
-        res.status(400).send({
+        res.status(200).send({
           status: "success",
           message: "Category updated",
-          Category: updateResult,
+          category: updateResult,
         });
       } else {
         res
@@ -81,7 +85,7 @@ module.exports = {
           .send({ status: "failed", message: "Category not found" });
       }
     } catch (e) {
-      res.status(404).send(e);
+      res.status(500).send({ message: "Server Error", Error: e });
     }
   },
 
@@ -89,13 +93,13 @@ module.exports = {
     try {
       const _id = req.params.cid;
       console.log(_id, "cid");
-      let deletedResult = connection();
-      deletedResult = await TechCategory.findByIdAndDelete(_id);
+      // let deletedResult = connection();
+      let deletedResult = await TechCategory.findByIdAndDelete(_id);
       if (deletedResult) {
-        res.status(400).send({
+        res.status(200).send({
           status: "success",
           message: "Category deleted",
-          Category: deletedResult,
+          category: deletedResult,
         });
       } else {
         res
@@ -103,7 +107,7 @@ module.exports = {
           .send({ status: "failed", message: "Category not found" });
       }
     } catch (e) {
-      res.status(404).send(e);
+      res.status(500).send({ message: "Server Error", Error: e });
     }
   },
 };

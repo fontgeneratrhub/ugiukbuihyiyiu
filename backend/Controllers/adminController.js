@@ -15,7 +15,7 @@ module.exports = {
   addAdmin: async (req, res) => {
     try {
       let { name, email, password, confirmPassword } = req.body;
-      let admin = connection();
+      // let admin = connection();
       // console.log(name, 'name');
       // console.log(email, 'email');
       // console.log(password, 'password');
@@ -25,21 +25,23 @@ module.exports = {
       if (!name || !email || !password || !confirmPassword) {
         return res
           .status(400)
-          .json({ status: "failed", message: "All fields are Required" });
+          .send({ status: "failed", message: "All fields are Required" });
       } else {
         // Check email formate vaildation
         if (emailvalidator.validate(req.body.email)) {
           // check entered email is sexist in our database or not
-          admin = await Admin.findOne({ email: email });
+          let admin = await Admin.findOne({ email: email });
           if (admin) {
-            res.send({ status: "failed", message: "Email already exist" });
+            res
+              .status(400)
+              .send({ status: "failed", message: "Email already exist" });
             console.log("Email already exist");
           } else {
             // check password and confirm are same Or not
             if (password !== confirmPassword) {
               res
                 .status(400)
-                .json({ message: "Password must match with Confirm Password" });
+                .send({ message: "Password must match with Confirm Password" });
             } else {
               // encrypt the admin passsword for securituy and save New admin successfully
 
@@ -52,9 +54,10 @@ module.exports = {
               });
               await newAdmin.save();
               console.log("Admin Added");
-              res.send({
+              res.status(200).send({
                 status: "success",
                 message: "Registered Successfully",
+                admin: newAdmin,
               });
             }
           }
@@ -65,7 +68,7 @@ module.exports = {
       }
     } catch (e) {
       console.log(e);
-      res.status(400).send({ message: "Server Error", Error: e });
+      res.status(500).send({ message: "Server Error", Error: e });
     }
   },
 
@@ -81,11 +84,11 @@ module.exports = {
       if (!email || !password) {
         return res
           .status(400)
-          .json({ status: "failed", message: "All fields are Required" });
+          .send({ status: "failed", message: "All fields are Required" });
       } else {
         if (emailvalidator.validate(req.body.email)) {
-          let admin = connection();
-          admin = await Admin.findOne({ email: email });
+          // let admin = connection();
+          let admin = await Admin.findOne({ email: email });
           if (admin != null) {
             const isMatch = await bcrypt.compare(password, admin.password);
             console.log("Password match", isMatch);
@@ -97,20 +100,21 @@ module.exports = {
                 { expiresIn: "2d" }
               );
 
-              res.send({
+              res.status(200).send({
                 status: "success",
                 message: "Login Success",
                 token: token,
                 id: admin.id,
+                admin: admin,
               });
             } else {
-              res.send({
+              res.status(400).send({
                 status: "failed",
                 message: "Email or password is not Valid",
               });
             }
           } else {
-            res.send({
+            res.status(400).send({
               status: "failed",
               message: "Email or password is not Valid",
             });
@@ -122,7 +126,7 @@ module.exports = {
       }
     } catch (e) {
       console.log(e);
-      res.status(400).send({ message: "Server Error", Error: e });
+      res.status(500).send({ message: "Server Error", Error: e });
     }
   },
 
@@ -130,42 +134,42 @@ module.exports = {
     try {
       const _id = req.params.id;
       console.log(_id);
-      let updateResult = connection();
+      // let updateResult = connection();
 
-      updateResult = await Admin.findByIdAndUpdate(_id, req.body, {
+      let updateResult = await Admin.findByIdAndUpdate(_id, req.body, {
         new: true,
       });
 
       if (updateResult) {
-        res.status(400).send({
+        res.status(200).send({
           status: "success",
           message: "Admin updated",
-          Admin: updateResult,
+          admin: updateResult,
         });
       } else {
         res.status(400).send({ status: "failed", message: "Admin not found" });
       }
     } catch (e) {
-      res.status(404).send(e);
+      res.status(500).send({ message: "Server Error", Error: e });
     }
   },
 
   deleteAdmin: async (req, res) => {
     try {
       const _id = req.params.id;
-      let deletedResult = connection();
-      deletedResult = await Admin.findByIdAndDelete(_id);
+      // let deletedResult = connection();
+      let deletedResult = await Admin.findByIdAndDelete(_id);
       if (deletedResult) {
-        res.status(400).send({
+        res.status(200).send({
           status: "success",
           message: "Admin deleted",
-          Admin: deletedResult,
+          admin: deletedResult,
         });
       } else {
         res.status(400).send({ status: "failed", message: "Admin not found" });
       }
     } catch (e) {
-      res.status(404).send(e);
+      res.status(500).send({ message: "Server Error", Error: e });
     }
   },
 

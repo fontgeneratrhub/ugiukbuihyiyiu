@@ -31,10 +31,10 @@ module.exports = {
         address,
       } = req.body;
 
-      let category = connection();
-      category = await TechCategory.findById(categoryId);
+      // let category = connection();
+      let category = await TechCategory.findById(categoryId);
       console.log(category.title, "cat-name");
-      let technician = connection();
+      // let technician = connection();
 
       // check all fields are filled or not
       if (
@@ -51,32 +51,34 @@ module.exports = {
       ) {
         return res
           .status(400)
-          .json({ status: "failed", message: "All fields are Required" });
+          .send({ status: "failed", message: "All fields are Required" });
       } else {
         // Check email formate vaildation
         if (emailvalidator.validate(req.body.email)) {
           // check entered email is sexist in our database or not
-          let technician = connection();
-          technician = await Technician.findOne({ email: email });
+          // let technician = connection();
+          let technician = await Technician.findOne({ email: email });
           if (technician) {
-            res.send({ status: "failed", message: "Email already exist" });
+            res
+              .status(400)
+              .send({ status: "failed", message: "Email already exist" });
             console.log("Email already exist");
           } else {
             // check password and confirm are same Or not
             if (password !== confirmPassword) {
-              res.send({
+              res.status(400).send({
                 status: "failed",
                 message: "Password must match with Confirm Password",
               });
             } else {
               if (!regPhone.test(phone)) {
-                res.send({
+                res.status(400).send({
                   status: "failed",
                   message: "Enter phone Number in correct formate",
                 });
               } else {
                 if (!regCnic.test(cnic)) {
-                  res.send({
+                  res.status(400).send({
                     status: "failed",
                     message: "CNIC No must follow the XXXXX-XXXXXXX-X format!",
                   });
@@ -101,6 +103,7 @@ module.exports = {
                   res.send({
                     status: "success",
                     message: "Registered Successfully",
+                    technician: newTechnician,
                   });
                 }
               }
@@ -113,7 +116,7 @@ module.exports = {
       }
     } catch (e) {
       console.log(e);
-      res.status(400).send({ message: "Server Error", Error: e });
+      res.status(500).send({ message: "Server Error", Error: e });
     }
   },
 
@@ -132,8 +135,8 @@ module.exports = {
           .json({ status: "failed", message: "All fields are Required" });
       } else {
         if (emailvalidator.validate(req.body.email)) {
-          let technician = connection();
-          technician = await Technician.findOne({ email: email });
+          // let technician = connection();
+          let technician = await Technician.findOne({ email: email });
           if (technician != null) {
             const isMatch = await bcrypt.compare(password, technician.password);
             console.log("Password match", isMatch);
@@ -145,20 +148,21 @@ module.exports = {
                 { expiresIn: "2d" }
               );
 
-              res.send({
+              res.status(200).send({
                 status: "success",
                 message: "Login Success",
                 token: token,
                 id: technician.id,
+                technician: technician,
               });
             } else {
-              res.send({
+              res.status(400).send({
                 status: "failed",
                 message: "Email or password is not Valid",
               });
             }
           } else {
-            res.send({
+            res.status(400).send({
               status: "failed",
               message: "Email or password is not Valid",
             });
@@ -170,7 +174,7 @@ module.exports = {
       }
     } catch (e) {
       console.log(e);
-      res.status(400).send({ message: "Server Error", Error: e });
+      res.status(500).send({ message: "Server Error", Error: e });
     }
   },
 
@@ -178,17 +182,17 @@ module.exports = {
     try {
       const _id = req.params.id;
       console.log(_id);
-      let updateResult = connection();
+      // let updateResult = connection();
 
-      updateResult = await Technician.findByIdAndUpdate(_id, req.body, {
+      let updateResult = await Technician.findByIdAndUpdate(_id, req.body, {
         new: true,
       });
 
       if (updateResult) {
-        res.status(400).send({
+        res.status(200).send({
           status: "success",
           message: "Technician updated",
-          Technician: updateResult,
+          technician: updateResult,
         });
       } else {
         res
@@ -196,20 +200,20 @@ module.exports = {
           .send({ status: "failed", message: "Technician not found" });
       }
     } catch (e) {
-      res.status(404).send(e);
+      res.status(500).send({ message: "Server Error", Error: e });
     }
   },
 
   deleteTechnician: async (req, res) => {
     try {
       const _id = req.params.id;
-      let deletedResult = connection();
-      deletedResult = await Technician.findByIdAndDelete(_id);
+      // let deletedResult = connection();
+      let deletedResult = await Technician.findByIdAndDelete(_id);
       if (deletedResult) {
-        res.status(400).send({
+        res.status(200).send({
           status: "success",
           message: "Technician deleted",
-          Technician: deletedResult,
+          technician: deletedResult,
         });
       } else {
         res
