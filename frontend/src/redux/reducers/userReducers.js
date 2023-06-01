@@ -1,5 +1,6 @@
+import { ADMIN_LOGOUT } from "../constants/adminConstants.js";
+import { TECHNICIAN_LOGOUT } from "../constants/technicianConstants.js";
 import {
-  TECHNICIAN_USER_LOGOUT,
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
@@ -8,7 +9,6 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
 } from "../constants/userConstants.js";
-import { ADMIN_USER_LOGOUT } from "../constants/adminConstants.js";
 
 export const userLoginReducer = (state = {}, action) => {
   switch (action.type) {
@@ -40,9 +40,9 @@ export const userRegisterReducer = (state = {}, action) => {
 
 export const logoutReducer = (state = {}, action) => {
   switch (action.type) {
-    case ADMIN_USER_LOGOUT:
+    case ADMIN_LOGOUT:
       return {};
-    case TECHNICIAN_USER_LOGOUT:
+    case TECHNICIAN_LOGOUT:
       return {};
     case USER_LOGOUT:
       return {};

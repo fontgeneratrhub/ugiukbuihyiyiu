@@ -34,13 +34,7 @@ module.exports = {
 
           let user = await User.findOne({ email: email });
           if (user) {
-<<<<<<< Updated upstream
-            res.send({ message: "Email already exists" });
-=======
-            res
-              .status(400)
-              .send({ status: "failed", message: "Email already exist" });
->>>>>>> Stashed changes
+            res.status(400).send({ message: "Email already exist" });
             console.log("Email already exist");
           } else {
             // check password and confirm are same Or not
@@ -60,7 +54,6 @@ module.exports = {
               });
               await newUser.save();
               console.log("User Added");
-<<<<<<< Updated upstream
 
               // Generate JWT Token
               const token = jwt.sign(
@@ -69,14 +62,9 @@ module.exports = {
                 { expiresIn: "2d" }
               );
 
-              res.send({
+              res.status(200).send({
                 message: "Registered Successfully",
                 token: token,
-=======
-              res.status(200).send({
-                status: "success",
-                message: "Registered Successfully",
->>>>>>> Stashed changes
                 user: newUser,
               });
             }
@@ -104,15 +92,9 @@ module.exports = {
       //   if (email && password) {
 
       if (!email || !password) {
-<<<<<<< Updated upstream
         return res.status(400).send({
           message: "All fields are Required",
         });
-=======
-        return res
-          .status(400)
-          .send({ status: "failed", message: "All fields are Required" });
->>>>>>> Stashed changes
       } else {
         if (emailvalidator.validate(req.body.email)) {
           // let user = connection();
@@ -130,29 +112,17 @@ module.exports = {
               );
 
               res.status(200).send({
-<<<<<<< Updated upstream
-=======
-                status: "success",
->>>>>>> Stashed changes
                 message: "Login Success",
                 token: token,
                 user: user,
               });
             } else {
               res.status(400).send({
-<<<<<<< Updated upstream
-=======
-                status: "failed",
->>>>>>> Stashed changes
                 message: "Email or password is not Valid",
               });
             }
           } else {
             res.status(400).send({
-<<<<<<< Updated upstream
-=======
-              status: "failed",
->>>>>>> Stashed changes
               message: "Email or password is not Valid",
             });
           }
@@ -165,14 +135,7 @@ module.exports = {
       }
     } catch (e) {
       console.log(e);
-<<<<<<< Updated upstream
-      res.status(500).send({
-        message: "Server Error",
-        Error: e,
-      });
-=======
       res.status(500).send({ message: "Server Error", Error: e });
->>>>>>> Stashed changes
     }
   },
 
@@ -188,10 +151,7 @@ module.exports = {
 
       if (updateResult) {
         res.status(200).send({
-<<<<<<< Updated upstream
-=======
           status: "success",
->>>>>>> Stashed changes
           message: "User updated",
           User: updateResult,
         });
@@ -199,14 +159,10 @@ module.exports = {
         res.status(400).send({ message: "User not found" });
       }
     } catch (e) {
-<<<<<<< Updated upstream
       res.status(500).send({
         message: "Server Error",
         Error: e,
       });
-=======
-      res.status(500).send(e);
->>>>>>> Stashed changes
     }
   },
 
@@ -224,14 +180,10 @@ module.exports = {
         res.status(400).send({ message: "User not found" });
       }
     } catch (e) {
-<<<<<<< Updated upstream
       res.status(500).send({
         message: "Server Error",
         Error: e,
       });
-=======
-      res.status(500).send(e);
->>>>>>> Stashed changes
     }
   },
 

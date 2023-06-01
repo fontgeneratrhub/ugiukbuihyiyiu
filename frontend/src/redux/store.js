@@ -11,6 +11,10 @@ import {
   adminUserRegisterReducer,
 } from "./reducers/adminReducers.js";
 import {
+  technicianUserLoginReducer,
+  technicianUserRegisterReducer,
+} from "./reducers/technicianReducers.js";
+import {
   logoutReducer,
   userLoginReducer,
   userRegisterReducer,
@@ -21,6 +25,8 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   adminUserLogin: adminUserLoginReducer,
   adminUserRegister: adminUserRegisterReducer,
+  technicianUserLogin: technicianUserLoginReducer,
+  technicianUserRegister: technicianUserRegisterReducer,
   logout: logoutReducer,
 });
 
@@ -30,6 +36,8 @@ const userInfoFromStorage = localStorage.getItem("userInfo")
 
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
+  adminUserLogin: { userInfo: userInfoFromStorage },
+  technicianUserLogin: { userInfo: userInfoFromStorage },
 };
 
 const middleware = [thunk];

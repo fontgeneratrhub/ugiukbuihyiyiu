@@ -1,22 +1,22 @@
 import {
-  ADMIN_USER_LOGIN_REQUEST,
-  ADMIN_USER_LOGIN_SUCCESS,
-  ADMIN_USER_LOGIN_FAIL,
-  ADMIN_USER_LOGOUT,
-  ADMIN_USER_REGISTER_REQUEST,
-  ADMIN_USER_REGISTER_SUCCESS,
-  ADMIN_USER_REGISTER_FAIL,
+  ADMIN_LOGIN_REQUEST,
+  ADMIN_LOGIN_SUCCESS,
+  ADMIN_LOGIN_FAIL,
+  ADMIN_LOGOUT,
+  ADMIN_REGISTER_REQUEST,
+  ADMIN_REGISTER_SUCCESS,
+  ADMIN_REGISTER_FAIL,
 } from "../constants/adminConstants.js";
 
 export const adminUserLoginReducer = (state = {}, action) => {
   switch (action.type) {
-    case ADMIN_USER_LOGIN_REQUEST:
+    case ADMIN_LOGIN_REQUEST:
       return { loading: true };
-    case ADMIN_USER_LOGIN_SUCCESS:
+    case ADMIN_LOGIN_SUCCESS:
       return { loading: false, userInfo: action.payload };
-    case ADMIN_USER_LOGIN_FAIL:
+    case ADMIN_LOGIN_FAIL:
       return { loading: false, error: action.payload };
-    case ADMIN_USER_LOGOUT:
+    case ADMIN_LOGOUT:
       return {};
     default:
       return state;
@@ -25,11 +25,11 @@ export const adminUserLoginReducer = (state = {}, action) => {
 
 export const adminUserRegisterReducer = (state = {}, action) => {
   switch (action.type) {
-    case ADMIN_USER_REGISTER_REQUEST:
+    case ADMIN_REGISTER_REQUEST:
       return { loading: true };
-    case ADMIN_USER_REGISTER_SUCCESS:
+    case ADMIN_REGISTER_SUCCESS:
       return { loading: false, userInfo: action.payload };
-    case ADMIN_USER_REGISTER_FAIL:
+    case ADMIN_REGISTER_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

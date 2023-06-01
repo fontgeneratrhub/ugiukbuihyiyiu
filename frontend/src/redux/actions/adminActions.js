@@ -1,16 +1,16 @@
 import axios from "axios";
 import {
-  ADMIN_USER_LOGIN_FAIL,
-  ADMIN_USER_LOGIN_REQUEST,
-  ADMIN_USER_LOGIN_SUCCESS,
-  ADMIN_USER_REGISTER_FAIL,
-  ADMIN_USER_REGISTER_REQUEST,
-  ADMIN_USER_REGISTER_SUCCESS,
+  ADMIN_LOGIN_FAIL,
+  ADMIN_LOGIN_REQUEST,
+  ADMIN_LOGIN_SUCCESS,
+  ADMIN_REGISTER_FAIL,
+  ADMIN_REGISTER_REQUEST,
+  ADMIN_REGISTER_SUCCESS,
 } from "../constants/adminConstants";
 
 export const adminLogin = (email, password) => async (dispatch) => {
   try {
-    dispatch({ type: ADMIN_USER_LOGIN_REQUEST });
+    dispatch({ type: ADMIN_LOGIN_REQUEST });
 
     const config = {
       headers: {
@@ -25,7 +25,7 @@ export const adminLogin = (email, password) => async (dispatch) => {
     );
 
     dispatch({
-      type: ADMIN_USER_LOGIN_SUCCESS,
+      type: ADMIN_LOGIN_SUCCESS,
       payload: { user: data.user, token: data.token },
     });
     localStorage.setItem(
@@ -34,7 +34,7 @@ export const adminLogin = (email, password) => async (dispatch) => {
     );
   } catch (error) {
     dispatch({
-      type: ADMIN_USER_LOGIN_FAIL,
+      type: ADMIN_LOGIN_FAIL,
       payload: {
         status: error.response && error.response.status,
         message:
@@ -49,7 +49,7 @@ export const adminLogin = (email, password) => async (dispatch) => {
 export const adminRegister =
   (name, email, password, confirmPassword) => async (dispatch) => {
     try {
-      dispatch({ type: ADMIN_USER_REGISTER_REQUEST });
+      dispatch({ type: ADMIN_REGISTER_REQUEST });
 
       const config = {
         headers: {
@@ -64,20 +64,20 @@ export const adminRegister =
       );
 
       dispatch({
-        type: ADMIN_USER_REGISTER_SUCCESS,
-        payload: { user: data.newUser, token: data.token },
+        type: ADMIN_REGISTER_SUCCESS,
+        payload: { user: data.user, token: data.token },
       });
       dispatch({
-        type: ADMIN_USER_LOGIN_SUCCESS,
-        payload: { user: data.newUser, token: data.token },
+        type: ADMIN_LOGIN_SUCCESS,
+        payload: { user: data.user, token: data.token },
       });
       localStorage.setItem(
         "userInfo",
-        JSON.stringify({ user: data.newUser, token: data.token })
+        JSON.stringify({ user: data.user, token: data.token })
       );
     } catch (error) {
       dispatch({
-        type: ADMIN_USER_REGISTER_FAIL,
+        type: ADMIN_REGISTER_FAIL,
         payload: {
           status: error.response && error.response.status,
           message:

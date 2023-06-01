@@ -20,11 +20,7 @@ const AdminLoginScreen = () => {
   const { loading, error, userInfo: adminUserInfo } = adminUserLogin;
 
   const userLogin = useSelector((state) => state.userLogin);
-  const {
-    loading: userLoading,
-    error: userError,
-    userInfo: userInfo,
-  } = userLogin;
+  const { userInfo: userInfo } = userLogin;
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
 

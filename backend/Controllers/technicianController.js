@@ -100,10 +100,19 @@ module.exports = {
                   });
                   await newTechnician.save();
                   console.log("Technician Added");
-                  res.send({
+
+                  // Generate JWT Token
+                  const token = jwt.sign(
+                    { technicianID: newTechnician._id },
+                    process.env.JWT_SECRET_KEY,
+                    { expiresIn: "2d" }
+                  );
+
+                  res.status(200).send({
                     status: "success",
                     message: "Registered Successfully",
-                    technician: newTechnician,
+                    token: token,
+                    user: newTechnician,
                   });
                 }
               }
@@ -152,8 +161,7 @@ module.exports = {
                 status: "success",
                 message: "Login Success",
                 token: token,
-                id: technician.id,
-                technician: technician,
+                user: technician,
               });
             } else {
               res.status(400).send({

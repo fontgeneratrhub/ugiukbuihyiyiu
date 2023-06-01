@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import { ADMIN_LOGOUT } from "../constants/adminConstants.js";
+import { TECHNICIAN_LOGOUT } from "../constants/technicianConstants.js";
 import {
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
@@ -9,7 +11,6 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
 } from "../constants/userConstants.js";
-import { ADMIN_USER_LOGOUT } from "../constants/adminConstants.js";
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -52,7 +53,8 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
-  dispatch({ type: ADMIN_USER_LOGOUT });
+  dispatch({ type: ADMIN_LOGOUT });
+  dispatch({ type: TECHNICIAN_LOGOUT });
 };
 
 export const register =

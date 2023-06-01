@@ -53,11 +53,20 @@ module.exports = {
                 password: hashpswd,
               });
               await newAdmin.save();
+
+              // Generate JWT Token
+              const token = jwt.sign(
+                { userID: newAdmin._id },
+                process.env.JWT_SECRET_KEY,
+                { expiresIn: "2d" }
+              );
+
               console.log("Admin Added");
               res.status(200).send({
                 status: "success",
                 message: "Registered Successfully",
-                admin: newAdmin,
+                user: newAdmin,
+                token: token,
               });
             }
           }
@@ -104,8 +113,7 @@ module.exports = {
                 status: "success",
                 message: "Login Success",
                 token: token,
-                id: admin.id,
-                admin: admin,
+                user: admin,
               });
             } else {
               res.status(400).send({
