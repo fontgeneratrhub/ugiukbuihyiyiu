@@ -44,17 +44,21 @@ const NavbarCmp = () => {
   const location = useLocation();
   const [isAdmin, setisAdmin] = useState(false);
   const [isTechnician, setIsTechnician] = useState(false);
+  const [userName, setUserName] = useState("");
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const adminUserLogin = useSelector((state) => state.adminUserLogin);
+  const { userInfo: adminUserInfo } = adminUserLogin;
+
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
-  // if (adminUserInfo) {
-  //   setisAdmin(true);
-  // } else if (technicianUserInfo) {
-  //   setIsTechnician(false);
-  // }
+  useEffect(() => {
+    if (adminUserInfo) {
+      setisAdmin(true);
+    }
+  }, [adminUserInfo]);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -148,14 +152,14 @@ const NavbarCmp = () => {
             </div>
           </div>
           <div className="flex justify-end mr-5">
-            {userInfo ? (
+            {adminUserInfo || userInfo ? (
               <div className="relative" ref={dropdownRef}>
                 <Button
                   variant="secondary"
                   onClick={() => setDropIsOpen(!dropIsOpen)}
                   className="text-white rounded-md"
                 >
-                  {userInfo.user.name}
+                  {adminUserInfo ? adminUserInfo.user.name : userInfo.user.name}
                 </Button>
                 {dropIsOpen && (
                   <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">

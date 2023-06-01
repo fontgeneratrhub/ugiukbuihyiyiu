@@ -1,19 +1,16 @@
 import axios from "axios";
-
 import {
-  USER_LOGIN_FAIL,
-  USER_LOGIN_REQUEST,
-  USER_LOGIN_SUCCESS,
-  USER_LOGOUT,
-  USER_REGISTER_FAIL,
-  USER_REGISTER_REQUEST,
-  USER_REGISTER_SUCCESS,
-} from "../constants/userConstants.js";
-import { ADMIN_USER_LOGOUT } from "../constants/adminConstants.js";
+  ADMIN_USER_LOGIN_FAIL,
+  ADMIN_USER_LOGIN_REQUEST,
+  ADMIN_USER_LOGIN_SUCCESS,
+  ADMIN_USER_REGISTER_FAIL,
+  ADMIN_USER_REGISTER_REQUEST,
+  ADMIN_USER_REGISTER_SUCCESS,
+} from "../constants/adminConstants";
 
-export const login = (email, password) => async (dispatch) => {
+export const adminLogin = (email, password) => async (dispatch) => {
   try {
-    dispatch({ type: USER_LOGIN_REQUEST });
+    dispatch({ type: ADMIN_USER_LOGIN_REQUEST });
 
     const config = {
       headers: {
@@ -22,13 +19,13 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "/api/user/login",
+      "/api/admin/login",
       { email, password },
       config
     );
 
     dispatch({
-      type: USER_LOGIN_SUCCESS,
+      type: ADMIN_USER_LOGIN_SUCCESS,
       payload: { user: data.user, token: data.token },
     });
     localStorage.setItem(
@@ -37,7 +34,7 @@ export const login = (email, password) => async (dispatch) => {
     );
   } catch (error) {
     dispatch({
-      type: USER_LOGIN_FAIL,
+      type: ADMIN_USER_LOGIN_FAIL,
       payload: {
         status: error.response && error.response.status,
         message:
@@ -49,16 +46,10 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-export const logout = () => (dispatch) => {
-  localStorage.removeItem("userInfo");
-  dispatch({ type: USER_LOGOUT });
-  dispatch({ type: ADMIN_USER_LOGOUT });
-};
-
-export const register =
+export const adminRegister =
   (name, email, password, confirmPassword) => async (dispatch) => {
     try {
-      dispatch({ type: USER_REGISTER_REQUEST });
+      dispatch({ type: ADMIN_USER_REGISTER_REQUEST });
 
       const config = {
         headers: {
@@ -67,26 +58,26 @@ export const register =
       };
 
       const { data } = await axios.post(
-        "/api/user/signUp",
+        "/api/admin/signUp",
         { name, email, password, confirmPassword },
         config
       );
 
       dispatch({
-        type: USER_REGISTER_SUCCESS,
-        payload: { user: data.user, token: data.token },
+        type: ADMIN_USER_REGISTER_SUCCESS,
+        payload: { user: data.newUser, token: data.token },
       });
       dispatch({
-        type: USER_LOGIN_SUCCESS,
-        payload: { user: data.user, token: data.token },
+        type: ADMIN_USER_LOGIN_SUCCESS,
+        payload: { user: data.newUser, token: data.token },
       });
       localStorage.setItem(
         "userInfo",
-        JSON.stringify({ user: data.user, token: data.token })
+        JSON.stringify({ user: data.newUser, token: data.token })
       );
     } catch (error) {
       dispatch({
-        type: USER_REGISTER_FAIL,
+        type: ADMIN_USER_REGISTER_FAIL,
         payload: {
           status: error.response && error.response.status,
           message:

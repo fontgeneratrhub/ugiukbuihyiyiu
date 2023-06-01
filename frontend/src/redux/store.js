@@ -1,12 +1,17 @@
-import { composeWithDevTools } from "@redux-devtools/extension";
 import {
   applyMiddleware,
   combineReducers,
   legacy_createStore as createStore,
 } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
 import {
+  adminUserLoginReducer,
+  adminUserRegisterReducer,
+} from "./reducers/adminReducers.js";
+import {
+  logoutReducer,
   userLoginReducer,
   userRegisterReducer,
 } from "./reducers/userReducers.js";
@@ -14,6 +19,9 @@ import {
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
+  adminUserLogin: adminUserLoginReducer,
+  adminUserRegister: adminUserRegisterReducer,
+  logout: logoutReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
