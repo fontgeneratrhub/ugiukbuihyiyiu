@@ -186,6 +186,44 @@ module.exports = {
     }
   },
 
+  // show  all technicians
+  getAllTechnicians: async (req, res) => {
+    try {
+      let technician = await Technician.find();
+      // console.log(getresult);
+
+      if (technician) {
+        res.status(200).send({ status: "success", technician: technician });
+      } else {
+        res
+          .status(400)
+          .send({ status: "failed", message: "No Technician found" });
+      }
+    } catch (e) {
+      res.status(500).send({ message: "Server Error", Error: e });
+      console.log(e);
+    }
+  },
+
+  getTechnicianById: async (req, res) => {
+    try {
+      const id = req.params.id;
+      let technician = await Technician.findById(id);
+      // console.log(getresult);
+
+      if (technician) {
+        res.status(200).send({ status: "success", technician: technician });
+      } else {
+        res
+          .status(400)
+          .send({ status: "failed", message: "No Technician found" });
+      }
+    } catch (e) {
+      res.status(500).send({ message: "Server Error", Error: e });
+      console.log(e);
+    }
+  },
+
   updateTechnician: async (req, res) => {
     try {
       const _id = req.params.id;

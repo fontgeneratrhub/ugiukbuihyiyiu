@@ -29,8 +29,13 @@ router.post("/signUp", userController.addUser);
 
 router.post("/login", userController.getUser);
 
-// router.get('/logout', userController.logoutUser);
-// router.get('/singalUser/:id', userController.getUserById)
+router.get(
+  "/showAll/:id",
+  authMiddleware.authorizeAdmin,
+  userController.getAllUsers
+);
+
+router.get("/single/:id", userController.getUserById);
 
 //-----------Insert Data----------------------
 

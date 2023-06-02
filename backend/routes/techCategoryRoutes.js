@@ -26,11 +26,7 @@ router.post(
 
 //-----------Read Data----------------------
 
-router.get(
-  "/showAll/:id",
-  authMiddleware.authorizeAdmin,
-  techCategoryController.getCategory
-);
+router.get("/showAll", techCategoryController.getCategory);
 
 //-----------Update Data----------------------
 
