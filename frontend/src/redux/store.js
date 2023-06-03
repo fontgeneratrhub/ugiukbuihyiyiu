@@ -11,10 +11,11 @@ import {
   adminUserRegisterReducer,
 } from "./reducers/adminReducers.js";
 import {
+  categoryListReducer,
+  technicianDetailsReducer,
+  technicianUserListReducer,
   technicianUserLoginReducer,
   technicianUserRegisterReducer,
-  categoryListReducer,
-  technicianUserListReducer,
 } from "./reducers/technicianReducers.js";
 import {
   logoutReducer,
@@ -29,6 +30,7 @@ const reducer = combineReducers({
   adminUserRegister: adminUserRegisterReducer,
   technicianUserLogin: technicianUserLoginReducer,
   technicianUserRegister: technicianUserRegisterReducer,
+  technicianDetails: technicianDetailsReducer,
   technicianUserList: technicianUserListReducer,
   logout: logoutReducer,
   categoryList: categoryListReducer,

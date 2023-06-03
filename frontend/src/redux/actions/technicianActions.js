@@ -6,6 +6,9 @@ import {
   TECHNICIAN_REGISTER_FAIL,
   TECHNICIAN_REGISTER_REQUEST,
   TECHNICIAN_REGISTER_SUCCESS,
+  TECHNICIAN_DETAILS_FAIL,
+  TECHNICIAN_DETAILS_REQUEST,
+  TECHNICIAN_DETAILS_SUCCESS,
   TECHNICIAN_LIST_REQUEST,
   TECHNICIAN_LIST_SUCCESS,
   TECHNICIAN_LIST_FAIL,
@@ -117,6 +120,32 @@ export const technicianRegister =
       });
     }
   };
+
+export const getTechnicianDetails = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: TECHNICIAN_DETAILS_REQUEST });
+
+    const { data } = await axios.get(`/api/technician/single/${id}`);
+
+    dispatch({
+      type: TECHNICIAN_DETAILS_SUCCESS,
+      payload: data.technician,
+    });
+
+    localStorage.setItem("techDetails", JSON.stringify(data.technician));
+  } catch (error) {
+    dispatch({
+      type: TECHNICIAN_DETAILS_FAIL,
+      payload: {
+        status: error.response && error.response.status,
+        message:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      },
+    });
+  }
+};
 
 export const listTechnicians = () => async (dispatch) => {
   try {

@@ -191,7 +191,7 @@ const FindTechniciansScreen = () => {
                     Experience: {technician.experience}
                   </h2>
 
-                  <Link to={`/technician/${technician.id}`}>
+                  <Link to={`/technician/${technician._id}`}>
                     <Button variant="outline" className="rounded-md">
                       View Profile
                     </Button>

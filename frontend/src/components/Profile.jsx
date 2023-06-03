@@ -1,14 +1,14 @@
 import React from "react";
+import avi from "../images/User-avatar.svg.png";
 
 const Profile = ({ user }) => {
   return (
-    <div className="sm:w-1/2 w-full bg-gray-900 flex flex-col justify-center items-center text-justify rounded-lg shadow-lg mb-4 sm:m-2  px-6 py-2 border-2 border-transparent hover:shadow-xl hover:border-gray-700 transition-colors duration-300">
-      <img
-        className="w-32 h-32 rounded-full m-2"
-        src={user.avatar}
-        alt="User Avatar"
-      />
-      <h2 className="text-white text-lg font-bold mb-2">{user.displayName}</h2>
+    <div
+      key={user._id}
+      className="sm:w-1/2 w-full bg-gray-900 flex flex-col justify-center items-center text-justify rounded-lg shadow-lg mb-4 sm:m-2  px-6 py-2 border-2 border-transparent hover:shadow-xl hover:border-gray-700 transition-colors duration-300"
+    >
+      <img className="w-32 h-32 rounded-full m-2" src={avi} alt="User Avatar" />
+      <h2 className="text-white text-lg font-bold mb-2">{user.name}</h2>
 
       <div className="text-gray-300 text-sm">
         <i className="fas fa-phone-alt mt-4 mr-2"></i>
@@ -18,6 +18,11 @@ const Profile = ({ user }) => {
       <div className="text-gray-300 text-sm ">
         <i className="fas fa-envelope mr-2"></i>
         Email: {user.email}
+      </div>
+
+      <div className="text-gray-300 text-sm ">
+        <i className="fas fa-location-dot mr-2"></i>
+        Address: {user.address}
       </div>
 
       <hr className="border-gray-700 my-4 w-1/2" />
@@ -31,7 +36,7 @@ const Profile = ({ user }) => {
         {user.category && (
           <h2 className="text-gray-300 text-sm font-light mb-2">
             <i className="fas fa-layer-group mr-2"></i>
-            Category: {user.category}
+            Category: {user.category.title}
           </h2>
         )}
       </div>
@@ -50,12 +55,7 @@ const Profile = ({ user }) => {
         </h2>
       )}
 
-      {user.isAdmin && (
-        <div className="text-white text-lg font-bold mb-2">Role: Admin</div>
-      )}
       <hr className="border-gray-700 my-4 w-1/2" />
-
-      <p className="text-gray-300 text-sm mb-4">{user.description}</p>
     </div>
   );
 };

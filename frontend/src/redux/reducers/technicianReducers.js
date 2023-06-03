@@ -2,6 +2,9 @@ import {
   CATEGORY_LIST_FAIL,
   CATEGORY_LIST_REQUEST,
   CATEGORY_LIST_SUCCESS,
+  TECHNICIAN_DETAILS_FAIL,
+  TECHNICIAN_DETAILS_REQUEST,
+  TECHNICIAN_DETAILS_SUCCESS,
   TECHNICIAN_LIST_FAIL,
   TECHNICIAN_LIST_REQUEST,
   TECHNICIAN_LIST_SUCCESS,
@@ -36,6 +39,19 @@ export const technicianUserRegisterReducer = (state = {}, action) => {
     case TECHNICIAN_REGISTER_SUCCESS:
       return { loading: false, techUserInfo: action.payload };
     case TECHNICIAN_REGISTER_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const technicianDetailsReducer = (state = { techUser: {} }, action) => {
+  switch (action.type) {
+    case TECHNICIAN_DETAILS_REQUEST:
+      return { ...state, loading: true };
+    case TECHNICIAN_DETAILS_SUCCESS:
+      return { loading: false, techUser: action.payload };
+    case TECHNICIAN_DETAILS_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;
