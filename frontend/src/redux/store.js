@@ -13,17 +13,18 @@ import {
 import {
   categoryListReducer,
   technicianDetailsReducer,
+  technicianUserDeleteReducer,
   technicianUserListReducer,
   technicianUserLoginReducer,
   technicianUserRegisterReducer,
-  technicianUserDeleteReducer,
+  technicianUserUpdateProfileReducer,
 } from "./reducers/technicianReducers.js";
 import {
   logoutReducer,
+  userDeleteReducer,
+  userListReducer,
   userLoginReducer,
   userRegisterReducer,
-  userListReducer,
-  userDeleteReducer,
   userUpdateProfileReducer,
 } from "./reducers/userReducers.js";
 
@@ -38,6 +39,7 @@ const reducer = combineReducers({
   technicianUserLogin: technicianUserLoginReducer,
   technicianUserRegister: technicianUserRegisterReducer,
   technicianUserDelete: technicianUserDeleteReducer,
+  technicianUserUpdateProfile: technicianUserUpdateProfileReducer,
   technicianDetails: technicianDetailsReducer,
   technicianUserList: technicianUserListReducer,
   logout: logoutReducer,

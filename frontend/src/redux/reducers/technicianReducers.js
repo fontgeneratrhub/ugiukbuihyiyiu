@@ -2,6 +2,9 @@ import {
   CATEGORY_LIST_FAIL,
   CATEGORY_LIST_REQUEST,
   CATEGORY_LIST_SUCCESS,
+  TECHNICIAN_DELETE_FAIL,
+  TECHNICIAN_DELETE_REQUEST,
+  TECHNICIAN_DELETE_SUCCESS,
   TECHNICIAN_DETAILS_FAIL,
   TECHNICIAN_DETAILS_REQUEST,
   TECHNICIAN_DETAILS_SUCCESS,
@@ -15,9 +18,10 @@ import {
   TECHNICIAN_REGISTER_FAIL,
   TECHNICIAN_REGISTER_REQUEST,
   TECHNICIAN_REGISTER_SUCCESS,
-  TECHNICIAN_DELETE_FAIL,
-  TECHNICIAN_DELETE_REQUEST,
-  TECHNICIAN_DELETE_SUCCESS,
+  TECHNICIAN_UPDATE_PROFILE_FAIL,
+  TECHNICIAN_UPDATE_PROFILE_REQUEST,
+  TECHNICIAN_UPDATE_PROFILE_RESET,
+  TECHNICIAN_UPDATE_PROFILE_SUCCESS,
 } from "../constants/technicianConstants";
 
 export const technicianUserLoginReducer = (state = {}, action) => {
@@ -43,6 +47,21 @@ export const technicianUserRegisterReducer = (state = {}, action) => {
       return { loading: false, techUserInfo: action.payload };
     case TECHNICIAN_REGISTER_FAIL:
       return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const technicianUserUpdateProfileReducer = (state = {}, action) => {
+  switch (action.type) {
+    case TECHNICIAN_UPDATE_PROFILE_REQUEST:
+      return { loading: true };
+    case TECHNICIAN_UPDATE_PROFILE_SUCCESS:
+      return { loading: false, success: true, techUserInfo: action.payload };
+    case TECHNICIAN_UPDATE_PROFILE_FAIL:
+      return { loading: false, error: action.payload };
+    case TECHNICIAN_UPDATE_PROFILE_RESET:
+      return {};
     default:
       return state;
   }

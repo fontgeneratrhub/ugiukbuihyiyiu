@@ -28,6 +28,19 @@ const ProfileScreen = () => {
     techUserInfo,
   } = technicianUserLogin;
 
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const { success: userUpdateSuccess } = userUpdateProfile;
+
+  const technicianUserUpdateProfile = useSelector(
+    (state) => state.technicianUserUpdateProfile
+  );
+  const { success: techUpdateSuccess } = technicianUserUpdateProfile;
+
+  const successMessage = (userUpdateSuccess || techUpdateSuccess) && {
+    status: "200",
+    message: "Updated Successfully!",
+  };
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -65,6 +78,9 @@ const ProfileScreen = () => {
             <h1 className="text-4xl text-center font-bold mb-4">
               User Profile
             </h1>
+            {(userUpdateSuccess || techUpdateSuccess) && (
+              <Message>{successMessage}</Message>
+            )}
             <Button
               variant="success"
               className={`${isEditing ? "hidden" : "block"} rounded-md mb-4`}

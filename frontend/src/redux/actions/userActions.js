@@ -138,7 +138,7 @@ export const updateProfile =
 
       dispatch({
         type: USER_UPDATE_PROFILE_SUCCESS,
-        payload: { user: data.user, token: data.token },
+        payload: { user: data.user },
       });
       dispatch({
         type: USER_LOGIN_SUCCESS,

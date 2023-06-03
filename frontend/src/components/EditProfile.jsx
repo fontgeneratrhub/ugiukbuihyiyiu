@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
+import { technicianUpdateProfile } from "../redux/actions/technicianActions.js";
 import { updateProfile } from "../redux/actions/userActions.js";
 
-import Button from "./Button";
 import avi from "../images/User-avatar.svg.png";
+import Button from "./Button";
+import Message from "./Message.jsx";
 
 const EditProfile = ({ user, setIsEditing, userType }) => {
   const dispatch = useDispatch();
@@ -15,6 +17,7 @@ const EditProfile = ({ user, setIsEditing, userType }) => {
           name: user.name,
           phone: user.phone,
           email: user.email,
+          cnic: user.cnic,
           location: user.location,
           experience: user.experience,
           address: user.address,
@@ -31,6 +34,14 @@ const EditProfile = ({ user, setIsEditing, userType }) => {
 
   const [formData, setFormData] = useState(initialFormData);
 
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const { error: userUpdateError } = userUpdateProfile;
+
+  const technicianUserUpdateProfile = useSelector(
+    (state) => state.technicianUserUpdateProfile
+  );
+  const { error: techUpdateError } = technicianUserUpdateProfile;
+
   const handleFieldChange = (e) => {
     setFormData({
       ...formData,
@@ -43,13 +54,31 @@ const EditProfile = ({ user, setIsEditing, userType }) => {
 
     if (userType === "technician") {
       console.log("Updated Profile:", formData);
+      dispatch(
+        technicianUpdateProfile(
+          formData.email,
+          formData.name,
+          formData.phone,
+          formData.location,
+          formData.cnic,
+          formData.experience,
+          formData.address,
+          user._id
+        )
+      );
+      if (!techUpdateError) {
+        setIsEditing(false);
+      }
     } else if (userType === "admin") {
       console.log("Updated Profile:", formData);
+      setIsEditing(false);
     } else if (userType === "user") {
-      console.log("Updated Profile:", formData);
       dispatch(updateProfile(formData.email, formData.name, user._id));
+      if (!userUpdateError) {
+        setIsEditing(false);
+      }
+      console.log("Updated Profile:", formData);
     }
-    setIsEditing(false);
   };
 
   const handleCancel = () => {
@@ -61,6 +90,10 @@ const EditProfile = ({ user, setIsEditing, userType }) => {
     <div className="sm:w-1/2 w-full bg-gray-900 flex flex-col justify-center items-center text-justify rounded-lg shadow-lg mb-4 sm:m-2 px-6 py-2 border-2 border-transparent hover:shadow-xl hover:border-gray-700 transition-colors duration-300">
       <img className="w-32 h-32 rounded-full m-2" src={avi} alt="User Avatar" />
       <form onSubmit={handleFormSubmit} className="w-full">
+        {userUpdateError ||
+          (techUpdateError && (
+            <Message>{userUpdateError || techUpdateError}</Message>
+          ))}
         <div className="mb-4">
           <label
             className="block text-white text-lg font-bold mb-2"

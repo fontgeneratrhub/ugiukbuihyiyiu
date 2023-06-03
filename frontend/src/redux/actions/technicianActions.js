@@ -1,23 +1,26 @@
 import axios from "axios";
 import {
-  TECHNICIAN_LOGIN_FAIL,
-  TECHNICIAN_LOGIN_REQUEST,
-  TECHNICIAN_LOGIN_SUCCESS,
-  TECHNICIAN_REGISTER_FAIL,
-  TECHNICIAN_REGISTER_REQUEST,
-  TECHNICIAN_REGISTER_SUCCESS,
-  TECHNICIAN_DETAILS_FAIL,
-  TECHNICIAN_DETAILS_REQUEST,
-  TECHNICIAN_DETAILS_SUCCESS,
-  TECHNICIAN_LIST_REQUEST,
-  TECHNICIAN_LIST_SUCCESS,
-  TECHNICIAN_LIST_FAIL,
   CATEGORY_LIST_FAIL,
   CATEGORY_LIST_REQUEST,
   CATEGORY_LIST_SUCCESS,
   TECHNICIAN_DELETE_FAIL,
   TECHNICIAN_DELETE_REQUEST,
   TECHNICIAN_DELETE_SUCCESS,
+  TECHNICIAN_DETAILS_FAIL,
+  TECHNICIAN_DETAILS_REQUEST,
+  TECHNICIAN_DETAILS_SUCCESS,
+  TECHNICIAN_LIST_FAIL,
+  TECHNICIAN_LIST_REQUEST,
+  TECHNICIAN_LIST_SUCCESS,
+  TECHNICIAN_LOGIN_FAIL,
+  TECHNICIAN_LOGIN_REQUEST,
+  TECHNICIAN_LOGIN_SUCCESS,
+  TECHNICIAN_REGISTER_FAIL,
+  TECHNICIAN_REGISTER_REQUEST,
+  TECHNICIAN_REGISTER_SUCCESS,
+  TECHNICIAN_UPDATE_PROFILE_FAIL,
+  TECHNICIAN_UPDATE_PROFILE_REQUEST,
+  TECHNICIAN_UPDATE_PROFILE_SUCCESS,
 } from "../constants/technicianConstants";
 
 export const technicianLogin = (email, password) => async (dispatch) => {
@@ -113,6 +116,65 @@ export const technicianRegister =
     } catch (error) {
       dispatch({
         type: TECHNICIAN_REGISTER_FAIL,
+        payload: {
+          status: error.response && error.response.status,
+          message:
+            error.response && error.response.data.message
+              ? error.response.data.message
+              : error.message,
+        },
+      });
+    }
+  };
+
+export const technicianUpdateProfile =
+  (email, name, phone, location, cnic, experience, address, id) =>
+  async (dispatch, getState) => {
+    try {
+      dispatch({ type: TECHNICIAN_UPDATE_PROFILE_REQUEST });
+
+      const {
+        technicianUserLogin: { techUserInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${techUserInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.put(
+        `/api/technician/update/${id}`,
+        {
+          email,
+          name,
+          phone,
+          location,
+          cnic,
+          experience,
+          address,
+        },
+        config
+      );
+
+      dispatch({
+        type: TECHNICIAN_UPDATE_PROFILE_SUCCESS,
+        payload: { user: data.technician },
+      });
+      dispatch({
+        type: TECHNICIAN_LOGIN_SUCCESS,
+        payload: { user: data.technician },
+      });
+      localStorage.setItem(
+        "techUserInfo",
+        JSON.stringify({
+          user: data.technician,
+        })
+      );
+    } catch (error) {
+      dispatch({
+        type: TECHNICIAN_UPDATE_PROFILE_FAIL,
         payload: {
           status: error.response && error.response.status,
           message:
