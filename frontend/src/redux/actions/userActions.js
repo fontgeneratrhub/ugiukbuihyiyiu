@@ -10,6 +10,10 @@ import {
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
+  USER_LIST_REQUEST,
+  USER_LIST_SUCCESS,
+  USER_LIST_FAIL,
+  USER_LIST_RESET,
 } from "../constants/userConstants.js";
 
 export const login = (email, password) => async (dispatch) => {
@@ -57,6 +61,7 @@ export const logout = () => (dispatch) => {
   localStorage.removeItem("adminUserInfo");
   dispatch({ type: TECHNICIAN_LOGOUT });
   localStorage.removeItem("techUserInfo");
+  dispatch({ type: USER_LIST_RESET });
 };
 
 export const register =
@@ -101,3 +106,34 @@ export const register =
       });
     }
   };
+
+export const listUsers = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: USER_LIST_REQUEST });
+
+    const {
+      adminUserLogin: { adminUserInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${adminUserInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/user/showAll/${id}`, config);
+
+    dispatch({ type: USER_LIST_SUCCESS, payload: data.users });
+  } catch (error) {
+    dispatch({
+      type: USER_LIST_FAIL,
+      payload: {
+        status: error.response && error.response.status,
+        message:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      },
+    });
+  }
+};

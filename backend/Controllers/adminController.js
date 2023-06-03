@@ -209,7 +209,7 @@ module.exports = {
   //     }
   // },
 
-  // getAllAdmin: async(req,res)=>{
+  // getAllAdmins: async(req,res)=>{
   //     try{
   //        let getresult=  connection();
   //           getresult= await Admin.find()

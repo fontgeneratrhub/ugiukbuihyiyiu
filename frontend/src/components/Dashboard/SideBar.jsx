@@ -1,10 +1,24 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { listUsers } from "../../redux/actions/userActions.js";
 
 import userAVI from "../../images/User-avatar.svg.png";
 
 const SideBar = ({ menuItems, selectedItem, handleItemClick }) => {
+  const dispatch = useDispatch();
+
+  const adminUserLogin = useSelector((state) => state.adminUserLogin);
+  const { adminUserInfo } = adminUserLogin;
+
+  const id = adminUserInfo ? adminUserInfo.user._id : null;
+
   const handleClick = (index, name) => {
     handleItemClick(index);
+
+    if (name === "Users") {
+      dispatch(listUsers(id));
+    }
   };
   return (
     <div className="min-h-screen w-1/6 bg-gray-900 flex flex-col items-center shadow-md p-4">

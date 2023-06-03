@@ -148,11 +148,11 @@ module.exports = {
   // show  all Users
   getAllUsers: async (req, res) => {
     try {
-      let user = await User.find();
+      let users = await User.find();
       // console.log(getresult);
 
-      if (user) {
-        res.status(200).send({ status: "success", user: user });
+      if (users) {
+        res.status(200).send({ status: "success", users: users });
       } else {
         res.status(400).send({ status: "failed", message: "No User found" });
       }
