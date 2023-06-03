@@ -193,7 +193,7 @@ module.exports = {
         res.status(200).send({
           status: "success",
           message: "User updated",
-          User: updateResult,
+          user: updateResult,
         });
       } else {
         res.status(400).send({ message: "User not found" });

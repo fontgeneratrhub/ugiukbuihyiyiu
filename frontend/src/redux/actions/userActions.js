@@ -17,6 +17,10 @@ import {
   USER_DELETE_FAIL,
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
+  USER_UPDATE_PROFILE_FAIL,
+  USER_UPDATE_PROFILE_REQUEST,
+  USER_UPDATE_PROFILE_SUCCESS,
+  USER_UPDATE_PROFILE_RESET,
 } from "../constants/userConstants.js";
 
 export const login = (email, password) => async (dispatch) => {
@@ -99,6 +103,54 @@ export const register =
     } catch (error) {
       dispatch({
         type: USER_REGISTER_FAIL,
+        payload: {
+          status: error.response && error.response.status,
+          message:
+            error.response && error.response.data.message
+              ? error.response.data.message
+              : error.message,
+        },
+      });
+    }
+  };
+
+export const updateProfile =
+  (email, name, id) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: USER_UPDATE_PROFILE_REQUEST });
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+          "Content-Type": "application/json",
+        },
+      };
+
+      const { data } = await axios.put(
+        `/api/user/update/${id}`,
+        { email, name },
+        config
+      );
+
+      dispatch({
+        type: USER_UPDATE_PROFILE_SUCCESS,
+        payload: { user: data.user, token: data.token },
+      });
+      dispatch({
+        type: USER_LOGIN_SUCCESS,
+        payload: { user: data.user, token: data.token },
+      });
+      localStorage.setItem(
+        "userInfo",
+        JSON.stringify({ user: data.user, token: data.token })
+      );
+    } catch (error) {
+      dispatch({
+        type: USER_UPDATE_PROFILE_FAIL,
         payload: {
           status: error.response && error.response.status,
           message:

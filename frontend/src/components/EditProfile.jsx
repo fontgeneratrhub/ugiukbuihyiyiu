@@ -1,8 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { updateProfile } from "../redux/actions/userActions.js";
+
 import Button from "./Button";
 import avi from "../images/User-avatar.svg.png";
 
 const EditProfile = ({ user, setIsEditing, userType }) => {
+  const dispatch = useDispatch();
+
   const initialFormData =
     userType === "technician"
       ? {
@@ -10,7 +16,6 @@ const EditProfile = ({ user, setIsEditing, userType }) => {
           phone: user.phone,
           email: user.email,
           location: user.location,
-          category: user.category,
           experience: user.experience,
           address: user.address,
         }
@@ -27,12 +32,10 @@ const EditProfile = ({ user, setIsEditing, userType }) => {
   const [formData, setFormData] = useState(initialFormData);
 
   const handleFieldChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    const fieldValue = type === "checkbox" ? checked : value;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: fieldValue,
-    }));
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleFormSubmit = (e) => {
@@ -44,6 +47,7 @@ const EditProfile = ({ user, setIsEditing, userType }) => {
       console.log("Updated Profile:", formData);
     } else if (userType === "user") {
       console.log("Updated Profile:", formData);
+      dispatch(updateProfile(formData.email, formData.name, user._id));
     }
     setIsEditing(false);
   };
@@ -62,7 +66,7 @@ const EditProfile = ({ user, setIsEditing, userType }) => {
             className="block text-white text-lg font-bold mb-2"
             htmlFor="name"
           >
-            Display Name:
+            Name:
           </label>
           <input
             type="text"
@@ -73,22 +77,7 @@ const EditProfile = ({ user, setIsEditing, userType }) => {
             onChange={handleFieldChange}
           />
         </div>
-        <div className="mb-4">
-          <label
-            className="block text-white text-lg font-bold mb-2"
-            htmlFor="phone"
-          >
-            Phone:
-          </label>
-          <input
-            type="text"
-            id="phone"
-            name="phone"
-            className="w-full bg-gray-800 text-white rounded py-2 px-3 focus:outline-none focus:shadow-outline"
-            value={formData.phone}
-            onChange={handleFieldChange}
-          />
-        </div>
+
         <div className="mb-4">
           <label
             className="block text-white text-lg font-bold mb-2"
@@ -105,24 +94,41 @@ const EditProfile = ({ user, setIsEditing, userType }) => {
             onChange={handleFieldChange}
           />
         </div>
-        <div className="mb-4">
-          <label
-            className="block text-white text-lg font-bold mb-2"
-            htmlFor="location"
-          >
-            Location:
-          </label>
-          <input
-            type="text"
-            id="location"
-            name="location"
-            className="w-full bg-gray-800 text-white rounded py-2 px-3 focus:outline-none focus:shadow-outline"
-            value={formData.location}
-            onChange={handleFieldChange}
-          />
-        </div>
+
         {userType === "technician" && (
           <>
+            <div className="mb-4">
+              <label
+                className="block text-white text-lg font-bold mb-2"
+                htmlFor="phone"
+              >
+                Phone:
+              </label>
+              <input
+                type="text"
+                id="phone"
+                name="phone"
+                className="w-full bg-gray-800 text-white rounded py-2 px-3 focus:outline-none focus:shadow-outline"
+                value={formData.phone}
+                onChange={handleFieldChange}
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-white text-lg font-bold mb-2"
+                htmlFor="location"
+              >
+                Location:
+              </label>
+              <input
+                type="text"
+                id="location"
+                name="location"
+                className="w-full bg-gray-800 text-white rounded py-2 px-3 focus:outline-none focus:shadow-outline"
+                value={formData.location}
+                onChange={handleFieldChange}
+              />
+            </div>
             <div className="mb-4">
               <label
                 className="block text-white text-lg font-bold mb-2"

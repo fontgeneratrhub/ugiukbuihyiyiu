@@ -15,6 +15,10 @@ import {
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
   USER_DELETE_FAIL,
+  USER_UPDATE_PROFILE_FAIL,
+  USER_UPDATE_PROFILE_REQUEST,
+  USER_UPDATE_PROFILE_SUCCESS,
+  USER_UPDATE_PROFILE_RESET,
 } from "../constants/userConstants.js";
 
 export const userLoginReducer = (state = {}, action) => {
@@ -52,6 +56,26 @@ export const logoutReducer = (state = {}, action) => {
     case TECHNICIAN_LOGOUT:
       return {};
     case USER_LOGOUT:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const userUpdateProfileReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_UPDATE_PROFILE_REQUEST:
+      return { ...state, loading: true };
+    case USER_UPDATE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        userInfo: action.payload,
+      };
+    case USER_UPDATE_PROFILE_FAIL:
+      return { ...state, loading: false, error: action.payload };
+    case USER_UPDATE_PROFILE_RESET:
       return {};
     default:
       return state;
