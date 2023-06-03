@@ -15,6 +15,9 @@ import {
   TECHNICIAN_REGISTER_FAIL,
   TECHNICIAN_REGISTER_REQUEST,
   TECHNICIAN_REGISTER_SUCCESS,
+  TECHNICIAN_DELETE_FAIL,
+  TECHNICIAN_DELETE_REQUEST,
+  TECHNICIAN_DELETE_SUCCESS,
 } from "../constants/technicianConstants";
 
 export const technicianUserLoginReducer = (state = {}, action) => {
@@ -39,6 +42,19 @@ export const technicianUserRegisterReducer = (state = {}, action) => {
     case TECHNICIAN_REGISTER_SUCCESS:
       return { loading: false, techUserInfo: action.payload };
     case TECHNICIAN_REGISTER_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const technicianUserDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case TECHNICIAN_DELETE_REQUEST:
+      return { loading: true };
+    case TECHNICIAN_DELETE_SUCCESS:
+      return { loading: false, success: true };
+    case TECHNICIAN_DELETE_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

@@ -15,6 +15,9 @@ import {
   CATEGORY_LIST_FAIL,
   CATEGORY_LIST_REQUEST,
   CATEGORY_LIST_SUCCESS,
+  TECHNICIAN_DELETE_FAIL,
+  TECHNICIAN_DELETE_REQUEST,
+  TECHNICIAN_DELETE_SUCCESS,
 } from "../constants/technicianConstants";
 
 export const technicianLogin = (email, password) => async (dispatch) => {
@@ -120,6 +123,41 @@ export const technicianRegister =
       });
     }
   };
+
+export const technicianDelete = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: TECHNICIAN_DELETE_REQUEST,
+    });
+
+    const {
+      adminUserLogin: { adminUserInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${adminUserInfo.token}`,
+      },
+    };
+
+    await axios.delete(`/api/technician/delete/${id}`, config);
+
+    dispatch({
+      type: TECHNICIAN_DELETE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: TECHNICIAN_DELETE_FAIL,
+      payload: {
+        status: error.response && error.response.status,
+        message:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      },
+    });
+  }
+};
 
 export const getTechnicianDetails = (id) => async (dispatch) => {
   try {
