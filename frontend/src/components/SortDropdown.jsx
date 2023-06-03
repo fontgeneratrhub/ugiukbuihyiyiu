@@ -27,7 +27,7 @@ const SortDropdown = ({ sortOptions, sortOption, handleSort }) => {
         onClick={() => setDropIsOpen(!dropIsOpen)}
         className="text-white rounded-md"
       >
-        Sort Options
+        Sort Options: {sortOption}
       </Button>
       <div
         className={`${

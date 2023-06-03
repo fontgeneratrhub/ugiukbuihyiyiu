@@ -20,22 +20,32 @@ const AdminRegisterScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const adminUserLogin = useSelector((state) => state.adminUserLogin);
-  const { userInfo: adminUserInfo } = adminUserLogin;
-
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo: userInfoLogin } = userLogin;
+  const { userInfo } = userLogin;
+
+  const adminUserLogin = useSelector((state) => state.adminUserLogin);
+  const { adminUserInfo } = adminUserLogin;
+
+  const technicianUserLogin = useSelector((state) => state.technicianUserLogin);
+  const { techUserInfo } = technicianUserLogin;
 
   const adminUserRegister = useSelector((state) => state.adminUserRegister);
-  const { loading, error, userInfo } = adminUserRegister;
+  const { loading, error, adminUserInfo: adminUserRegInfo } = adminUserRegister;
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
-    if (adminUserInfo || userInfoLogin || userInfo) {
+    if (adminUserInfo || techUserInfo || userInfo || adminUserRegInfo) {
       navigate(redirect);
     }
-  }, [navigate, redirect, adminUserInfo, userInfoLogin, userInfo]);
+  }, [
+    navigate,
+    redirect,
+    adminUserInfo,
+    techUserInfo,
+    userInfo,
+    adminUserRegInfo,
+  ]);
 
   const submitHandler = (e) => {
     e.preventDefault();

@@ -32,67 +32,72 @@ const TechRegisterScreen = () => {
   const {
     loading: categoryLoading,
     error: categoryError,
-    categories,
+    // categories,
   } = categoryList;
 
   useEffect(() => {
     dispatch(listTechnicianCategories());
   }, [dispatch]);
 
-  // const categories = {
-  //   category: [
-  //     {
-  //       _id: "60f9b6b3e6c9a00f1c1b4b1b",
-  //       name: "Electrician",
-  //       createdAt: "2021-07-22T12:12:03.000Z",
-  //       updatedAt: "2021-07-22T12:12:03.000Z",
-  //       __v: 0,
-  //     },
-  //     {
-  //       _id: "60f9b6b3e6c9a00f1c1b4b1c",
-  //       name: "Plumber",
-  //       createdAt: "2021-07-22T12:12:03.000Z",
-  //       updatedAt: "2021-07-22T12:12:03.000Z",
-  //       __v: 0,
-  //     },
-  //     {
-  //       _id: "60f9b6b3e6c9a00f1c1b4b1d",
-  //       name: "Carpenter",
-  //       createdAt: "2021-07-22T12:12:03.000Z",
-  //       updatedAt: "2021-07-22T12:12:03.000Z",
-  //       __v: 0,
-  //     },
-  //     {
-  //       _id: "60f9b6b3e6c9a00f1c1b4b1e",
-  //       name: "Painter",
-  //       createdAt: "2021-07-22T12:12:03.000Z",
-  //       updatedAt: "2021-07-22T12:12:03.000Z",
-  //       __v: 0,
-  //     },
-  //   ],
-  // };
-
-  const adminUserLogin = useSelector((state) => state.adminUserLogin);
-  const { userInfo: adminUserInfo } = adminUserLogin;
-
-  const technicianUserLogin = useSelector((state) => state.technicianUserLogin);
-  const { userInfo: techUserInfo } = technicianUserLogin;
+  // const categories = [
+  //   {
+  //     _id: "60f9b6b3e6c9a00f1c1b4b1b",
+  //     name: "Electrician",
+  //     createdAt: "2021-07-22T12:12:03.000Z",
+  //     updatedAt: "2021-07-22T12:12:03.000Z",
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: "60f9b6b3e6c9a00f1c1b4b1c",
+  //     name: "Plumber",
+  //     createdAt: "2021-07-22T12:12:03.000Z",
+  //     updatedAt: "2021-07-22T12:12:03.000Z",
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: "60f9b6b3e6c9a00f1c1b4b1d",
+  //     name: "Carpenter",
+  //     createdAt: "2021-07-22T12:12:03.000Z",
+  //     updatedAt: "2021-07-22T12:12:03.000Z",
+  //     __v: 0,
+  //   },
+  //   {
+  //     _id: "60f9b6b3e6c9a00f1c1b4b1e",
+  //     name: "Painter",
+  //     createdAt: "2021-07-22T12:12:03.000Z",
+  //     updatedAt: "2021-07-22T12:12:03.000Z",
+  //     __v: 0,
+  //   },
+  // ];
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo: userInfoLogin } = userLogin;
+  const { userInfo } = userLogin;
+
+  const adminUserLogin = useSelector((state) => state.adminUserLogin);
+  const { adminUserInfo } = adminUserLogin;
+
+  const technicianUserLogin = useSelector((state) => state.technicianUserLogin);
+  const { techUserInfo } = technicianUserLogin;
 
   const technicianUserRegister = useSelector(
     (state) => state.technicianUserRegister
   );
-  const { loading, error, userInfo: userInfo } = technicianUserRegister;
+  const { loading, error, userInfo: techUserRegInfo } = technicianUserRegister;
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
-    if (adminUserInfo || userInfoLogin || techUserInfo) {
+    if (techUserRegInfo || techUserInfo || adminUserInfo || userInfo) {
       navigate(redirect);
     }
-  }, [navigate, redirect, adminUserInfo, userInfoLogin, userInfo]);
+  }, [
+    navigate,
+    techUserRegInfo,
+    techUserInfo,
+    adminUserInfo,
+    userInfo,
+    redirect,
+  ]);
 
   const submitHandler = (e) => {
     e.preventDefault();

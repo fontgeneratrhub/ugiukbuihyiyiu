@@ -16,22 +16,22 @@ const TechLoginScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const adminUserLogin = useSelector((state) => state.adminUserLogin);
-  const { userInfo: adminUserInfo } = adminUserLogin;
+  const { adminUserInfo } = adminUserLogin;
 
   const technicianUserLogin = useSelector((state) => state.technicianUserLogin);
-  const { loading, error, userInfo: technicianUserInfo } = technicianUserLogin;
-
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo: userInfo } = userLogin;
+  const { loading, error, techUserInfo } = technicianUserLogin;
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
-    if (userInfo || adminUserInfo || technicianUserInfo) {
+    if (techUserInfo || adminUserInfo || userInfo) {
       navigate(redirect);
     }
-  }, [userInfo, adminUserInfo, technicianUserInfo, navigate, redirect]);
+  }, [navigate, redirect, techUserInfo, adminUserInfo, userInfo]);
 
   const submitHandler = (e) => {
     e.preventDefault();

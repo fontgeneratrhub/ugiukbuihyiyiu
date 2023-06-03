@@ -11,7 +11,6 @@ import Message from "../../components/Message.jsx";
 const UserLoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -20,13 +19,19 @@ const UserLoginScreen = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
 
+  const adminUserLogin = useSelector((state) => state.adminUserLogin);
+  const { adminUserInfo } = adminUserLogin;
+
+  const technicianUserLogin = useSelector((state) => state.technicianUserLogin);
+  const { techUserInfo } = technicianUserLogin;
+
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo || adminUserInfo || techUserInfo) {
       navigate(redirect);
     }
-  }, [userInfo, navigate, redirect]);
+  }, [navigate, redirect, userInfo, adminUserInfo, techUserInfo]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -112,7 +117,7 @@ const UserLoginScreen = () => {
 
                   <div className="relative flex justify-center items-center w-full">
                     <input
-                      type={showPassword ? "text" : "password"}
+                      type="password"
                       id="password"
                       value={password}
                       placeholder="Enter Password"

@@ -6,6 +6,9 @@ import {
   TECHNICIAN_REGISTER_FAIL,
   TECHNICIAN_REGISTER_REQUEST,
   TECHNICIAN_REGISTER_SUCCESS,
+  TECHNICIAN_LIST_REQUEST,
+  TECHNICIAN_LIST_SUCCESS,
+  TECHNICIAN_LIST_FAIL,
   CATEGORY_LIST_FAIL,
   CATEGORY_LIST_REQUEST,
   CATEGORY_LIST_SUCCESS,
@@ -32,7 +35,7 @@ export const technicianLogin = (email, password) => async (dispatch) => {
       payload: { user: data.user, token: data.token },
     });
     localStorage.setItem(
-      "userInfo",
+      "techUserInfo",
       JSON.stringify({ user: data.user, token: data.token })
     );
   } catch (error) {
@@ -98,7 +101,7 @@ export const technicianRegister =
         payload: { user: data.user, token: data.token },
       });
       localStorage.setItem(
-        "userInfo",
+        "techUserInfo",
         JSON.stringify({ user: data.user, token: data.token })
       );
     } catch (error) {
@@ -115,11 +118,35 @@ export const technicianRegister =
     }
   };
 
+export const listTechnicians = () => async (dispatch) => {
+  try {
+    dispatch({ type: TECHNICIAN_LIST_REQUEST });
+
+    const { data } = await axios.get("/api/technician/showAll");
+
+    dispatch({
+      type: TECHNICIAN_LIST_SUCCESS,
+      payload: data.technicians,
+    });
+  } catch (error) {
+    dispatch({
+      type: TECHNICIAN_LIST_FAIL,
+      payload: {
+        status: error.response && error.response.status,
+        message:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      },
+    });
+  }
+};
+
 export const listTechnicianCategories = () => async (dispatch) => {
   try {
     dispatch({ type: CATEGORY_LIST_REQUEST });
 
-    const { data } = await axios.get("/api/category/showAll/:id");
+    const { data } = await axios.get("/api/category/showAll");
 
     dispatch({
       type: CATEGORY_LIST_SUCCESS,

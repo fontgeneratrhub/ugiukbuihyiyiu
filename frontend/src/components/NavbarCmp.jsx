@@ -42,29 +42,17 @@ const NavbarCmp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const [isAdmin, setisAdmin] = useState(false);
-  const [isTechnician, setIsTechnician] = useState(false);
-  const [userName, setUserName] = useState("");
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   const adminUserLogin = useSelector((state) => state.adminUserLogin);
-  const { userInfo: adminUserInfo } = adminUserLogin;
+  const { adminUserInfo } = adminUserLogin;
 
   const technicianUserLogin = useSelector((state) => state.technicianUserLogin);
-  const { userInfo: techUserInfo } = technicianUserLogin;
+  const { techUserInfo } = technicianUserLogin;
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
-
-  useEffect(() => {
-    if (adminUserInfo) {
-      setisAdmin(true);
-    }
-    if (techUserInfo) {
-      setIsTechnician(true);
-    }
-  }, [adminUserInfo]);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -176,9 +164,9 @@ const NavbarCmp = () => {
                     <div className="p-1">
                       <Link
                         to={
-                          isAdmin
+                          adminUserInfo
                             ? "/admin/dashboard"
-                            : isTechnician
+                            : techUserInfo
                             ? "/technician/dashboard"
                             : "/dashboard"
                         }

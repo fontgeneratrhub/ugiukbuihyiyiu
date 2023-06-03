@@ -14,6 +14,7 @@ import {
   technicianUserLoginReducer,
   technicianUserRegisterReducer,
   categoryListReducer,
+  technicianUserListReducer,
 } from "./reducers/technicianReducers.js";
 import {
   logoutReducer,
@@ -28,6 +29,7 @@ const reducer = combineReducers({
   adminUserRegister: adminUserRegisterReducer,
   technicianUserLogin: technicianUserLoginReducer,
   technicianUserRegister: technicianUserRegisterReducer,
+  technicianUserList: technicianUserListReducer,
   logout: logoutReducer,
   categoryList: categoryListReducer,
 });
@@ -36,10 +38,18 @@ const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
 
+const adminUserInfoFromStorage = localStorage.getItem("adminUserInfo")
+  ? JSON.parse(localStorage.getItem("adminUserInfo"))
+  : null;
+
+const techUserInfoFromStorage = localStorage.getItem("techUserInfo")
+  ? JSON.parse(localStorage.getItem("techUserInfo"))
+  : null;
+
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
-  adminUserLogin: { userInfo: userInfoFromStorage },
-  technicianUserLogin: { userInfo: userInfoFromStorage },
+  adminUserLogin: { adminUserInfo: adminUserInfoFromStorage },
+  technicianUserLogin: { technUserInfo: techUserInfoFromStorage },
 };
 
 const middleware = [thunk];

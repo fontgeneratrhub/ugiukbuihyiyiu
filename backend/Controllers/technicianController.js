@@ -189,11 +189,11 @@ module.exports = {
   // show  all technicians
   getAllTechnicians: async (req, res) => {
     try {
-      let technician = await Technician.find();
+      let technicians = await Technician.find();
       // console.log(getresult);
 
-      if (technician) {
-        res.status(200).send({ status: "success", technician: technician });
+      if (technicians) {
+        res.status(200).send({ status: "success", technicians: technicians });
       } else {
         res
           .status(400)

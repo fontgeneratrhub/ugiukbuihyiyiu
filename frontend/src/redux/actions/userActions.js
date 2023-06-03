@@ -51,10 +51,12 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
-  localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
+  localStorage.removeItem("userInfo");
   dispatch({ type: ADMIN_LOGOUT });
+  localStorage.removeItem("adminUserInfo");
   dispatch({ type: TECHNICIAN_LOGOUT });
+  localStorage.removeItem("techUserInfo");
 };
 
 export const register =

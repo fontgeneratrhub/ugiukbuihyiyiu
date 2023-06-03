@@ -1,23 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { listTechnicianCategories } from "../redux/actions/technicianActions";
+
 import Button from "./Button";
 
 const SearchBar = ({ onSearch, onCategoryChange }) => {
+  const dispatch = useDispatch();
+
   const handleSearch = (event) => {
     event.preventDefault();
     const searchText = event.target.elements.search.value;
     onSearch(searchText);
   };
 
-  const categories = [
-    "Electrician",
-    "Plumber",
-    "Carpenter",
-    "Painter",
-    "Mason",
-    "Welder",
-    "Mechanic",
-    "Technician",
-  ];
+  const categoryList = useSelector((state) => state.categoryList);
+  const { loading, error, categories } = categoryList;
+
+  useEffect(() => {
+    dispatch(listTechnicianCategories());
+  }, [dispatch]);
 
   const handleCategoryChange = (event) => {
     const category = event.target.value;
@@ -34,27 +36,36 @@ const SearchBar = ({ onSearch, onCategoryChange }) => {
           className="bg-gray-600 border-0 sm:rounded-l-md sm:rounded-r-none rounded-md py-3 px-4 my-2 focus:outline-none focus:ring-0 flex-grow"
         />
 
-        <select
-          name="category"
-          onChange={handleCategoryChange}
-          className="bg-gray-600 border-0 sm:border border-gray-500 rounded-md sm:rounded-none py-3 px-4 my-2 focus:outline-none"
-        >
-          <option
-            className="text-gray-500 bg-white hover:bg-gray-700 px-3 py-2 rounded-md text-base hover:font-bold"
-            value=""
+        <div>
+          <select
+            id="category"
+            name="category"
+            onChange={handleCategoryChange}
+            className="bg-gray-600 border-0 sm:border border-gray-500 rounded-md sm:rounded-none py-3 px-4 my-2 focus:outline-none"
           >
-            All Categories
-          </option>
-          {categories.map((category) => (
             <option
-              className="text-gray-500 bg-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base hover:font-bold"
-              key={category}
-              value={category}
+              value=""
+              className="text-gray-500 bg-white hover:bg-gray-700 px-3 py-2 rounded-md text-base hover:font-bold"
             >
-              {category}
+              All Categories
             </option>
-          ))}
-        </select>
+            {loading ? (
+              <option>Loading...</option>
+            ) : error ? (
+              <option>Error: {error}</option>
+            ) : (
+              categories.map((category) => (
+                <option
+                  key={category._id}
+                  value={category.title}
+                  className="text-gray-500 bg-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base hover:font-bold"
+                >
+                  {category.title}
+                </option>
+              ))
+            )}
+          </select>
+        </div>
 
         <Button
           variant="primary"

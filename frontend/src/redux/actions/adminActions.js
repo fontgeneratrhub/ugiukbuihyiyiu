@@ -29,7 +29,7 @@ export const adminLogin = (email, password) => async (dispatch) => {
       payload: { user: data.user, token: data.token },
     });
     localStorage.setItem(
-      "userInfo",
+      "adminUserInfo",
       JSON.stringify({ user: data.user, token: data.token })
     );
   } catch (error) {
@@ -72,7 +72,7 @@ export const adminRegister =
         payload: { user: data.user, token: data.token },
       });
       localStorage.setItem(
-        "userInfo",
+        "adminUserInfo",
         JSON.stringify({ user: data.user, token: data.token })
       );
     } catch (error) {

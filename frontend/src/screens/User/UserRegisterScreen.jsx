@@ -19,19 +19,25 @@ const UserRegisterScreen = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
 
-  const userRegister = useSelector((state) => state.userRegister);
-  const { loading, error, userInfo } = userRegister;
-
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo: userInfoLogin } = userLogin;
+  const { userInfo } = userLogin;
+
+  const adminUserLogin = useSelector((state) => state.adminUserLogin);
+  const { adminUserInfo } = adminUserLogin;
+
+  const technicianUserLogin = useSelector((state) => state.technicianUserLogin);
+  const { techUserInfo } = technicianUserLogin;
+
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, error, userInfo: userRegInfo } = userRegister;
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
-    if (userInfoLogin || userInfo) {
+    if (userRegInfo || userInfo || adminUserInfo || techUserInfo) {
       navigate(redirect);
     }
-  }, [userInfo, navigate, redirect]);
+  }, [navigate, redirect, userRegInfo, userInfo, adminUserInfo, techUserInfo]);
 
   const submitHandler = (e) => {
     e.preventDefault(); //Dispatch Register
