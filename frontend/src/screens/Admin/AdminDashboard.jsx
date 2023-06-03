@@ -20,7 +20,14 @@ const AdminDashboard = () => {
     if (!adminUserInfo || userInfo || techUserInfo) {
       navigate("/admin/login");
     }
-  }, [navigate, adminUserInfo, userInfo, techUserInfo]);
+  }, [navigate, adminUserInfo]);
+
+  useEffect(() => {
+    // Check if any other user type is logged in (redirect to homepage)
+    if (!adminUserInfo && userInfo && techUserInfo) {
+      navigate("/");
+    }
+  }, [navigate, userInfo, techUserInfo]);
 
   return <Dashboard variant="admin" />;
 };

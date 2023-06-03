@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Button from "./Button";
 
-const Table = ({ data, columns, handleEdit, handleDelete, entityType }) => {
+const Table = ({ data, columns, handleDelete, entityType }) => {
   return (
     <div className="overflow-x-auto">
       <table className="bg-gray-700 w-full table-auto border-collapse border-2 border-gray-400 rounded-lg text-center overflow-hidden whitespace-no-wrap">

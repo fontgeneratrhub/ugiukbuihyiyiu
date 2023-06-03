@@ -2,14 +2,34 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { listUsers } from "../../redux/actions/userActions.js";
+import { listTechnicians } from "../../redux/actions/technicianActions.js";
 
 import userAVI from "../../images/User-avatar.svg.png";
 
-const SideBar = ({ menuItems, selectedItem, handleItemClick }) => {
+const SideBar = ({ variant, menuItems, selectedItem, handleItemClick }) => {
   const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   const adminUserLogin = useSelector((state) => state.adminUserLogin);
   const { adminUserInfo } = adminUserLogin;
+
+  const technicianUserLogin = useSelector((state) => state.technicianUserLogin);
+  const { techUserInfo } = technicianUserLogin;
+
+  let loggedInUserName = "";
+
+  if (adminUserInfo && variant === "admin") {
+    loggedInUserName = adminUserInfo.user.name;
+  } else if (techUserInfo && variant === "technician") {
+    loggedInUserName = techUserInfo.user.name;
+  } else if (userInfo && variant === "user") {
+    loggedInUserName = userInfo.user.name;
+  }
+
+  const formattedUserName =
+    loggedInUserName.charAt(0).toUpperCase() + loggedInUserName.slice(1);
 
   const id = adminUserInfo ? adminUserInfo.user._id : null;
 
@@ -18,6 +38,8 @@ const SideBar = ({ menuItems, selectedItem, handleItemClick }) => {
 
     if (name === "Users") {
       dispatch(listUsers(id));
+    } else if (name === "Technicians") {
+      dispatch(listTechnicians());
     }
   };
   return (
@@ -28,8 +50,8 @@ const SideBar = ({ menuItems, selectedItem, handleItemClick }) => {
           src={userAVI}
           alt="User Avatar"
         />
-        <h2 className="text-white text-xl font-semibold mb-2 hidden md:block">
-          Jane Doe
+        <h2 className="text-white text-xl text-center font-semibold mb-2 hidden md:block">
+          {formattedUserName}
         </h2>
       </div>
 

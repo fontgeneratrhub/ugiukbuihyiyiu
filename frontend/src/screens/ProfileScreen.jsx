@@ -1,44 +1,89 @@
-import React, { useState } from "react";
-import Profile from "../components/Profile";
-import avi from "../images/User-avatar.svg.png";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import Button from "../components/Button";
 import EditProfile from "../components/EditProfile";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
+import Profile from "../components/Profile";
 
 const ProfileScreen = () => {
   const [isEditing, setIsEditing] = useState(false);
 
-  const userInfo = {
-    id: 1,
-    displayName: "John Smith",
-    email: "tugrp@example.com",
-    phone: "123456879",
-    location: "New York",
-    category: "Electrician",
-    rating: "4.5",
-    experience: "4 Years",
-    avatar: avi,
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-    isTechnician: true,
-  };
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading: userLoading, error: userError, userInfo } = userLogin;
+
+  const adminUserLogin = useSelector((state) => state.adminUserLogin);
+  const {
+    loading: adminLoading,
+    error: adminError,
+    adminUserInfo,
+  } = adminUserLogin;
+
+  const technicianUserLogin = useSelector((state) => state.technicianUserLogin);
+  const {
+    loading: techLoading,
+    error: techError,
+    techUserInfo,
+  } = technicianUserLogin;
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!adminUserInfo && !userInfo && !techUserInfo) {
+      navigate("/");
+    }
+  }, [navigate, userInfo, adminUserInfo, techUserInfo]);
+
+  let user = null;
+  let userType = null;
+
+  if (userInfo) {
+    user = userInfo.user;
+    userType = "user";
+  } else if (adminUserInfo) {
+    user = adminUserInfo.user;
+    userType = "admin";
+  } else if (techUserInfo) {
+    user = techUserInfo.user;
+    userType = "technician";
+  }
+  if (!adminUserInfo && !userInfo && !techUserInfo) {
+    return null;
+  }
 
   return (
     <section className="min-h-screen flex flex-row justify-center items-center bg-gray-800 text-white py-20">
       <div className="mx-auto max-w-screen-xl w-full flex flex-col justify-center items-center px-4 sm:px-8 lg:px-6">
-        <h1 className="text-4xl text-center font-bold mb-4">User Profile</h1>
-        <Button
-          variant="success"
-          className={`${isEditing ? "hidden" : "block"} rounded-md mb-4`}
-          onClick={() => {
-            setIsEditing(!isEditing);
-          }}
-        >
-          Edit Profile
-        </Button>
-        {isEditing ? (
-          <EditProfile user={userInfo} setIsEditing={setIsEditing} />
+        {userLoading || adminLoading || techLoading ? (
+          <Loader />
+        ) : userError || adminError || techError ? (
+          <Message>{userError || adminError || techError}</Message>
         ) : (
-          <Profile user={userInfo} />
+          <>
+            <h1 className="text-4xl text-center font-bold mb-4">
+              User Profile
+            </h1>
+            <Button
+              variant="success"
+              className={`${isEditing ? "hidden" : "block"} rounded-md mb-4`}
+              onClick={() => {
+                setIsEditing(!isEditing);
+              }}
+            >
+              Edit Profile
+            </Button>
+            {isEditing ? (
+              <EditProfile
+                user={user}
+                setIsEditing={setIsEditing}
+                userType={userType}
+              />
+            ) : (
+              <Profile user={user} userType={userType} />
+            )}
+          </>
         )}
       </div>
     </section>

@@ -6,10 +6,10 @@ import MainContent from "./MainContent";
 const Dashboard = ({ variant }) => {
   const menuItems = {
     admin: [
-      {
-        name: "Admins",
-        icon: "fas fa-user",
-      },
+      // {
+      //   name: "Admins",
+      //   icon: "fas fa-user",
+      // },
       {
         name: "Technicians",
         icon: "fas fa-screwdriver-wrench",
@@ -54,6 +54,7 @@ const Dashboard = ({ variant }) => {
   return (
     <section className="min-h-screen flex flex-row justify-center items-center bg-gray-800 text-white pt-16">
       <Sidebar
+        variant={variant}
         menuItems={menuItems[variant]}
         selectedItem={selectedItem}
         handleItemClick={handleItemClick}

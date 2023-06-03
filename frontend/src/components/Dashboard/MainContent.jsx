@@ -1,15 +1,19 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { deleteUser, listUsers } from "../../redux/actions/userActions";
 
 import Loader from "../../components/Loader";
 import Message from "../../components/Message.jsx";
 import Table from "../Table";
 
 const MainContent = ({ variant, selectedItem, menuItems }) => {
-  const userColumns = ["name", "id", "email"];
-  const adminColumns = ["name", "id", "email"];
-  const technicianColumns = ["name", "id", "email"];
+  const userColumns = ["name", "_id", "email"];
+  const adminColumns = ["name", "_id", "email"];
+  const technicianColumns = ["name", "_id", "email"];
   const orderColumns = ["orderId", "customerId", "status"];
+
+  const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -40,9 +44,22 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
   const userList = useSelector((state) => state.userList);
   const { loading: usersLoading, error: usersError, users } = userList;
 
+  const technicianUserList = useSelector((state) => state.technicianUserList);
+  const {
+    loading: technicianUsersLoading,
+    error: technicianUsersError,
+    technicians,
+  } = technicianUserList;
+
   // Delete user
   const handleDeleteUser = (userId) => {
-    console.log("Delete");
+    dispatch(deleteUser(userId)).then(() => {
+      dispatch(listUsers());
+    });
+  };
+
+  const handleDeleteTechnician = (technicianId) => {
+    console.log("Delete Technician");
   };
 
   return (
@@ -63,27 +80,30 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
         </h2>
       )}
 
-      {usersLoading ? (
+      {usersLoading || technicianUsersLoading ? (
         <Loader />
-      ) : usersError ? (
+      ) : usersError || technicianUsersError ? (
         <Message variant="error">{usersError}</Message>
       ) : (
         selectedItem !== null && (
           <div>
-            {menuItems[selectedItem].name === "Admins" && (
+            {/* {menuItems[selectedItem].name === "Admins" && (
               <div>
                 <h2 className="text-2xl font-semibold mb-2">Admins</h2>
                 {admins.map((admin) => (
                   <div key={admin.id}>{admin.name}</div>
                 ))}
               </div>
-            )}
+            )} */}
             {menuItems[selectedItem].name === "Technicians" && (
               <div>
-                <h2 className="text-2xl font-semibold mb-2">Technicians</h2>
-                {technicians.map((technician) => (
-                  <div key={technician.id}>{technician.name}</div>
-                ))}
+                <h2 className="text-2xl font-semibold mb-2">All Technicians</h2>
+                <Table
+                  data={technicians}
+                  columns={technicianColumns}
+                  handleDelete={handleDeleteTechnician}
+                  entityType="technician"
+                />
               </div>
             )}
             {menuItems[selectedItem].name === "Users" && users && (

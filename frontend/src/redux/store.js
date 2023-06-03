@@ -22,12 +22,14 @@ import {
   userLoginReducer,
   userRegisterReducer,
   userListReducer,
+  userDeleteReducer,
 } from "./reducers/userReducers.js";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userList: userListReducer,
+  deleteUser: userDeleteReducer,
   adminUserLogin: adminUserLoginReducer,
   adminUserRegister: adminUserRegisterReducer,
   technicianUserLogin: technicianUserLoginReducer,

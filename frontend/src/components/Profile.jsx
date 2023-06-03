@@ -1,7 +1,7 @@
 import React from "react";
 import avi from "../images/User-avatar.svg.png";
 
-const Profile = ({ user }) => {
+const Profile = ({ user, userType }) => {
   return (
     <div
       key={user._id}
@@ -54,8 +54,6 @@ const Profile = ({ user }) => {
           Rating: {user.rating}
         </h2>
       )}
-
-      <hr className="border-gray-700 my-4 w-1/2" />
     </div>
   );
 };
