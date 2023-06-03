@@ -51,7 +51,7 @@ const techUserInfoFromStorage = localStorage.getItem("techUserInfo")
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
   adminUserLogin: { adminUserInfo: adminUserInfoFromStorage },
-  technicianUserLogin: { technUserInfo: techUserInfoFromStorage },
+  technicianUserLogin: { techUserInfo: techUserInfoFromStorage },
 };
 
 const middleware = [thunk];

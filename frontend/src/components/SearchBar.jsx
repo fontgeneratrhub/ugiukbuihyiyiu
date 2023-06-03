@@ -43,23 +43,14 @@ const SearchBar = ({ onSearch, onCategoryChange }) => {
             onChange={handleCategoryChange}
             className="bg-gray-600 border-0 sm:border border-gray-500 rounded-md sm:rounded-none py-3 px-4 my-2 focus:outline-none"
           >
-            <option
-              value=""
-              className="text-gray-500 bg-white hover:bg-gray-700 px-3 py-2 rounded-md text-base hover:font-bold"
-            >
-              All Categories
-            </option>
+            <option value="">All Categories</option>
             {loading ? (
               <option>Loading...</option>
             ) : error ? (
               <option>Error: {error}</option>
             ) : (
               categories.map((category) => (
-                <option
-                  key={category._id}
-                  value={category.title}
-                  className="text-gray-500 bg-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base hover:font-bold"
-                >
+                <option key={category._id} value={category.title}>
                   {category.title}
                 </option>
               ))

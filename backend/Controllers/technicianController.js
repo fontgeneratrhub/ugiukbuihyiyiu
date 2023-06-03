@@ -74,7 +74,7 @@ module.exports = {
               if (!regPhone.test(phone)) {
                 res.status(400).send({
                   status: "failed",
-                  message: "Enter phone Number in correct formate",
+                  message: "Enter Phone Number in Correct Format!",
                 });
               } else {
                 if (!regCnic.test(cnic)) {

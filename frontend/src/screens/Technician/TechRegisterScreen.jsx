@@ -32,43 +32,12 @@ const TechRegisterScreen = () => {
   const {
     loading: categoryLoading,
     error: categoryError,
-    // categories,
+    categories,
   } = categoryList;
 
   useEffect(() => {
     dispatch(listTechnicianCategories());
   }, [dispatch]);
-
-  // const categories = [
-  //   {
-  //     _id: "60f9b6b3e6c9a00f1c1b4b1b",
-  //     name: "Electrician",
-  //     createdAt: "2021-07-22T12:12:03.000Z",
-  //     updatedAt: "2021-07-22T12:12:03.000Z",
-  //     __v: 0,
-  //   },
-  //   {
-  //     _id: "60f9b6b3e6c9a00f1c1b4b1c",
-  //     name: "Plumber",
-  //     createdAt: "2021-07-22T12:12:03.000Z",
-  //     updatedAt: "2021-07-22T12:12:03.000Z",
-  //     __v: 0,
-  //   },
-  //   {
-  //     _id: "60f9b6b3e6c9a00f1c1b4b1d",
-  //     name: "Carpenter",
-  //     createdAt: "2021-07-22T12:12:03.000Z",
-  //     updatedAt: "2021-07-22T12:12:03.000Z",
-  //     __v: 0,
-  //   },
-  //   {
-  //     _id: "60f9b6b3e6c9a00f1c1b4b1e",
-  //     name: "Painter",
-  //     createdAt: "2021-07-22T12:12:03.000Z",
-  //     updatedAt: "2021-07-22T12:12:03.000Z",
-  //     __v: 0,
-  //   },
-  // ];
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -82,7 +51,11 @@ const TechRegisterScreen = () => {
   const technicianUserRegister = useSelector(
     (state) => state.technicianUserRegister
   );
-  const { loading, error, userInfo: techUserRegInfo } = technicianUserRegister;
+  const {
+    loading,
+    error,
+    techUserInfo: techUserRegInfo,
+  } = technicianUserRegister;
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
@@ -106,16 +79,16 @@ const TechRegisterScreen = () => {
     }
     dispatch(
       technicianRegister(
+        categoryId,
         name,
         email,
-        cnic,
+        password,
+        confirmPassword,
         techlocation,
         experience,
         phone,
-        address,
-        categoryId,
-        password,
-        confirmPassword
+        cnic,
+        address
       )
     );
   };
@@ -174,7 +147,7 @@ const TechRegisterScreen = () => {
                       type="text"
                       id="cnic"
                       value={cnic}
-                      placeholder="Enter CNIC: 12345-1234567-8"
+                      placeholder="Enter CNIC: XXXXX-XXXXXXX-X"
                       onChange={(e) => {
                         setCnic(e.target.value);
                       }}
@@ -277,7 +250,7 @@ const TechRegisterScreen = () => {
                       ) : (
                         categories.map((category) => (
                           <option key={category._id} value={category._id}>
-                            {category.name}
+                            {category.title}
                           </option>
                         ))
                       )}

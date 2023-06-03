@@ -57,16 +57,16 @@ export const technicianLogin = (email, password) => async (dispatch) => {
 
 export const technicianRegister =
   (
+    categoryId,
     name,
     email,
     password,
     confirmPassword,
-    cnic,
     location,
     experience,
     phone,
-    address,
-    categoryId
+    cnic,
+    address
   ) =>
   async (dispatch) => {
     try {
@@ -81,16 +81,16 @@ export const technicianRegister =
       const { data } = await axios.post(
         "/api/technician/signUp",
         {
+          categoryId,
           name,
           email,
           password,
           confirmPassword,
-          cnic,
           location,
           experience,
           phone,
+          cnic,
           address,
-          categoryId,
         },
         config
       );
