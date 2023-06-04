@@ -11,7 +11,7 @@
     <strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="#">View Demo</a>
+    <a href="https://kariger-com.vercel.app/">View Demo</a>
     ·
     <a href="https://github.com/junaidahmadalvi/kariger.com/issues">Report Bug</a>
     ·
@@ -27,7 +27,7 @@
 
 ## Live Preview Project
 
-[Live Preview]()
+[Live Preview](https://kariger-com.vercel.app/)
 
 ## Features
 
@@ -36,6 +36,11 @@
 - Login/Register Screen: Allows users to sign in or register with their email and password or social media accounts.
 - User Profile Screen: Displays user information and allows them to edit their profiles, change their passwords, or delete their accounts.
 - Navbar and Footer Component: Navigation components that appear on all screens and allow users to access help or log out of their accounts.
+- Technician Screen: Displays a list of Karigers and allows users to filter them by Categories.
+- Technician Details Screen: Displays detailed information about a Kariger, including their location, reviews, and the services they provide.
+- User Dashboard Screen: Displays a list of the user's orders and allows them to create, edit, or delete orders.
+- Technician Dashboard Screen: Displays a list of the Kariger's orders and allows them to accept or reject orders.
+- Admin Dashboard Screen: Displays a list of all users and allows the admin to create, edit, or delete users.
 
 ## Tech Stack
 
@@ -44,6 +49,11 @@ KAriger.com uses a number of open source projects to work properly:
 - [React.Js] - HTML enhanced for web apps!
 - [React Router] - A library for managing routing in React applications.
 - [Redux.Js] - A predictable state container for JavaScript apps.
+- [Redux Thunk] - A middleware for Redux that allows you to write action creators that return a function instead of an action.
+- [Redux-Devtools-Extension] - A live-editing time travel environment for Redux with hot reloading, action replay, and customizable UI.
+- [React-Redux] - Official React bindings for Redux.
+- [Font Awesome] - The web's most popular icon set and toolkit.
+- [Axios] - Promise based HTTP client for the browser and node.js.
 - [TailwindCSS] - A utility-first CSS framework for designing responsive and customizable UI components.
 - [Vite.Js] - BoilerPlate for React Application
 - [Node.js] - Evented I/O for the backend
@@ -52,8 +62,16 @@ KAriger.com uses a number of open source projects to work properly:
 - [Mongoose] - An Object Data Modeling (ODM) library for MongoDB and Node. js.
 - [JWT] - JSON Web Token (JWT) is a compact URL-safe means of representing claims to be transferred between two parties.
 - [Bcrypt] - A library to help you hash passwords.
+- [Body-Parser] - Node.js body parsing middleware.
+- [Concurrently] - Run multiple commands concurrently.
+- [Dotenv] - A zero-dependency module that loads environment variables from a .env file into process.env.
+- [Nodemon] - A utility that will monitor for any changes in your source and automatically restart your server.
+- [ESLint] - A tool for identifying and reporting on patterns found in ECMAScript/JavaScript code.
+- [Router] - A middleware for routing requests to different handlers depending on the request URL.
+- [Cors] - A middleware for handling Cross-Origin Resource Sharing (CORS).
+- [Email-Vaildator] - A library for validating email addresses.
 - [GitHub] - GitHub, Inc. is a provider of Internet hosting for software development and version control using Git.
-- [Postman] - Postman is a developer tool that lets you write, test, and document your APIs.
+- [Thunder Client] - A REST client extension for VS Code.
 
 ## Getting Started
 
