@@ -14,6 +14,11 @@
       "config": {
         "maxLambdaSize": "50mb"
       }
+    },
+    {
+      "src": "frontend",
+      "use": "@vercel/static",
+      "config": {}
     }
   ],
   "routes": [
