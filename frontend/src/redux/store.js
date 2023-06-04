@@ -9,6 +9,7 @@ import thunk from "redux-thunk";
 import {
   adminUserLoginReducer,
   adminUserRegisterReducer,
+  adminUserUpdateProfileReducer,
 } from "./reducers/adminReducers.js";
 import {
   categoryListReducer,
@@ -36,6 +37,7 @@ const reducer = combineReducers({
   deleteUser: userDeleteReducer,
   adminUserLogin: adminUserLoginReducer,
   adminUserRegister: adminUserRegisterReducer,
+  adminUserUpdateProfile: adminUserUpdateProfileReducer,
   technicianUserLogin: technicianUserLoginReducer,
   technicianUserRegister: technicianUserRegisterReducer,
   technicianUserDelete: technicianUserDeleteReducer,

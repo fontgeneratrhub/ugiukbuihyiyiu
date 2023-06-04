@@ -28,6 +28,11 @@ const ProfileScreen = () => {
     techUserInfo,
   } = technicianUserLogin;
 
+  const adminUserUpdateProfile = useSelector(
+    (state) => state.adminUserUpdateProfile
+  );
+  const { success: adminUpdateSuccess } = adminUserUpdateProfile;
+
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success: userUpdateSuccess } = userUpdateProfile;
 
@@ -36,7 +41,9 @@ const ProfileScreen = () => {
   );
   const { success: techUpdateSuccess } = technicianUserUpdateProfile;
 
-  const successMessage = (userUpdateSuccess || techUpdateSuccess) && {
+  const successMessage = (userUpdateSuccess ||
+    adminUpdateSuccess ||
+    techUpdateSuccess) && {
     status: "200",
     message: "Updated Successfully!",
   };
@@ -78,7 +85,7 @@ const ProfileScreen = () => {
             <h1 className="text-4xl text-center font-bold mb-4">
               User Profile
             </h1>
-            {(userUpdateSuccess || techUpdateSuccess) && (
+            {(userUpdateSuccess || adminUpdateSuccess || techUpdateSuccess) && (
               <Message>{successMessage}</Message>
             )}
             <Button

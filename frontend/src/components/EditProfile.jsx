@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { technicianUpdateProfile } from "../redux/actions/technicianActions.js";
+import { adminUpdateProfile } from "../redux/actions/adminActions.js";
 import { updateProfile } from "../redux/actions/userActions.js";
 
 import avi from "../images/User-avatar.svg.png";
@@ -34,6 +35,11 @@ const EditProfile = ({ user, setIsEditing, userType }) => {
 
   const [formData, setFormData] = useState(initialFormData);
 
+  const adminUserUpdateProfile = useSelector(
+    (state) => state.adminUserUpdateProfile
+  );
+  const { error: adminUpdateError } = adminUserUpdateProfile;
+
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { error: userUpdateError } = userUpdateProfile;
 
@@ -51,9 +57,7 @@ const EditProfile = ({ user, setIsEditing, userType }) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-
     if (userType === "technician") {
-      console.log("Updated Profile:", formData);
       dispatch(
         technicianUpdateProfile(
           formData.email,
@@ -70,14 +74,15 @@ const EditProfile = ({ user, setIsEditing, userType }) => {
         setIsEditing(false);
       }
     } else if (userType === "admin") {
-      console.log("Updated Profile:", formData);
-      setIsEditing(false);
+      dispatch(adminUpdateProfile(formData.email, formData.name, user._id));
+      if (!adminUpdateError) {
+        setIsEditing(false);
+      }
     } else if (userType === "user") {
       dispatch(updateProfile(formData.email, formData.name, user._id));
       if (!userUpdateError) {
         setIsEditing(false);
       }
-      console.log("Updated Profile:", formData);
     }
   };
 

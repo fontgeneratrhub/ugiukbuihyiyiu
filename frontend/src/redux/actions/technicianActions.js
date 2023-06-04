@@ -3,9 +3,6 @@ import {
   CATEGORY_LIST_FAIL,
   CATEGORY_LIST_REQUEST,
   CATEGORY_LIST_SUCCESS,
-  TECHNICIAN_DELETE_FAIL,
-  TECHNICIAN_DELETE_REQUEST,
-  TECHNICIAN_DELETE_SUCCESS,
   TECHNICIAN_DETAILS_FAIL,
   TECHNICIAN_DETAILS_REQUEST,
   TECHNICIAN_DETAILS_SUCCESS,
@@ -21,7 +18,13 @@ import {
   TECHNICIAN_UPDATE_PROFILE_FAIL,
   TECHNICIAN_UPDATE_PROFILE_REQUEST,
   TECHNICIAN_UPDATE_PROFILE_SUCCESS,
-} from "../constants/technicianConstants";
+} from "../constants/technicianConstants.js";
+
+import {
+  TECHNICIAN_DELETE_FAIL,
+  TECHNICIAN_DELETE_REQUEST,
+  TECHNICIAN_DELETE_SUCCESS,
+} from "../constants/adminConstants.js";
 
 export const technicianLogin = (email, password) => async (dispatch) => {
   try {
