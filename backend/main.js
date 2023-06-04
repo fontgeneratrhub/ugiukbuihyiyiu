@@ -32,7 +32,7 @@ app.use(bodyParser.json());
 // var jsonParser = bodyParser.json()
 
 app.get("/", (req, res) => {
-  res.send("API is running....");
+  res.send("API is running...");
 });
 
 //user route
