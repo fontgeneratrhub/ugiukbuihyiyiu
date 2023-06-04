@@ -11,6 +11,7 @@ import {
   TECHNICIAN_DETAILS_FAIL,
   TECHNICIAN_DETAILS_REQUEST,
   TECHNICIAN_DETAILS_SUCCESS,
+  TECHNICIAN_DETAILS_RESET,
   TECHNICIAN_LIST_FAIL,
   TECHNICIAN_LIST_REQUEST,
   TECHNICIAN_LIST_SUCCESS,
@@ -86,11 +87,13 @@ export const technicianUserDeleteReducer = (state = {}, action) => {
 export const technicianDetailsReducer = (state = { techUser: {} }, action) => {
   switch (action.type) {
     case TECHNICIAN_DETAILS_REQUEST:
-      return { ...state, loading: true };
+      return { loading: true, ...state };
     case TECHNICIAN_DETAILS_SUCCESS:
       return { loading: false, techUser: action.payload };
     case TECHNICIAN_DETAILS_FAIL:
       return { loading: false, error: action.payload };
+    case TECHNICIAN_DETAILS_RESET:
+      return { techUser: {} };
     default:
       return state;
   }

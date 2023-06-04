@@ -6,6 +6,7 @@ import NavbarCmp from "./components/NavbarCmp";
 import AdminDashboard from "./screens/Admin/AdminDashboard";
 import AdminLoginScreen from "./screens/Admin/AdminLoginScreen";
 import AdminRegisterScreen from "./screens/Admin/AdminRegisterScreen";
+import EditProfileScreen from "./screens/Admin/EditProfileScreen";
 import HomeScreen from "./screens/HomeScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import FindTechniciansScreen from "./screens/Technician/FindTechniciansScreen";
@@ -35,6 +36,7 @@ function App() {
         <Route path="/admin/login" element={<AdminLoginScreen />} />
         <Route path="/admin/register" element={<AdminRegisterScreen />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/edit/profile/:id" element={<EditProfileScreen />} />
       </Routes>
       <Footer />
     </Router>

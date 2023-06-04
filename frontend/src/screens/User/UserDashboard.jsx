@@ -25,7 +25,7 @@ const UserDashboard = () => {
 
   useEffect(() => {
     // Check if any other user type is logged in (redirect to homepage)
-    if (!adminUserInfo && !techUserInfo) {
+    if (adminUserInfo || techUserInfo) {
       navigate("/");
     }
   }, [navigate, adminUserInfo, techUserInfo]);

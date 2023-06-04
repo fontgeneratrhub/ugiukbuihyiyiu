@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { deleteUser, listUsers } from "../../redux/actions/userActions";
 import {
-  technicianDelete,
   listTechnicians,
-} from "../../redux/actions/technicianActions";
+  technicianDelete,
+} from "../../redux/actions/technicianActions.js";
+import { deleteUser, listUsers } from "../../redux/actions/userActions.js";
 
 import Loader from "../../components/Loader";
 import Message from "../../components/Message.jsx";
@@ -27,6 +27,19 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
 
   const technicianUserLogin = useSelector((state) => state.technicianUserLogin);
   const { techUserInfo } = technicianUserLogin;
+
+  const userDelete = useSelector((state) => state.userDelete);
+  const { success: deleteSuccess } = userDelete;
+
+  const technicianUserDelete = useSelector(
+    (state) => state.technicianUserDelete
+  );
+  const { success: technicianDeleteSuccess } = technicianUserDelete;
+
+  const successMessage = (deleteSuccess || technicianDeleteSuccess) && {
+    status: "200",
+    message: "Deleted Successfully!",
+  };
 
   let loggedInUserName = "";
   let userType = "";
@@ -88,7 +101,9 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
           User Type: {userType}
         </h2>
       )}
-
+      {(deleteSuccess || technicianDeleteSuccess) && (
+        <Message>{successMessage}</Message>
+      )}
       {selectedItem !== null && (
         <div>
           {/* {menuItems[selectedItem].name === "Admins" && (

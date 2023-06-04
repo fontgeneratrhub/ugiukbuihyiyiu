@@ -31,7 +31,7 @@ const TechProfileScreen = () => {
         ) : error ? (
           <Message>{error}</Message>
         ) : (
-          <Profile user={techUser} />
+          <Profile user={techUser} userType="technician" />
         )}
       </div>
     </section>

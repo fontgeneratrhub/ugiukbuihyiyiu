@@ -29,7 +29,7 @@ const Table = ({ data, columns, handleDelete, entityType }) => {
                 </td>
               ))}
               <td className="border border-gray-500">
-                <Link to={`/admin/${entityType}/${row._id}/edit`}>
+                <Link to={`/admin/edit/profile/${row._id}`}>
                   <Button variant="primary" className="rounded-md">
                     <i className="fas fa-edit"></i>
                   </Button>

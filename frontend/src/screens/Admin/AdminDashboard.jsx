@@ -17,14 +17,14 @@ const AdminDashboard = () => {
   const { techUserInfo } = technicianUserLogin;
 
   useEffect(() => {
-    if (!adminUserInfo || userInfo || techUserInfo) {
+    if (!adminUserInfo) {
       navigate("/admin/login");
     }
   }, [navigate, adminUserInfo]);
 
   useEffect(() => {
     // Check if any other user type is logged in (redirect to homepage)
-    if (!adminUserInfo && userInfo && techUserInfo) {
+    if (userInfo || techUserInfo) {
       navigate("/");
     }
   }, [navigate, userInfo, techUserInfo]);
