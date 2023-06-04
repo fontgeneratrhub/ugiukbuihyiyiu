@@ -17,7 +17,9 @@ const userRoutes = require("./routes/userRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const techCategoryRoutes = require("./routes/techCategoryRoutes");
 const technicianRoutes = require("./routes/technicianRoutes");
+const orderRoutes = require("./routes/orderRoutes");
 
+// DB-Connection
 connection();
 
 // middlewares
@@ -46,6 +48,9 @@ app.use("/api/category", techCategoryRoutes);
 
 // Technician route
 app.use("/api/technician", technicianRoutes);
+
+// Order route
+app.use("/api/order", orderRoutes);
 
 const PORT = process.env.PORT || 4000;
 app.listen(

@@ -1,5 +1,7 @@
 const { Technician } = require("../Schemas/technicianSchema");
 const { TechCategory } = require("../Schemas/techCategorySchema");
+const { Order } = require("../Schemas/orderSchema");
+const { User } = require("../Schemas/userSchema");
 
 var ObjectId = require("mongodb").ObjectId;
 
@@ -268,6 +270,56 @@ module.exports = {
       }
     } catch (e) {
       res.status(404).send(e);
+    }
+  },
+
+  technicianOrders: async (req, res) => {
+    try {
+      const technicianId = req.params.id;
+      console.log(technicianId, "technicianId");
+      // let deletedResult = connection();
+      let order = await Order.find({ technicianId: technicianId });
+      console.log("technicianId", "technicianOrder");
+
+      if (order) {
+        var orderArr = [];
+        for (let i = 0; i < order.length; i++) {
+          const userId = order[i].userId;
+          const technicianId = order[i].technicianId;
+          // console.log("userId", i, userId);
+          // console.log("technicianId", i, technicianId);
+
+          let user = await User.findOne({ _id: userId });
+          let userName = user.name;
+          // console.log(userName);
+          let technician = await Technician.findOne({ _id: technicianId });
+          let technicianName = technician.name;
+          // console.log(technicianName);
+
+          let newObj = {
+            _id: order[i]._id,
+            userName: userName,
+            technicianName: technicianName,
+            status: order[i].status,
+            createdAt: order[i].createdAt,
+          };
+          // console.log(newObj);
+          orderArr.push(newObj);
+          //   let user = await User.findOne
+        }
+
+        if (order.length == orderArr.length) {
+          res.status(200).send({
+            message: "orders finded Successfully",
+            order: orderArr,
+          });
+          // res.status(200).send({ status: "success", order: orderArr });
+        }
+      } else {
+        res.status(400).send({ message: "order not found" });
+      }
+    } catch (e) {
+      res.status(500).send(e);
     }
   },
 

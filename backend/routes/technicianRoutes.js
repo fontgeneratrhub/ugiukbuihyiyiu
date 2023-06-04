@@ -29,6 +29,9 @@ router.post("/login", technicianController.getTechnician);
 router.get("/showAll", technicianController.getAllTechnicians);
 router.get("/single/:id", technicianController.getTechnicianById);
 
+// show technician orders
+router.get("/technicianOrders/:id", technicianController.technicianOrders);
+
 //-----------Update Data----------------------
 
 // router.use(express.json())

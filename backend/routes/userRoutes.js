@@ -37,6 +37,9 @@ router.get(
 
 router.get("/single/:id", userController.getUserById);
 
+// show user orders
+router.get("/userOrders/:id", userController.getUserOrders);
+
 //-----------Insert Data----------------------
 
 // router.use(express.json())
