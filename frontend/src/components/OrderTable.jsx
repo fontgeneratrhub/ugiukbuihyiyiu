@@ -40,7 +40,7 @@ const OrderTable = ({
                   className="rounded-md"
                   onClick={() => handleStatus(row._id)}
                 >
-                  <i className="fas fa-tick"></i>
+                  <i className="fas fa-trash"></i>
                 </Button>
               </td>
               <td className="border border-gray-500">

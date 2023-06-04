@@ -32,6 +32,7 @@ import {
 import {
   orderCreateReducer,
   orderListUserReducer,
+  orderListTechnicianReducer,
 } from "./reducers/orderReducers.js";
 
 const reducer = combineReducers({
@@ -52,6 +53,7 @@ const reducer = combineReducers({
   technicianUserList: technicianUserListReducer,
   orderCreate: orderCreateReducer,
   orderListUser: orderListUserReducer,
+  orderListTechnician: orderListTechnicianReducer,
   logout: logoutReducer,
   categoryList: categoryListReducer,
 });

@@ -76,6 +76,13 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
     userOrders,
   } = orderListUser;
 
+  const orderListTechnician = useSelector((state) => state.orderListTechnician);
+  const {
+    loading: technicianOrdersLoading,
+    error: technicianOrdersError,
+    technicianOrders,
+  } = orderListTechnician;
+
   const handleDeleteUser = (userId) => {
     if (window.confirm("Are You Sure?")) {
       dispatch(deleteUser(userId)).then(() => {
@@ -211,9 +218,19 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
                   <h3 className="text-xl font-semibold mb-2">
                     Your Assigned Orders
                   </h3>
-                  {technicianOrders.map((order) => (
-                    <div key={order.id}>{order.name}</div>
-                  ))}
+                  {technicianOrdersLoading ? (
+                    <Loader />
+                  ) : technicianOrdersError ? (
+                    <Message variant="error">{technicianOrdersError}</Message>
+                  ) : (
+                    <OrderTable
+                      data={technicianOrders}
+                      columns={orderColumns}
+                      handleDelete={handleDeleteUserOrder}
+                      handleStatus={handleStatusUserOrder}
+                      entityType="technician"
+                    />
+                  )}
                 </div>
               )}
             </div>

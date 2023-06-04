@@ -25,10 +25,11 @@ const TechDashboard = () => {
 
   useEffect(() => {
     // Check if any other user type is logged in (redirect to homepage)
-    if (!userInfo && !adminUserInfo) {
+    if (userInfo || adminUserInfo) {
       navigate("/");
     }
   }, [navigate, userInfo, adminUserInfo]);
+
   return <Dashboard variant="technician" />;
 };
 

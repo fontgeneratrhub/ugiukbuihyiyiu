@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { listUsers } from "../../redux/actions/userActions.js";
 import { listTechnicians } from "../../redux/actions/technicianActions.js";
-import { listUserOrders } from "../../redux/actions/orderActions.js";
+import {
+  listUserOrders,
+  listTechnicianOrders,
+} from "../../redux/actions/orderActions.js";
 
 import userAVI from "../../images/User-avatar.svg.png";
 
@@ -37,13 +40,17 @@ const SideBar = ({ variant, menuItems, selectedItem, handleItemClick }) => {
   const handleClick = (index, name) => {
     handleItemClick(index);
 
-    if (name === "Users") {
+    if (variant === "admin" && name === "Users") {
       dispatch(listUsers(id));
-    } else if (name === "Technicians") {
+    }
+    if (variant === "admin" && name === "Technicians") {
       dispatch(listTechnicians());
     }
-    if (name === "Orders" && variant === "user") {
+    if (variant === "user" && name === "Orders") {
       dispatch(listUserOrders(userInfo.user._id));
+    }
+    if (variant === "technician" && name === "Orders") {
+      dispatch(listTechnicianOrders(techUserInfo.user._id));
     }
   };
   return (
