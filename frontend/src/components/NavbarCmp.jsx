@@ -137,7 +137,7 @@ const NavbarCmp = () => {
                   Technicians
                 </Link>
                 <Link
-                  to="/contact"
+                  to="/contact-us"
                   className="block mt-4 lg:inline-block lg:mt-0 p-2 rounded text-gray-200  hover:bg-gray-700  hover:text-white "
                 >
                   Contact-Us
@@ -158,6 +158,7 @@ const NavbarCmp = () => {
                     : techUserInfo
                     ? techUserInfo.user.name
                     : userInfo.user.name}
+                  <i className="fas fa-caret-down ml-2"></i>
                 </Button>
                 {dropIsOpen && (
                   <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
@@ -222,7 +223,7 @@ const NavbarCmp = () => {
             Technicians
           </Link>
           <Link
-            to="/contact"
+            to="/contact-us"
             className="text-gray-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-bold"
             onClick={() => setIsOpen(!isOpen)}
           >

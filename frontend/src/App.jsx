@@ -7,7 +7,9 @@ import AdminDashboard from "./screens/Admin/AdminDashboard";
 import AdminLoginScreen from "./screens/Admin/AdminLoginScreen";
 import AdminRegisterScreen from "./screens/Admin/AdminRegisterScreen";
 import EditProfileScreen from "./screens/Admin/EditProfileScreen";
+import ContactUsScreen from "./screens/ContactUsScreen";
 import HomeScreen from "./screens/HomeScreen";
+import NotFoundScreen from "./screens/NotFoundScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import FindTechniciansScreen from "./screens/Technician/FindTechniciansScreen";
 import TechDashboard from "./screens/Technician/TechDashboard";
@@ -28,6 +30,7 @@ function App() {
         <Route path="/register" element={<UserRegisterScreen />} />
         <Route path="/profile" element={<ProfileScreen />} />
         <Route path="/dashboard" element={<UserDashboard />} />
+        <Route path="/contact-us" element={<ContactUsScreen />} />
         <Route path="/technicians" element={<FindTechniciansScreen />} />
         <Route path="/technician/login" element={<TechLoginScreen />} />
         <Route path="/technician/register" element={<TechRegisterScreen />} />
@@ -37,6 +40,7 @@ function App() {
         <Route path="/admin/register" element={<AdminRegisterScreen />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/edit/profile/:id" element={<EditProfileScreen />} />
+        <Route path="*" element={<NotFoundScreen />} />
       </Routes>
       <Footer />
     </Router>

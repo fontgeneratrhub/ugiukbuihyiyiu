@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Button from "../components/Button";
 import EditProfile from "../components/EditProfile";
@@ -10,6 +10,8 @@ import Profile from "../components/Profile";
 
 const ProfileScreen = () => {
   const [isEditing, setIsEditing] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const userLogin = useSelector((state) => state.userLogin);
   const { loading: userLoading, error: userError, userInfo } = userLogin;
@@ -48,13 +50,13 @@ const ProfileScreen = () => {
     message: "Updated Successfully!",
   };
 
-  const navigate = useNavigate();
+  const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
-    if (!adminUserInfo && !userInfo && !techUserInfo) {
-      navigate("/");
+    if (userInfo || adminUserInfo || techUserInfo) {
+      navigate(redirect);
     }
-  }, [navigate, userInfo, adminUserInfo, techUserInfo]);
+  }, [navigate, redirect, userInfo, adminUserInfo, techUserInfo]);
 
   let user = null;
   let userType = null;
