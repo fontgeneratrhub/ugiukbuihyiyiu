@@ -10,12 +10,13 @@ import { deleteUser, listUsers } from "../../redux/actions/userActions.js";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message.jsx";
 import Table from "../Table";
+import OrderTable from "../orderTable.jsx";
 
 const MainContent = ({ variant, selectedItem, menuItems }) => {
   const userColumns = ["name", "_id", "email"];
   // const adminColumns = ["name", "_id", "email"];
   const technicianColumns = ["name", "_id", "email"];
-  // const orderColumns = ["orderId", "customerId", "status"];
+  const orderColumns = ["_id", "userName", "technicianName", "status"];
 
   const dispatch = useDispatch();
 
@@ -68,6 +69,13 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
     technicians,
   } = technicianUserList;
 
+  const orderListUser = useSelector((state) => state.orderListUser);
+  const {
+    loading: ordersLoading,
+    error: ordersError,
+    userOrders,
+  } = orderListUser;
+
   const handleDeleteUser = (userId) => {
     if (window.confirm("Are You Sure?")) {
       dispatch(deleteUser(userId)).then(() => {
@@ -81,6 +89,24 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
       dispatch(technicianDelete(technicianId)).then(() => {
         dispatch(listTechnicians());
       });
+    }
+  };
+
+  const handleDeleteUserOrder = (orderId) => {
+    if (window.confirm("Are You Sure?")) {
+      // dispatch(deleteUser(userId)).then(() => {
+      //   dispatch(listUsers(adminUserInfo.user._id));
+      // });
+      console.log("Delete Order", orderId);
+    }
+  };
+
+  const handleStatusUserOrder = (orderId) => {
+    if (window.confirm("Are You Sure?")) {
+      // dispatch(deleteUser(userId)).then(() => {
+      //   dispatch(listUsers(adminUserInfo.user._id));
+      // });
+      console.log("Status Order", orderId);
     }
   };
 
@@ -152,7 +178,6 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
 
           {menuItems[selectedItem].name === "Orders" && (
             <div>
-              <h2 className="text-2xl font-semibold mb-2">Orders</h2>
               {variant === "admin" && (
                 <div>
                   <h3 className="text-xl font-semibold mb-2">All Orders</h3>
@@ -165,9 +190,19 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
               {variant === "user" && (
                 <div>
                   <h3 className="text-xl font-semibold mb-2">Your Orders</h3>
-                  {userOrders.map((order) => (
-                    <div key={order.id}>{order.name}</div>
-                  ))}
+                  {ordersLoading ? (
+                    <Loader />
+                  ) : ordersError ? (
+                    <Message variant="error">{ordersError}</Message>
+                  ) : (
+                    <OrderTable
+                      data={userOrders}
+                      columns={orderColumns}
+                      handleDelete={handleDeleteUserOrder}
+                      handleStatus={handleStatusUserOrder}
+                      entityType="user"
+                    />
+                  )}
                 </div>
               )}
 

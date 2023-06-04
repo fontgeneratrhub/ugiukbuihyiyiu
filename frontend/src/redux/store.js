@@ -29,7 +29,10 @@ import {
   userUpdateProfileReducer,
   userDetailsReducer,
 } from "./reducers/userReducers.js";
-import { orderCreateReducer } from "./reducers/orderReducers.js";
+import {
+  orderCreateReducer,
+  orderListUserReducer,
+} from "./reducers/orderReducers.js";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -48,6 +51,7 @@ const reducer = combineReducers({
   technicianDetails: technicianDetailsReducer,
   technicianUserList: technicianUserListReducer,
   orderCreate: orderCreateReducer,
+  orderListUser: orderListUserReducer,
   logout: logoutReducer,
   categoryList: categoryListReducer,
 });

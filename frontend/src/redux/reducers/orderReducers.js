@@ -2,6 +2,10 @@ import {
   ORDER_CREATE_FAIL,
   ORDER_CREATE_REQUEST,
   ORDER_CREATE_SUCCESS,
+  ORDER_LIST_USER_FAIL,
+  ORDER_LIST_USER_REQUEST,
+  ORDER_LIST_USER_RESET,
+  ORDER_LIST_USER_SUCCESS,
 } from "../constants/orderConstants.js";
 
 export const orderCreateReducer = (state = {}, action) => {
@@ -16,6 +20,25 @@ export const orderCreateReducer = (state = {}, action) => {
       };
     case ORDER_CREATE_FAIL:
       return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const orderListUserReducer = (state = { userOrders: [] }, action) => {
+  switch (action.type) {
+    case ORDER_LIST_USER_REQUEST:
+      return { loading: true };
+    case ORDER_LIST_USER_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        userOrders: action.payload,
+      };
+    case ORDER_LIST_USER_FAIL:
+      return { loading: false, error: action.payload };
+    case ORDER_LIST_USER_RESET:
+      return { userOrders: [] };
     default:
       return state;
   }
