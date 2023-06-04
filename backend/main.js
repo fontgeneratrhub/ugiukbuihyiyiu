@@ -31,6 +31,10 @@ app.use(express.json());
 app.use(bodyParser.json());
 // var jsonParser = bodyParser.json()
 
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
+
 //user route
 app.use("/api/user", userRoutes);
 
