@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { getTechnicianDetails } from "../../redux/actions/technicianActions.js";
+import { createOrder } from "../../redux/actions/orderActions.js";
 
 import Button from "../../components/Button";
 import Loader from "../../components/Loader";
@@ -24,17 +25,28 @@ const TechProfileScreen = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { success, orderInfo } = orderCreate;
+
+  const successMessage = {
+    status: "200",
+    message:
+      "Order Created Successfully! You can Check your Orders in the Dashboard",
+  };
+
   const handleBookTechncian = () => {
     const confirmed = window.confirm(
       "Are you sure you want to book this Technician?"
     );
 
     if (confirmed) {
-      // Perform the booking action
-      console.log("Book Technician", techUser._id, userInfo.user._id);
-      alert("Technician Booked Successfully");
+      dispatch(createOrder(userInfo.user._id, techUser._id));
     }
   };
+
+  // Check if the order was created for the current technician
+  const isOrderCreatedForTechnician =
+    success && orderInfo && orderInfo.technicianId === techUser._id;
 
   return (
     <section className="min-h-screen flex flex-row justify-center items-center bg-gray-800 text-white py-20">
@@ -65,7 +77,18 @@ const TechProfileScreen = () => {
                   Book Technician
                 </Button>
               ) : null}
+              {isOrderCreatedForTechnician && (
+                <Button
+                  variant="primary"
+                  className="rounded-md"
+                  onClick={() => navigate("/dashboard")}
+                >
+                  <i className="fas fa-gauge-high mr-2"></i>
+                  Go to Dashboard
+                </Button>
+              )}
             </div>
+            {isOrderCreatedForTechnician && <Message>{successMessage}</Message>}
             <Profile user={techUser} userType="technician" />
           </>
         )}

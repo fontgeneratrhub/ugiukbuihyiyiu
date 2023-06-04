@@ -29,6 +29,7 @@ import {
   userUpdateProfileReducer,
   userDetailsReducer,
 } from "./reducers/userReducers.js";
+import { orderCreateReducer } from "./reducers/orderReducers.js";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -46,6 +47,7 @@ const reducer = combineReducers({
   technicianUserUpdateProfile: technicianUserUpdateProfileReducer,
   technicianDetails: technicianDetailsReducer,
   technicianUserList: technicianUserListReducer,
+  orderCreate: orderCreateReducer,
   logout: logoutReducer,
   categoryList: categoryListReducer,
 });
