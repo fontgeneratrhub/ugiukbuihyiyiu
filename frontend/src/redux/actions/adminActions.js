@@ -51,7 +51,7 @@ export const adminLogin = (email, password) => async (dispatch) => {
 };
 
 export const adminRegister =
-  (name, email, password, confirmPassword) => async (dispatch) => {
+  (name, email, password, confirmPassword, secretCode) => async (dispatch) => {
     try {
       dispatch({ type: ADMIN_REGISTER_REQUEST });
 
@@ -63,7 +63,7 @@ export const adminRegister =
 
       const { data } = await axios.post(
         "/api/admin/signUp",
-        { name, email, password, confirmPassword },
+        { name, email, password, confirmPassword, secretCode },
         config
       );
 

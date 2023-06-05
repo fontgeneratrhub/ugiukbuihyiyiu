@@ -43,34 +43,20 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
   const { techUserInfo } = technicianUserLogin;
 
   const userDelete = useSelector((state) => state.userDelete);
-  const {
-    loading: deleteLoading,
-    error: deleteError,
-    success: deleteSuccess,
-  } = userDelete;
+  const { error: deleteError, success: deleteSuccess } = userDelete;
 
   const technicianUserDelete = useSelector(
     (state) => state.technicianUserDelete
   );
-  const {
-    loading: technicianDeleteLoading,
-    error: technicianDeleteError,
-    success: technicianDeleteSuccess,
-  } = technicianUserDelete;
+  const { error: technicianDeleteError, success: technicianDeleteSuccess } =
+    technicianUserDelete;
 
   const orderDelete = useSelector((state) => state.orderDelete);
-  const {
-    loading: orderDeleteLoading,
-    error: orderDeleteError,
-    success: orderDeleteSuccess,
-  } = orderDelete;
+  const { error: orderDeleteError, success: orderDeleteSuccess } = orderDelete;
 
   const orderStatusUpdate = useSelector((state) => state.orderStatusUpdate);
-  const {
-    loading: orderStatusUpdateLoading,
-    error: orderStatusUpdateError,
-    success: orderStatusUpdateSuccess,
-  } = orderStatusUpdate;
+  const { error: orderStatusUpdateError, success: orderStatusUpdateSuccess } =
+    orderStatusUpdate;
 
   const successMessage = (deleteSuccess ||
     technicianDeleteSuccess ||

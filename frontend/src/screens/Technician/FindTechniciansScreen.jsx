@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import { listTechnicians } from "../../redux/actions/technicianActions";
@@ -21,6 +22,16 @@ const FindTechniciansScreen = () => {
   const [loadingSearch, setLoadingSearch] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const technicianUserLogin = useSelector((state) => state.technicianUserLogin);
+  const { techUserInfo } = technicianUserLogin;
+
+  useEffect(() => {
+    if (techUserInfo) {
+      navigate("/login");
+    }
+  }, [navigate, techUserInfo]);
 
   const technicianUserList = useSelector((state) => state.technicianUserList);
   const { loading, error, technicians } = technicianUserList;
@@ -30,7 +41,10 @@ const FindTechniciansScreen = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    setFilteredTechnicians(technicians);
+    const sucscribedTechnicians = technicians.filter((technician) =>
+      technician.subscription.subscribed === true ? technician : null
+    );
+    setFilteredTechnicians(sucscribedTechnicians);
     setNoTechniciansFound(technicians.length === 0);
     if (technicians.length === 0) {
       setErrorMsg({ status: 404, message: "No technicians found." });
@@ -109,11 +123,17 @@ const FindTechniciansScreen = () => {
   const handleSearch = (searchText) => {
     setLoadingSearch(true);
 
-    let filtered = technicians;
+    const sucscribedTechnicians = technicians.filter((technician) =>
+      technician.subscription.subscribed === true ? technician : null
+    );
+
+    let filtered = sucscribedTechnicians;
 
     if (searchText) {
-      filtered = filtered.filter((technician) =>
-        technician.name.toLowerCase().includes(searchText.toLowerCase())
+      filtered = filtered.filter(
+        (technician) =>
+          technician.name.toLowerCase().includes(searchText.toLowerCase()) ||
+          technician.location.toLowerCase().includes(searchText.toLowerCase())
       );
     }
 

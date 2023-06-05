@@ -52,7 +52,7 @@ const AdminRegisterScreen = () => {
     if (password != confirmPassword) {
       setMessage("Passwords Don't Match");
     }
-    dispatch(adminRegister(name, email, password, confirmPassword));
+    dispatch(adminRegister(name, email, password, confirmPassword, secretCode));
   };
 
   return (

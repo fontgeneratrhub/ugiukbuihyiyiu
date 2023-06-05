@@ -32,7 +32,7 @@ const SearchBar = ({ onSearch, onCategoryChange }) => {
         <input
           type="text"
           name="search"
-          placeholder="Search for a Technician..."
+          placeholder="Enter Location or Name for a Technician..."
           className="bg-gray-600 border-0 sm:rounded-l-md sm:rounded-r-none rounded-md py-3 px-4 my-2 focus:outline-none focus:ring-0 flex-grow"
         />
 

@@ -74,7 +74,7 @@ const OrderTable = ({
               {columns.map((column) => (
                 <th key={column}>{column.replace(/([A-Z])/g, " $1").trim()}</th>
               ))}
-              <th>Delete</th>
+              {isUserLoggedIn ? null : <th>Delete</th>}
             </tr>
           </thead>
           <tbody className="bg-gray-600 text-gray-100">
@@ -88,15 +88,17 @@ const OrderTable = ({
                     {row[column]}
                   </td>
                 ))}
-                <td className="border border-gray-500">
-                  <Button
-                    variant="danger"
-                    className="rounded-md"
-                    onClick={() => handleDelete(row._id)}
-                  >
-                    <i className="fas fa-trash"></i>
-                  </Button>
-                </td>
+                {isUserLoggedIn ? null : (
+                  <td className="border border-gray-500">
+                    <Button
+                      variant="danger"
+                      className="rounded-md"
+                      onClick={() => handleDelete(row._id)}
+                    >
+                      <i className="fas fa-trash"></i>
+                    </Button>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

@@ -38,10 +38,6 @@ const Dashboard = ({ variant }) => {
         name: "Orders",
         icon: "fas fa-clipboard-list",
       },
-      {
-        name: "Reviews",
-        icon: "fas fa-users",
-      },
     ],
   };
 
