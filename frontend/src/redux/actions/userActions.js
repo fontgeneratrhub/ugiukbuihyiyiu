@@ -1,12 +1,20 @@
 import axios from "axios";
 
 import { ADMIN_LOGOUT } from "../constants/adminConstants.js";
+import {
+  ORDER_LIST_RESET,
+  ORDER_LIST_TECHNICIAN_RESET,
+  ORDER_LIST_USER_RESET,
+} from "../constants/orderConstants.js";
 import { TECHNICIAN_LOGOUT } from "../constants/technicianConstants.js";
 import {
   USER_DELETE_FAIL,
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
+  USER_DETAILS_FAIL,
+  USER_DETAILS_REQUEST,
   USER_DETAILS_RESET,
+  USER_DETAILS_SUCCESS,
   USER_LIST_FAIL,
   USER_LIST_REQUEST,
   USER_LIST_RESET,
@@ -20,10 +28,8 @@ import {
   USER_REGISTER_SUCCESS,
   USER_UPDATE_PROFILE_FAIL,
   USER_UPDATE_PROFILE_REQUEST,
+  USER_UPDATE_PROFILE_RESET,
   USER_UPDATE_PROFILE_SUCCESS,
-  USER_DETAILS_FAIL,
-  USER_DETAILS_REQUEST,
-  USER_DETAILS_SUCCESS,
 } from "../constants/userConstants.js";
 
 export const login = (email, password) => async (dispatch) => {
@@ -65,14 +71,18 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
-  dispatch({ type: USER_LOGOUT });
   localStorage.removeItem("userInfo");
+  dispatch({ type: USER_LOGOUT });
+  dispatch({ type: USER_DETAILS_RESET });
+  dispatch({ type: ORDER_LIST_USER_RESET });
+  dispatch({ type: ORDER_LIST_TECHNICIAN_RESET });
+  dispatch({ type: ORDER_LIST_RESET });
+  dispatch({ type: USER_LIST_RESET });
+  dispatch({ type: USER_UPDATE_PROFILE_RESET });
   dispatch({ type: ADMIN_LOGOUT });
   localStorage.removeItem("adminUserInfo");
   dispatch({ type: TECHNICIAN_LOGOUT });
   localStorage.removeItem("techUserInfo");
-  dispatch({ type: USER_LIST_RESET });
-  dispatch({ type: USER_DETAILS_RESET });
 };
 
 export const register =

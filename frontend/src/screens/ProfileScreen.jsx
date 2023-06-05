@@ -53,7 +53,7 @@ const ProfileScreen = () => {
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
-    if (userInfo || adminUserInfo || techUserInfo) {
+    if (!userInfo && !adminUserInfo && !techUserInfo) {
       navigate(redirect);
     }
   }, [navigate, redirect, userInfo, adminUserInfo, techUserInfo]);

@@ -16,7 +16,13 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
   const userColumns = ["name", "_id", "email"];
   // const adminColumns = ["name", "_id", "email"];
   const technicianColumns = ["name", "_id", "email"];
-  const orderColumns = ["_id", "userName", "technicianName", "status"];
+  const orderColumns = [
+    "_id",
+    "userName",
+    "technicianName",
+    "createdAt",
+    "status",
+  ];
 
   const dispatch = useDispatch();
 
@@ -69,6 +75,13 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
     technicians,
   } = technicianUserList;
 
+  const orderListAll = useSelector((state) => state.orderListAll);
+  const {
+    loading: allOrdersLoading,
+    error: allOrdersError,
+    allOrders,
+  } = orderListAll;
+
   const orderListUser = useSelector((state) => state.orderListUser);
   const {
     loading: ordersLoading,
@@ -99,7 +112,7 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
     }
   };
 
-  const handleDeleteUserOrder = (orderId) => {
+  const handleDeleteOrder = (orderId) => {
     if (window.confirm("Are You Sure?")) {
       // dispatch(deleteUser(userId)).then(() => {
       //   dispatch(listUsers(adminUserInfo.user._id));
@@ -108,7 +121,7 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
     }
   };
 
-  const handleStatusUserOrder = (orderId) => {
+  const handleStatusOrder = (orderId) => {
     if (window.confirm("Are You Sure?")) {
       // dispatch(deleteUser(userId)).then(() => {
       //   dispatch(listUsers(adminUserInfo.user._id));
@@ -153,7 +166,7 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
               {technicianUsersLoading ? (
                 <Loader />
               ) : technicianUsersError ? (
-                <Message variant="error">{technicianUsersError}</Message>
+                <Message>{technicianUsersError}</Message>
               ) : (
                 <Table
                   data={technicians}
@@ -171,7 +184,7 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
               {usersLoading ? (
                 <Loader />
               ) : usersError ? (
-                <Message variant="error">{usersError}</Message>
+                <Message>{usersError}</Message>
               ) : (
                 <Table
                   data={users}
@@ -188,9 +201,19 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
               {variant === "admin" && (
                 <div>
                   <h3 className="text-xl font-semibold mb-2">All Orders</h3>
-                  {allOrders.map((order) => (
-                    <div key={order.id}>{order.name}</div>
-                  ))}
+                  {allOrdersLoading ? (
+                    <Loader />
+                  ) : allOrdersError ? (
+                    <Message>{allOrdersError}</Message>
+                  ) : (
+                    <OrderTable
+                      data={allOrders}
+                      columns={orderColumns}
+                      handleDelete={handleDeleteOrder}
+                      handleStatus={handleStatusOrder}
+                      entityType="admin"
+                    />
+                  )}
                 </div>
               )}
 
@@ -205,8 +228,8 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
                     <OrderTable
                       data={userOrders}
                       columns={orderColumns}
-                      handleDelete={handleDeleteUserOrder}
-                      handleStatus={handleStatusUserOrder}
+                      handleDelete={handleDeleteOrder}
+                      handleStatus={handleStatusOrder}
                       entityType="user"
                     />
                   )}
@@ -226,8 +249,8 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
                     <OrderTable
                       data={technicianOrders}
                       columns={orderColumns}
-                      handleDelete={handleDeleteUserOrder}
-                      handleStatus={handleStatusUserOrder}
+                      handleDelete={handleDeleteOrder}
+                      handleStatus={handleStatusOrder}
                       entityType="technician"
                     />
                   )}

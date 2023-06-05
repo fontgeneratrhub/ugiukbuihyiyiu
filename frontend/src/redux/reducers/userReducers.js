@@ -1,4 +1,9 @@
 import { ADMIN_LOGOUT } from "../constants/adminConstants.js";
+import {
+  ORDER_LIST_RESET,
+  ORDER_LIST_TECHNICIAN_RESET,
+  ORDER_LIST_USER_RESET,
+} from "../constants/orderConstants.js";
 import { TECHNICIAN_LOGOUT } from "../constants/technicianConstants.js";
 import {
   USER_DELETE_FAIL,
@@ -68,19 +73,19 @@ export const logoutReducer = (state = {}, action) => {
     case USER_LOGOUT:
       return { userInfo: null };
     case ADMIN_LOGOUT:
-      return {
-        adminUserInfo: null,
-      };
+      return { adminUserInfo: null };
     case TECHNICIAN_LOGOUT:
-      return {
-        techUserInfo: null,
-      };
+      return { techUserInfo: null };
     case USER_LIST_RESET:
-      return {
-        users: [],
-      };
+      return { users: [] };
     case USER_DETAILS_RESET:
       return { user: {} };
+    case ORDER_LIST_RESET:
+      return { allOrders: [] };
+    case ORDER_LIST_USER_RESET:
+      return { userOrders: [] };
+    case ORDER_LIST_TECHNICIAN_RESET:
+      return { technicianOrders: [] };
     default:
       return state;
   }

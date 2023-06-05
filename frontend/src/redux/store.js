@@ -12,6 +12,12 @@ import {
   adminUserUpdateProfileReducer,
 } from "./reducers/adminReducers.js";
 import {
+  orderCreateReducer,
+  orderListAllReducer,
+  orderListTechnicianReducer,
+  orderListUserReducer,
+} from "./reducers/orderReducers.js";
+import {
   categoryListReducer,
   technicianDetailsReducer,
   technicianUserDeleteReducer,
@@ -23,39 +29,35 @@ import {
 import {
   logoutReducer,
   userDeleteReducer,
+  userDetailsReducer,
   userListReducer,
   userLoginReducer,
   userRegisterReducer,
   userUpdateProfileReducer,
-  userDetailsReducer,
 } from "./reducers/userReducers.js";
-import {
-  orderCreateReducer,
-  orderListUserReducer,
-  orderListTechnicianReducer,
-} from "./reducers/orderReducers.js";
 
 const reducer = combineReducers({
-  userLogin: userLoginReducer,
-  userRegister: userRegisterReducer,
-  userList: userListReducer,
-  userUpdateProfile: userUpdateProfileReducer,
-  userDetails: userDetailsReducer,
-  userDelete: userDeleteReducer,
   adminUserLogin: adminUserLoginReducer,
   adminUserRegister: adminUserRegisterReducer,
   adminUserUpdateProfile: adminUserUpdateProfileReducer,
+  orderCreate: orderCreateReducer,
+  orderListAll: orderListAllReducer,
+  orderListTechnician: orderListTechnicianReducer,
+  orderListUser: orderListUserReducer,
+  categoryList: categoryListReducer,
   technicianUserLogin: technicianUserLoginReducer,
   technicianUserRegister: technicianUserRegisterReducer,
   technicianUserDelete: technicianUserDeleteReducer,
   technicianUserUpdateProfile: technicianUserUpdateProfileReducer,
   technicianDetails: technicianDetailsReducer,
   technicianUserList: technicianUserListReducer,
-  orderCreate: orderCreateReducer,
-  orderListUser: orderListUserReducer,
-  orderListTechnician: orderListTechnicianReducer,
   logout: logoutReducer,
-  categoryList: categoryListReducer,
+  userDelete: userDeleteReducer,
+  userDetails: userDetailsReducer,
+  userList: userListReducer,
+  userLogin: userLoginReducer,
+  userRegister: userRegisterReducer,
+  userUpdateProfile: userUpdateProfileReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
