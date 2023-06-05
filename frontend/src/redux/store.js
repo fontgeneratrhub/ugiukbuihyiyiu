@@ -17,6 +17,7 @@ import {
   orderListAllReducer,
   orderListTechnicianReducer,
   orderListUserReducer,
+  orderStatusUpdateReducer,
 } from "./reducers/orderReducers.js";
 import {
   categoryListReducer,
@@ -46,6 +47,7 @@ const reducer = combineReducers({
   orderListAll: orderListAllReducer,
   orderListTechnician: orderListTechnicianReducer,
   orderListUser: orderListUserReducer,
+  orderStatusUpdate: orderStatusUpdateReducer,
   categoryList: categoryListReducer,
   technicianUserLogin: technicianUserLoginReducer,
   technicianUserRegister: technicianUserRegisterReducer,

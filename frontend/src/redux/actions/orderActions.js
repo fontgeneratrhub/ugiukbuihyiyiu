@@ -15,6 +15,10 @@ import {
   ORDER_LIST_USER_FAIL,
   ORDER_LIST_USER_REQUEST,
   ORDER_LIST_USER_SUCCESS,
+  ORDER_STATUS_UPDATE_FAIL,
+  ORDER_STATUS_UPDATE_REQUEST,
+  ORDER_STATUS_UPDATE_RESET,
+  ORDER_STATUS_UPDATE_SUCCESS,
 } from "../constants/orderConstants.js";
 
 export const createOrder =
@@ -175,6 +179,31 @@ export const listTechnicianOrders = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ORDER_LIST_TECHNICIAN_FAIL,
+      payload: {
+        status: error.response && error.response.status,
+        message:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      },
+    });
+  }
+};
+
+export const updateOrderStatus = (id, status) => async (dispatch) => {
+  try {
+    dispatch({
+      type: ORDER_STATUS_UPDATE_REQUEST,
+    });
+
+    await axios.put(`/api/order/update/${id}`, { status });
+
+    dispatch({
+      type: ORDER_STATUS_UPDATE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: ORDER_STATUS_UPDATE_FAIL,
       payload: {
         status: error.response && error.response.status,
         message:

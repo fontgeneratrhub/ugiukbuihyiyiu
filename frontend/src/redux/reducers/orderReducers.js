@@ -17,6 +17,10 @@ import {
   ORDER_LIST_USER_REQUEST,
   ORDER_LIST_USER_RESET,
   ORDER_LIST_USER_SUCCESS,
+  ORDER_STATUS_UPDATE_FAIL,
+  ORDER_STATUS_UPDATE_REQUEST,
+  ORDER_STATUS_UPDATE_RESET,
+  ORDER_STATUS_UPDATE_SUCCESS,
 } from "../constants/orderConstants.js";
 
 export const orderCreateReducer = (state = {}, action) => {
@@ -107,6 +111,24 @@ export const orderDeleteReducer = (state = {}, action) => {
       };
     case ORDER_DELETE_FAIL:
       return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const orderStatusUpdateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ORDER_STATUS_UPDATE_REQUEST:
+      return { loading: true };
+    case ORDER_STATUS_UPDATE_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+    case ORDER_STATUS_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+    case ORDER_STATUS_UPDATE_RESET:
+      return {};
     default:
       return state;
   }

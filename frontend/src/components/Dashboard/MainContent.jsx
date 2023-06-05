@@ -11,6 +11,7 @@ import {
   deleteOrder,
   listTechnicianOrders,
   listUserOrders,
+  updateOrderStatus,
 } from "../../redux/actions/orderActions.js";
 
 import Loader from "../../components/Loader";
@@ -42,16 +43,45 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
   const { techUserInfo } = technicianUserLogin;
 
   const userDelete = useSelector((state) => state.userDelete);
-  const { success: deleteSuccess } = userDelete;
+  const {
+    loading: deleteLoading,
+    error: deleteError,
+    success: deleteSuccess,
+  } = userDelete;
 
   const technicianUserDelete = useSelector(
     (state) => state.technicianUserDelete
   );
-  const { success: technicianDeleteSuccess } = technicianUserDelete;
+  const {
+    loading: technicianDeleteLoading,
+    error: technicianDeleteError,
+    success: technicianDeleteSuccess,
+  } = technicianUserDelete;
 
-  const successMessage = (deleteSuccess || technicianDeleteSuccess) && {
+  const orderDelete = useSelector((state) => state.orderDelete);
+  const {
+    loading: orderDeleteLoading,
+    error: orderDeleteError,
+    success: orderDeleteSuccess,
+  } = orderDelete;
+
+  const orderStatusUpdate = useSelector((state) => state.orderStatusUpdate);
+  const {
+    loading: orderStatusUpdateLoading,
+    error: orderStatusUpdateError,
+    success: orderStatusUpdateSuccess,
+  } = orderStatusUpdate;
+
+  const successMessage = (deleteSuccess ||
+    technicianDeleteSuccess ||
+    orderDeleteSuccess) && {
     status: "200",
     message: "Deleted Successfully!",
+  };
+
+  const updateSuccessMessage = orderStatusUpdateSuccess && {
+    status: "200",
+    message: "Updated Successfully!",
   };
 
   let loggedInUserName = "";
@@ -136,19 +166,28 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
 
   const handleStatusOrder = (orderId) => {
     if (window.confirm("Are You Sure?")) {
-      // dispatch(updateStatusOrder(orderId)).then(() => {
-      //   if (variant === "admin") {
-      //     dispatch(listAllOrders(adminUserInfo.user._id));
-      //   }
-      //   if (variant === "user") {
-      //     dispatch(listUserOrders(userInfo.user._id));
-      //   }
-      //   if (variant === "technician") {
-      //     dispatch(listTechnicianOrders(techUserInfo.user._id));
-      //   }
-      // });
+      const orders =
+        variant === "admin"
+          ? allOrders
+          : variant === "user"
+          ? userOrders
+          : technicianOrders;
 
-      console.log("Status Order", orderId);
+      const status = orders.find((order) => order._id === orderId).status;
+
+      const newStatus = status === "Pending" ? "Done" : status;
+
+      dispatch(updateOrderStatus(orderId, newStatus)).then(() => {
+        if (variant === "admin") {
+          dispatch(listAllOrders(adminUserInfo.user._id));
+        }
+        if (variant === "user") {
+          dispatch(listUserOrders(userInfo.user._id));
+        }
+        if (variant === "technician") {
+          dispatch(listTechnicianOrders(techUserInfo.user._id));
+        }
+      });
     }
   };
 
@@ -169,9 +208,16 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
           User Type: {userType}
         </h2>
       )}
-      {(deleteSuccess || technicianDeleteSuccess) && (
+      {(deleteSuccess || technicianDeleteSuccess || orderDeleteSuccess) && (
         <Message>{successMessage}</Message>
       )}
+
+      {orderStatusUpdateSuccess && <Message>{updateSuccessMessage}</Message>}
+      {orderStatusUpdateError && <Message>{orderStatusUpdateError}</Message>}
+      {deleteError && <Message>{deleteError}</Message>}
+      {technicianDeleteError && <Message>{technicianDeleteError}</Message>}
+      {orderDeleteError && <Message>{orderDeleteError}</Message>}
+
       {selectedItem !== null && (
         <div>
           {/* {menuItems[selectedItem].name === "Admins" && (
