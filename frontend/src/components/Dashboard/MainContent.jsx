@@ -2,22 +2,22 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
-  listTechnicians,
-  technicianDelete,
-} from "../../redux/actions/technicianActions.js";
-import { deleteUser, listUsers } from "../../redux/actions/userActions.js";
-import {
-  listAllOrders,
   deleteOrder,
+  listAllOrders,
   listTechnicianOrders,
   listUserOrders,
   updateOrderStatus,
 } from "../../redux/actions/orderActions.js";
+import {
+  listTechnicians,
+  technicianDelete,
+} from "../../redux/actions/technicianActions.js";
+import { deleteUser, listUsers } from "../../redux/actions/userActions.js";
 
 import Loader from "../../components/Loader";
-import Message from "../../components/Message.jsx";
+import Message from "../../components/Message";
 import Table from "../Table";
-import OrderTable from "../orderTable.jsx";
+import OrderTable from "../OrderTable";
 
 const MainContent = ({ variant, selectedItem, menuItems }) => {
   const userColumns = ["name", "_id", "email"];
