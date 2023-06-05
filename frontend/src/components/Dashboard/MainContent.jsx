@@ -6,6 +6,12 @@ import {
   technicianDelete,
 } from "../../redux/actions/technicianActions.js";
 import { deleteUser, listUsers } from "../../redux/actions/userActions.js";
+import {
+  listAllOrders,
+  deleteOrder,
+  listTechnicianOrders,
+  listUserOrders,
+} from "../../redux/actions/orderActions.js";
 
 import Loader from "../../components/Loader";
 import Message from "../../components/Message.jsx";
@@ -114,18 +120,34 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
 
   const handleDeleteOrder = (orderId) => {
     if (window.confirm("Are You Sure?")) {
-      // dispatch(deleteUser(userId)).then(() => {
-      //   dispatch(listUsers(adminUserInfo.user._id));
-      // });
-      console.log("Delete Order", orderId);
+      dispatch(deleteOrder(orderId)).then(() => {
+        if (variant === "admin") {
+          dispatch(listAllOrders(adminUserInfo.user._id));
+        }
+        if (variant === "user") {
+          dispatch(listUserOrders(userInfo.user._id));
+        }
+        if (variant === "technician") {
+          dispatch(listTechnicianOrders(techUserInfo.user._id));
+        }
+      });
     }
   };
 
   const handleStatusOrder = (orderId) => {
     if (window.confirm("Are You Sure?")) {
-      // dispatch(deleteUser(userId)).then(() => {
-      //   dispatch(listUsers(adminUserInfo.user._id));
+      // dispatch(updateStatusOrder(orderId)).then(() => {
+      //   if (variant === "admin") {
+      //     dispatch(listAllOrders(adminUserInfo.user._id));
+      //   }
+      //   if (variant === "user") {
+      //     dispatch(listUserOrders(userInfo.user._id));
+      //   }
+      //   if (variant === "technician") {
+      //     dispatch(listTechnicianOrders(techUserInfo.user._id));
+      //   }
       // });
+
       console.log("Status Order", orderId);
     }
   };

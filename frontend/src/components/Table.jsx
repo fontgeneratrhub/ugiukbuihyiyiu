@@ -3,15 +3,14 @@ import { Link } from "react-router-dom";
 import Button from "./Button";
 
 const Table = ({ data, columns, handleDelete, entityType }) => {
+  const isAdminLoggedIn = entityType === "admin" ? true : false;
   return (
     <div className="overflow-x-auto">
       <table className="bg-gray-700 w-full table-auto border-collapse border-2 border-gray-400 rounded-lg text-center overflow-hidden whitespace-no-wrap">
         <thead className="bg-gray-800 h-10 uppercase font-bold">
           <tr>
             {columns.map((column) => (
-              <th key={column}>
-                {column.charAt(0).toUpperCase() + column.slice(1)}
-              </th>
+              <th key={column}>{column.replace(/([A-Z])/g, " $1").trim()}</th>
             ))}
             <th>Edit</th>
             <th>Delete</th>

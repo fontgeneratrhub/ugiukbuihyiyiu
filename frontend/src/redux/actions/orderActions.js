@@ -1,18 +1,21 @@
+import axios from "axios";
 import {
   ORDER_CREATE_FAIL,
   ORDER_CREATE_REQUEST,
   ORDER_CREATE_SUCCESS,
+  ORDER_DELETE_FAIL,
+  ORDER_DELETE_REQUEST,
+  ORDER_DELETE_SUCCESS,
+  ORDER_LIST_FAIL,
+  ORDER_LIST_REQUEST,
+  ORDER_LIST_SUCCESS,
   ORDER_LIST_TECHNICIAN_FAIL,
   ORDER_LIST_TECHNICIAN_REQUEST,
   ORDER_LIST_TECHNICIAN_SUCCESS,
   ORDER_LIST_USER_FAIL,
   ORDER_LIST_USER_REQUEST,
   ORDER_LIST_USER_SUCCESS,
-  ORDER_LIST_FAIL,
-  ORDER_LIST_REQUEST,
-  ORDER_LIST_SUCCESS,
 } from "../constants/orderConstants.js";
-import axios from "axios";
 
 export const createOrder =
   (userId, technicianId) => async (dispatch, getState) => {
@@ -55,6 +58,31 @@ export const createOrder =
       });
     }
   };
+
+export const deleteOrder = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: ORDER_DELETE_REQUEST,
+    });
+
+    await axios.delete(`/api/order/delete/${id}`);
+
+    dispatch({
+      type: ORDER_DELETE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: ORDER_DELETE_FAIL,
+      payload: {
+        status: error.response && error.response.status,
+        message:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      },
+    });
+  }
+};
 
 export const listAllOrders = (id) => async (dispatch, getState) => {
   try {

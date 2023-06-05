@@ -13,6 +13,7 @@ import {
 } from "./reducers/adminReducers.js";
 import {
   orderCreateReducer,
+  orderDeleteReducer,
   orderListAllReducer,
   orderListTechnicianReducer,
   orderListUserReducer,
@@ -41,6 +42,7 @@ const reducer = combineReducers({
   adminUserRegister: adminUserRegisterReducer,
   adminUserUpdateProfile: adminUserUpdateProfileReducer,
   orderCreate: orderCreateReducer,
+  orderDelete: orderDeleteReducer,
   orderListAll: orderListAllReducer,
   orderListTechnician: orderListTechnicianReducer,
   orderListUser: orderListUserReducer,

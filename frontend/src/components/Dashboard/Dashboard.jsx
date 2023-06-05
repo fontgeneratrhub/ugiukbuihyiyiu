@@ -52,7 +52,7 @@ const Dashboard = ({ variant }) => {
   };
 
   return (
-    <section className="min-h-screen flex flex-row justify-center items-center bg-gray-800 text-white pt-16">
+    <section className="min-h-screen flex flex-row bg-gray-800 text-white pt-16">
       <Sidebar
         variant={variant}
         menuItems={menuItems[variant]}
