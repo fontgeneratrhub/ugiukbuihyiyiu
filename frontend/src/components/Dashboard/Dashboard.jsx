@@ -4,6 +4,20 @@ import Sidebar from "./SideBar";
 import MainContent from "./MainContent";
 
 const Dashboard = ({ variant }) => {
+  let classes;
+  switch (variant) {
+    case "admin":
+      classes = "bg-indigo-900";
+      break;
+    case "technician":
+      classes = "bg-sky-900";
+      break;
+    case "user":
+      classes = "bg-gray-900";
+      break;
+    default:
+      classes = "bg-gray-900";
+  }
   const menuItems = {
     admin: [
       // {
@@ -52,7 +66,9 @@ const Dashboard = ({ variant }) => {
   };
 
   return (
-    <section className="min-h-screen flex flex-row bg-gray-800 text-white pt-16">
+    <section
+      className={`${classes} min-h-screen flex flex-row text-white pt-16`}
+    >
       <Sidebar
         variant={variant}
         menuItems={menuItems[variant]}

@@ -42,19 +42,22 @@ const UserRegisterScreen = () => {
   const submitHandler = (e) => {
     e.preventDefault(); //Dispatch Register
     if (password != confirmPassword) {
-      setMessage("Passwords Don't Match");
+      setMessage({
+        status: "404",
+        message: "Passwords Do not Match!",
+      });
     } else {
       dispatch(register(name, email, password, confirmPassword));
     }
   };
 
   return (
-    <section className="min-h-screen flex flex-col justify-center items-center bg-gray-800 text-white p-20">
+    <section className="min-h-screen flex flex-col justify-center items-center bg-gray-800 text-white p-4 sm:p-20">
       {loading ? (
         <Loader />
       ) : (
         <div className="mx-auto max-w-screen-xl w-full flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl text-center font-bold mb-4">
+          <h1 className="text-4xl text-center font-bold mb-4 mt-14 sm:mt-0">
             Welcome to Kariger.com Register Portal!
           </h1>
 
@@ -75,11 +78,7 @@ const UserRegisterScreen = () => {
               </p>
 
               {message && <Message type="error">{message}</Message>}
-              {error && (
-                <Message type="error">
-                  {error.status}: {error.message}
-                </Message>
-              )}
+              {error && <Message type="error">{error}</Message>}
 
               <div className="w-full mt-4">
                 <label htmlFor="name" className="sr-only">

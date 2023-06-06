@@ -44,13 +44,13 @@ const UserLoginScreen = () => {
   };
 
   return (
-    <section className="min-h-screen flex flex-col justify-center items-center bg-gray-800 text-white p-20">
+    <section className="min-h-screen flex flex-col justify-center items-center bg-gray-800 text-white p-4 sm:p-20">
       <div className="mx-auto max-w-screen-xl w-full flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
         {loading ? (
           <Loader />
         ) : (
           <>
-            <h1 className="text-4xl text-center font-bold mb-4">
+            <h1 className="text-4xl text-center font-bold mb-4 mt-14 sm:mt-0">
               Welcome to Kariger.com!
             </h1>
             <div className="flex flex-col items-center justify-evenly md:flex-row">

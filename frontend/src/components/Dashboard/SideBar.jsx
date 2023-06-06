@@ -16,6 +16,21 @@ import { listUsers } from "../../redux/actions/userActions.js";
 import userAVI from "../../images/User-avatar.svg.png";
 
 const SideBar = ({ variant, menuItems, selectedItem, handleItemClick }) => {
+  let classes;
+  switch (variant) {
+    case "admin":
+      classes = "bg-indigo-900";
+      break;
+    case "technician":
+      classes = "bg-sky-900";
+      break;
+    case "user":
+      classes = "bg-gray-900";
+      break;
+    default:
+      classes = "bg-gray-900";
+  }
+
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -68,7 +83,9 @@ const SideBar = ({ variant, menuItems, selectedItem, handleItemClick }) => {
     }
   };
   return (
-    <div className="min-h-screen w-1/6 bg-gray-900 flex flex-col items-center shadow-md p-4">
+    <div
+      className={`${classes} min-h-screen bg- w-1/6 flex flex-col items-center shadow-md p-4`}
+    >
       <div className="flex flex-col items-center  mb-4">
         <img
           className="w-full rounded-full mr-3"

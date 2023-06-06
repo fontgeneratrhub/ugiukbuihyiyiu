@@ -130,12 +130,14 @@ const NavbarCmp = () => {
                 >
                   Home
                 </Link>
-                <Link
-                  to="/technicians"
-                  className="block mt-4 lg:inline-block lg:mt-0 p-2 rounded text-gray-200  hover:bg-gray-700  hover:text-white "
-                >
-                  Technicians
-                </Link>
+                {!techUserInfo && (
+                  <Link
+                    to="/technicians"
+                    className="block mt-4 lg:inline-block lg:mt-0 p-2 rounded text-gray-200  hover:bg-gray-700  hover:text-white "
+                  >
+                    Technicians
+                  </Link>
+                )}
                 <Link
                   to="/contact-us"
                   className="block mt-4 lg:inline-block lg:mt-0 p-2 rounded text-gray-200  hover:bg-gray-700  hover:text-white "
@@ -215,13 +217,15 @@ const NavbarCmp = () => {
           >
             Home
           </Link>
-          <Link
-            to="/technicians"
-            className="text-gray-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-bold"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            Technicians
-          </Link>
+          {!techUserInfo && (
+            <Link
+              to="/technicians"
+              className="text-gray-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-bold"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              Technicians
+            </Link>
+          )}
           <Link
             to="/contact-us"
             className="text-gray-500 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-bold"

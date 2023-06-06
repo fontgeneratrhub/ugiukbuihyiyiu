@@ -50,7 +50,10 @@ const AdminRegisterScreen = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setMessage("Passwords Don't Match");
+      setMessage({
+        status: "404",
+        message: "Passwords Do not Match!",
+      });
     } else {
       dispatch(
         adminRegister(name, email, password, confirmPassword, secretCode)
@@ -59,13 +62,13 @@ const AdminRegisterScreen = () => {
   };
 
   return (
-    <section className="min-h-screen flex flex-col justify-center items-center bg-blue-900 text-white p-20">
+    <section className="min-h-screen flex flex-col justify-center items-center bg-indigo-900 text-white p-4 sm:p-20">
       <div className="mx-auto max-w-screen-xl w-full flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
         {loading ? (
           <Loader />
         ) : (
           <>
-            <h1 className="text-4xl text-center font-bold mb-4">
+            <h1 className="text-4xl text-center font-bold mb-4 mt-14 sm:mt-0">
               Welcome to Admin Register Portal!
             </h1>
             <div className="flex flex-col items-center justify-evenly md:flex-row">
@@ -77,7 +80,7 @@ const AdminRegisterScreen = () => {
                 />
               </div>
               <form
-                className="w-full max-w-2xl flex flex-col items-center justify-center rounded-lg border border-gray-400 my-4 mx-auto p-4 sm:p-6 lg:p-8"
+                className="w-full max-w-2xl flex flex-col items-center justify-center rounded-lg border border-indigo-400 my-4 mx-auto p-4 sm:p-6 lg:p-8"
                 onSubmit={submitHandler}
               >
                 <p className="text-center text-xl leading-relaxed pb-2">
@@ -99,7 +102,7 @@ const AdminRegisterScreen = () => {
                       setName(e.target.value);
                     }}
                     required
-                    className="w-full bg-gray-700 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                    className="w-full bg-indigo-700 placeholder-indigo-400 rounded-lg border-indigo-400 p-4 pr-12 text-sm shadow-sm"
                   />
                 </div>
 
@@ -118,12 +121,12 @@ const AdminRegisterScreen = () => {
                         setEmail(e.target.value);
                       }}
                       required
-                      className="w-full bg-gray-700 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                      className="w-full bg-indigo-700 placeholder-indigo-400  rounded-lg border-indigo-400 p-4 pr-12 text-sm shadow-sm"
                     />
                     <span className="absolute inset-y-0 right-0 grid place-content-center px-4">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 text-gray-400"
+                        className="h-4 w-4 text-indigo-400"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -153,10 +156,10 @@ const AdminRegisterScreen = () => {
                         setPassword(e.target.value);
                       }}
                       required
-                      className="w-full bg-gray-700 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                      className="w-full bg-indigo-700 placeholder-indigo-400  rounded-lg border-indigo-400 p-4 pr-12 text-sm shadow-sm"
                     />
                     <span className="absolute inset-y-0 right-0 grid place-content-center px-4">
-                      <i className="fas fa-lock h-4 w-4 text-gray-400"></i>
+                      <i className="fas fa-lock h-4 w-4 text-indigo-400"></i>
                     </span>
                   </div>
                 </div>
@@ -175,10 +178,10 @@ const AdminRegisterScreen = () => {
                         setConfirmPassword(e.target.value);
                       }}
                       required
-                      className="w-full bg-gray-700 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                      className="w-full bg-indigo-700 placeholder-indigo-400  rounded-lg border-indigo-400 p-4 pr-12 text-sm shadow-sm"
                     />
                     <span className="absolute inset-y-0 right-0 grid place-content-center px-4">
-                      <i className="fas fa-lock h-4 w-4 text-gray-400"></i>
+                      <i className="fas fa-lock h-4 w-4 text-indigo-400"></i>
                     </span>
                   </div>
                 </div>
@@ -197,10 +200,10 @@ const AdminRegisterScreen = () => {
                         setSecretCode(e.target.value);
                       }}
                       required
-                      className="w-full bg-gray-700 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                      className="w-full bg-indigo-700 placeholder-indigo-400  rounded-lg border-indigo-400 p-4 pr-12 text-sm shadow-sm"
                     />
                     <span className="absolute inset-y-0 right-0 grid place-content-center px-4">
-                      <i className="fas fa-key h-4 w-4 text-gray-400"></i>
+                      <i className="fas fa-key h-4 w-4 text-indigo-400 text"></i>
                     </span>
                   </div>
                 </div>
@@ -213,7 +216,7 @@ const AdminRegisterScreen = () => {
                   Register
                 </Button>
 
-                <p className="text-center text-sm text-gray-400">
+                <p className="text-center text-sm text-indigo-400">
                   Already have an Account?{" "}
                   <Link className="underline text-white" to="/admin/login">
                     Sign in

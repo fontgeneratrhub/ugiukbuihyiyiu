@@ -45,13 +45,13 @@ const TechLoginScreen = () => {
   };
 
   return (
-    <section className="min-h-screen flex flex-col justify-center items-center bg-gray-800 text-white p-20">
+    <section className="min-h-screen flex flex-col justify-center items-center bg-sky-800 text-white p-4 sm:p-20">
       <div className="mx-auto max-w-screen-xl w-full flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
         {loading ? (
           <Loader />
         ) : (
           <>
-            <h1 className="text-4xl text-center font-bold mb-4">
+            <h1 className="text-4xl text-center font-bold mb-4 mt-14 sm:mt-0">
               Welcome to Technician Portal!
             </h1>
             <div className="flex flex-col items-center justify-evenly md:flex-row">
@@ -63,12 +63,12 @@ const TechLoginScreen = () => {
                 />
               </div>
               <form
-                className="w-full max-w-2xl flex flex-col items-center justify-center rounded-lg border border-gray-400 my-4 mx-auto p-4 sm:p-6 lg:p-8"
+                className="w-full max-w-2xl flex flex-col items-center justify-center rounded-lg border border-sky-400 my-4 mx-auto p-4 sm:p-6 lg:p-8"
                 onSubmit={submitHandler}
               >
                 <p className="text-center text-xl leading-relaxed">
                   Sign in to your Account <br />
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm text-sky-500">
                     You've been Missed!
                   </span>
                 </p>
@@ -90,12 +90,12 @@ const TechLoginScreen = () => {
                         setEmail(e.target.value);
                       }}
                       required
-                      className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                      className="w-full bg-sky-600 rounded-lg placeholder-sky-400 border-sky-400 p-4 pr-12 text-sm shadow-sm"
                     />
                     <span className="absolute inset-y-0 right-0 grid place-content-center px-4">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 text-gray-400"
+                        className="h-4 w-4 text-sky-400"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -126,10 +126,10 @@ const TechLoginScreen = () => {
                         setPassword(e.target.value);
                       }}
                       required
-                      className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                      className="w-full bg-sky-600 rounded-lg placeholder-sky-400 border-sky-400 p-4 pr-12 text-sm shadow-sm"
                     />
                     <span className="absolute inset-y-0 right-0 grid place-content-center px-4">
-                      <i className="fas fa-lock h-4 w-4 text-gray-400"></i>
+                      <i className="fas fa-lock h-4 w-4 text-sky-400"></i>
                     </span>
                   </div>
 
@@ -137,7 +137,7 @@ const TechLoginScreen = () => {
                     <div className="flex items-center">
                       <Link
                         onClick={forgetPwdHandler}
-                        className="text-sm text-gray-400 hover:text-white"
+                        className="text-sm text-sky-400 hover:text-white"
                       >
                         Forgot your password?
                       </Link>
@@ -153,7 +153,7 @@ const TechLoginScreen = () => {
                   Login
                 </Button>
 
-                <p className="text-center text-sm text-gray-400">
+                <p className="text-center text-sm text-sky-400">
                   No account?{" "}
                   <Link
                     className="underline text-white"

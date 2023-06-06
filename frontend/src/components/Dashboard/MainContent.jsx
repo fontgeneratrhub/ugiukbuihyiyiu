@@ -27,6 +27,21 @@ import OrderTable from "../OrderTable";
 import FeedbackTable from "../FeedbackTable";
 
 const MainContent = ({ variant, selectedItem, menuItems }) => {
+  let classes;
+  switch (variant) {
+    case "admin":
+      classes = "bg-gradient-to-br from-indigo-800 to-indigo-700";
+      break;
+    case "technician":
+      classes = "bg-gradient-to-br from-sky-800 to-sky-700";
+      break;
+    case "user":
+      classes = "bg-gradient-to-br from-gray-800 to-gray-700";
+      break;
+    default:
+      classes = "bg-gradient-to-br from-gray-800 to-gray-700";
+  }
+
   const userColumns = ["name", "_id", "email"];
   // const adminColumns = ["name", "_id", "email"];
   const technicianColumns = ["name", "_id", "email"];
@@ -245,7 +260,7 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
   // };
 
   return (
-    <div className="min-h-screen w-10/12 bg-gradient-to-br from-gray-800 to-gray-700 p-4">
+    <div className={`${classes} min-h-screen w-10/12 p-4`}>
       {/* Main content */}
       <h1 className="text-4xl text-center font-bold">
         Welcome {formattedUserName}!

@@ -75,7 +75,10 @@ const TechRegisterScreen = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (password != confirmPassword) {
-      setMessage("Passwords Don't Match");
+      setMessage({
+        status: "404",
+        message: "Passwords Do not Match!",
+      });
     }
     dispatch(
       technicianRegister(
@@ -93,13 +96,13 @@ const TechRegisterScreen = () => {
     );
   };
   return (
-    <section className="min-h-screen flex flex-col justify-center items-center bg-gray-800 text-white p-6 sm:p-20">
+    <section className="min-h-screen flex flex-col justify-center items-center bg-sky-800 text-white p-6 sm:p-20">
       <div className="mx-auto max-w-screen-xl w-full flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
         {loading ? (
           <Loader />
         ) : (
           <>
-            <h1 className="text-4xl text-center font-bold mb-4">
+            <h1 className="text-4xl text-center font-bold mb-4 mt-14 sm:mt-0">
               Welcome to Technician Register Portal!
             </h1>
             <div className="flex flex-col items-center justify-evenly md:flex-row">
@@ -111,7 +114,7 @@ const TechRegisterScreen = () => {
                 />
               </div>
               <form
-                className="w-full max-w-2xl flex flex-col items-center justify-center rounded-lg border border-gray-400 my-4 mx-auto p-4 sm:p-6 lg:p-8"
+                className="w-full max-w-2xl flex flex-col items-center justify-center rounded-lg border border-sky-400 my-4 mx-auto p-4 sm:p-6 lg:p-8"
                 onSubmit={submitHandler}
               >
                 <p className="text-center text-xl leading-relaxed">
@@ -135,7 +138,7 @@ const TechRegisterScreen = () => {
                         setName(e.target.value);
                       }}
                       required
-                      className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                      className="w-full bg-sky-600 rounded-lg placeholder-sky-400 border-sky-400 p-4 pr-12 text-sm shadow-sm"
                     />
                   </div>
 
@@ -152,7 +155,7 @@ const TechRegisterScreen = () => {
                         setCnic(e.target.value);
                       }}
                       required
-                      className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                      className="w-full bg-sky-600 rounded-lg placeholder-sky-400 border-sky-400 p-4 pr-12 text-sm shadow-sm"
                     />
                   </div>
 
@@ -170,7 +173,7 @@ const TechRegisterScreen = () => {
                         setTechLocation(e.target.value);
                       }}
                       required
-                      className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                      className="w-full bg-sky-600 rounded-lg placeholder-sky-400 border-sky-400 p-4 pr-12 text-sm shadow-sm"
                     />
                   </div>
 
@@ -188,7 +191,7 @@ const TechRegisterScreen = () => {
                         setExperience(e.target.value);
                       }}
                       required
-                      className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                      className="w-full bg-sky-600 rounded-lg placeholder-sky-400 border-sky-400 p-4 pr-12 text-sm shadow-sm"
                     />
                   </div>
 
@@ -205,7 +208,7 @@ const TechRegisterScreen = () => {
                         setPhone(e.target.value);
                       }}
                       required
-                      className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                      className="w-full bg-sky-600 rounded-lg placeholder-sky-400 border-sky-400 p-4 pr-12 text-sm shadow-sm"
                     />
                   </div>
 
@@ -223,7 +226,7 @@ const TechRegisterScreen = () => {
                         setAddress(e.target.value);
                       }}
                       required
-                      className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                      className="w-full bg-sky-600 rounded-lg placeholder-sky-400 border-sky-400 p-4 pr-12 text-sm shadow-sm"
                     />
                   </div>
 
@@ -238,7 +241,7 @@ const TechRegisterScreen = () => {
                         setCategoryId(e.target.value);
                       }}
                       required
-                      className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                      className="w-full bg-sky-600 rounded-lg placeholder-sky-400 border-sky-400 p-4 pr-12 text-sm shadow-sm"
                     >
                       <option value="" disabled>
                         -- Select a Category --
@@ -272,12 +275,12 @@ const TechRegisterScreen = () => {
                           setEmail(e.target.value);
                         }}
                         required
-                        className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                        className="w-full bg-sky-600 rounded-lg placeholder-sky-400 border-sky-400 p-4 pr-12 text-sm shadow-sm"
                       />
                       <span className="absolute inset-y-0 right-0 grid place-content-center px-4">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="h-4 w-4 text-gray-400"
+                          className="h-4 w-4 text-sky-400"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
@@ -307,10 +310,10 @@ const TechRegisterScreen = () => {
                           setPassword(e.target.value);
                         }}
                         required
-                        className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                        className="w-full bg-sky-600 rounded-lg placeholder-sky-400 border-sky-400 p-4 pr-12 text-sm shadow-sm"
                       />
                       <span className="absolute inset-y-0 right-0 grid place-content-center px-4">
-                        <i className="fas fa-lock h-4 w-4 text-gray-400"></i>
+                        <i className="fas fa-lock h-4 w-4 text-sky-400"></i>
                       </span>
                     </div>
                   </div>
@@ -329,10 +332,10 @@ const TechRegisterScreen = () => {
                           setConfirmPassword(e.target.value);
                         }}
                         required
-                        className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                        className="w-full bg-sky-600 rounded-lg placeholder-sky-400 border-sky-400 p-4 pr-12 text-sm shadow-sm"
                       />
                       <span className="absolute inset-y-0 right-0 grid place-content-center px-4">
-                        <i className="fas fa-lock h-4 w-4 text-gray-400"></i>
+                        <i className="fas fa-lock h-4 w-4 text-sky-400"></i>
                       </span>
                     </div>
                   </div>
@@ -346,7 +349,7 @@ const TechRegisterScreen = () => {
                   Register
                 </Button>
 
-                <p className="text-center text-sm text-gray-400">
+                <p className="text-center text-sm text-sky-400">
                   Already have an Account?{" "}
                   <Link className="underline text-white" to="/technician/login">
                     Sign in
