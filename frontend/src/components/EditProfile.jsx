@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { technicianUpdateProfile } from "../redux/actions/technicianActions.js";
@@ -11,6 +12,7 @@ import Message from "./Message.jsx";
 
 const EditProfile = ({ user, setIsEditing, userType }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const initialFormData =
     userType === "technician"
@@ -73,16 +75,19 @@ const EditProfile = ({ user, setIsEditing, userType }) => {
       if (!techUpdateError) {
         setIsEditing(false);
       }
+      navigate("/technician/dashboard");
     } else if (userType === "admin") {
       dispatch(adminUpdateProfile(formData.email, formData.name, user._id));
       if (!adminUpdateError) {
         setIsEditing(false);
       }
+      navigate("/admin/dashboard");
     } else if (userType === "user") {
       dispatch(updateProfile(formData.email, formData.name, user._id));
       if (!userUpdateError) {
         setIsEditing(false);
       }
+      navigate("/dashboard");
     }
   };
 

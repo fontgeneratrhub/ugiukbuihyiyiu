@@ -22,7 +22,7 @@ const TechRegisterScreen = () => {
   const [categoryId, setCategoryId] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState(null);
+  // const [message, setMessage] = useState(null);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -74,12 +74,12 @@ const TechRegisterScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (password != confirmPassword) {
-      setMessage({
-        status: "404",
-        message: "Passwords Do not Match!",
-      });
-    }
+    // if (password != confirmPassword) {
+    //   setMessage({
+    //     status: "404",
+    //     message: "Passwords Do not Match!",
+    //   });
+    // }
     dispatch(
       technicianRegister(
         categoryId,
@@ -121,7 +121,7 @@ const TechRegisterScreen = () => {
                   Create New Account
                 </p>
 
-                {message && <Message>{message}</Message>}
+                {/* {message && <Message>{message}</Message>} */}
                 {error && <Message>{error}</Message>}
 
                 <div className="w-full grid grid-cols-1 gap-4 sm:grid-cols-2 my-2">

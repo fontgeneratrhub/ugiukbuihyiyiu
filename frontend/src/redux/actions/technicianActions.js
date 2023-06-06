@@ -155,20 +155,19 @@ export const technicianUpdateProfile =
         payload: { user: data.technician },
       });
 
+      // dispatch({
+      //   type: TECHNICIAN_LOGIN_SUCCESS,
+      //   payload: { user: data.technician },
+      // });
+      // localStorage.setItem(
+      //   "techUserInfo",
+      //   JSON.stringify({
+      //     user: data.technician,
+      //   })
+      // );
       dispatch({
         type: TECHNICIAN_DETAILS_RESET,
       });
-
-      dispatch({
-        type: TECHNICIAN_LOGIN_SUCCESS,
-        payload: { user: data.technician },
-      });
-      localStorage.setItem(
-        "techUserInfo",
-        JSON.stringify({
-          user: data.technician,
-        })
-      );
     } catch (error) {
       dispatch({
         type: TECHNICIAN_UPDATE_PROFILE_FAIL,
@@ -197,19 +196,18 @@ export const techincianSubscription = (id) => async (dispatch) => {
     });
 
     dispatch({
-      type: TECHNICIAN_DETAILS_RESET,
-    });
-
-    dispatch({
       type: TECHNICIAN_LOGIN_SUCCESS,
       payload: { user: data.technician },
     });
-    localStorage.setItem(
-      "techUserInfo",
-      JSON.stringify({
-        user: data.technician,
-      })
-    );
+    // localStorage.setItem(
+    //   "techUserInfo",
+    //   JSON.stringify({
+    //     user: data.technician,
+    //   })
+    // );
+    dispatch({
+      type: TECHNICIAN_DETAILS_RESET,
+    });
   } catch (error) {
     dispatch({
       type: TECHNICIAN_SUPSCRIPTION_FAIL,

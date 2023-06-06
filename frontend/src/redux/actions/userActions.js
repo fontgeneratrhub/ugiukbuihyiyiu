@@ -6,7 +6,10 @@ import {
   ORDER_LIST_TECHNICIAN_RESET,
   ORDER_LIST_USER_RESET,
 } from "../constants/orderConstants.js";
-import { TECHNICIAN_LOGOUT } from "../constants/technicianConstants.js";
+import {
+  TECHNICIAN_LOGOUT,
+  TECHNICIAN_DETAILS_RESET,
+} from "../constants/technicianConstants.js";
 import {
   USER_DELETE_FAIL,
   USER_DELETE_REQUEST,
@@ -74,6 +77,7 @@ export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_RESET });
+  dispatch({ type: TECHNICIAN_DETAILS_RESET });
   dispatch({ type: ORDER_LIST_USER_RESET });
   dispatch({ type: ORDER_LIST_TECHNICIAN_RESET });
   dispatch({ type: ORDER_LIST_RESET });
@@ -159,14 +163,15 @@ export const updateProfile = (email, name, id) => async (dispatch) => {
       type: USER_UPDATE_PROFILE_SUCCESS,
       payload: { user: data.user },
     });
-    dispatch({
-      type: USER_LOGIN_SUCCESS,
-      payload: { user: data.user, token: data.token },
-    });
-    localStorage.setItem(
-      "userInfo",
-      JSON.stringify({ user: data.user, token: data.token })
-    );
+    // dispatch({
+    //   type: USER_LOGIN_SUCCESS,
+    //   payload: { user: data.user, token: data.token },
+    // });
+    // localStorage.setItem(
+    //   "userInfo",
+    //   JSON.stringify({ user: data.user, token: data.token })
+    // );
+    dispatch({ type: USER_DETAILS_RESET });
   } catch (error) {
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,

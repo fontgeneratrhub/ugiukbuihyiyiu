@@ -14,7 +14,7 @@ const AdminRegisterScreen = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [secretCode, setSecretCode] = useState("");
-  const [message, setMessage] = useState(null);
+  // const [message, setMessage] = useState(null);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -49,16 +49,14 @@ const AdminRegisterScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      setMessage({
-        status: "404",
-        message: "Passwords Do not Match!",
-      });
-    } else {
-      dispatch(
-        adminRegister(name, email, password, confirmPassword, secretCode)
-      );
-    }
+    // if (password !== confirmPassword) {
+    //   setMessage({
+    //     status: "404",
+    //     message: "Passwords Do not Match!",
+    //   });
+    // } else {
+    dispatch(adminRegister(name, email, password, confirmPassword, secretCode));
+    // }
   };
 
   return (
@@ -86,7 +84,7 @@ const AdminRegisterScreen = () => {
                 <p className="text-center text-xl leading-relaxed pb-2">
                   Create New Account
                 </p>
-                {message && <Message>{message}</Message>}
+                {/* {message && <Message>{message}</Message>} */}
                 {error && <Message>{error}</Message>}
 
                 <div className="w-full pt-2">
