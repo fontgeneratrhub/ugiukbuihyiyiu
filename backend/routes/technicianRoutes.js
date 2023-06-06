@@ -32,6 +32,12 @@ router.get("/single/:id", technicianController.getTechnicianById);
 // show technician orders
 router.get("/technicianOrders/:id", technicianController.technicianOrders);
 
+// show technician Feedback
+router.get(
+  "/technicianFeedbacks/:id",
+  technicianController.technicianFeedbacks
+);
+
 //-----------Update Data----------------------
 
 // router.use(express.json())

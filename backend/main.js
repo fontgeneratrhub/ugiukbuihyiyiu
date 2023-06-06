@@ -18,6 +18,7 @@ const adminRoutes = require("./routes/adminRoutes");
 const techCategoryRoutes = require("./routes/techCategoryRoutes");
 const technicianRoutes = require("./routes/technicianRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const feedbackRoutes = require("./routes/feedbackRoutes");
 
 // DB-Connection
 connection();
@@ -51,6 +52,9 @@ app.use("/api/technician", technicianRoutes);
 
 // Order route
 app.use("/api/order", orderRoutes);
+
+// Feedback route
+app.use("/api/feedback", feedbackRoutes);
 
 const PORT = process.env.PORT || 4000;
 app.listen(

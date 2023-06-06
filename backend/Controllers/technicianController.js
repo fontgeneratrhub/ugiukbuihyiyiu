@@ -2,6 +2,7 @@ const { Technician } = require("../Schemas/technicianSchema");
 const { TechCategory } = require("../Schemas/techCategorySchema");
 const { Order } = require("../Schemas/orderSchema");
 const { User } = require("../Schemas/userSchema");
+const { Feedback } = require("../Schemas/feedbackSchema");
 
 var ObjectId = require("mongodb").ObjectId;
 
@@ -269,7 +270,7 @@ module.exports = {
           .send({ status: "failed", message: "Technician not found" });
       }
     } catch (e) {
-      res.status(404).send(e);
+      res.status(500).send({ message: "Server Error", Error: e });
     }
   },
 
@@ -323,50 +324,54 @@ module.exports = {
     }
   },
 
-  // Logout user
-  //  logoutUser: async (req, res) =>
-  //  {
-  //      console.log('req.user: ', req.user);
-  //      const token = req.headers.authorization.split(' ')[1];
-  //      console.log(token,'token');
+  technicianFeedbacks: async (req, res) => {
+    try {
+      const technicianId = req.params.id;
+      console.log(technicianId, "technicianId");
+      // let deletedResult = connection();
+      let feedback = await Feedback.find({ technicianId: technicianId });
+      console.log("technicianId", "technicianFeedback");
 
-  //      try {
-  //      await jwt.destroy(token);
-  //      res.status(200).json({ message: 'your are successfully deleted' });
-  //      } catch {
-  //      res.status(200).json({ message: 'something wrong' });
-  //      }
-  //  },
+      if (feedback) {
+        var feedbackArr = [];
+        for (let i = 0; i < feedback.length; i++) {
+          const userId = feedback[i].userId;
+          const technicianId = feedback[i].technicianId;
+          // console.log("userId", i, userId);
+          // console.log("technicianId", i, technicianId);
 
-  // getUser: async(req,res)=>{
-  //     try{
-  //        let getresult=  connection();
-  //           getresult= await User.find()
-  //         // console.log(getresult);
-  //        res.send(getresult)
-  //     }catch(e)
-  //     {
-  //         console.log(e);
-  //         res.status(400).send({  "message": "Server Error", "Error": e })
-  //     }
-  // },
+          let user = await User.findOne({ _id: userId });
+          let userName = user.name;
+          // console.log(userName);
+          let technician = await Technician.findOne({ _id: technicianId });
+          let technicianName = technician.name;
+          // console.log(technicianName);
 
-  // getAllUser: async(req,res)=>{
-  //     try{
-  //        let getresult=  connection();
-  //           getresult= await User.find()
-  //         // console.log(getresult);
-  //        res.send(getresult)
-  //     }catch(e){console.log(e);}
-  // },
+          let newObj = {
+            _id: feedback[i]._id,
+            userName: userName,
+            technicianName: technicianName,
+            description: feedback[i].description,
+            stars: feedback[i].stars,
+            createdAt: feedback[i].createdAt,
+          };
+          // console.log(newObj);
+          feedbackArr.push(newObj);
+          //   let user = await User.findOne
+        }
 
-  // getUserById:  async(req,res)=>{
-  //     try{
-  //         const _id = req.params.id;
-  //         console.log(_id);
-  //         const getIndividualResult = await User.findById(_id)
-  //         // console.log(getIndividualResult,"user")
-  //         res.status(201).send(getIndividualResult)
-  //     }catch(e){res.send(e);}
-  // },
+        if (feedback.length == feedbackArr.length) {
+          res.status(200).send({
+            message: "feedback finded Successfully",
+            feedback: feedbackArr,
+          });
+          // res.status(200).send({ status: "success", order: orderArr });
+        }
+      } else {
+        res.status(400).send({ message: "feedback not found" });
+      }
+    } catch (e) {
+      res.status(500).send({ message: "Server Error", Error: e });
+    }
+  },
 };
