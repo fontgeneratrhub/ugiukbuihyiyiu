@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import image1 from "../../images/jeriden-villegas-VLPUm5wP5Z0-unsplash.jpg";
 
