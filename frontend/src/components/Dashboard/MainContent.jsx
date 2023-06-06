@@ -13,11 +13,18 @@ import {
   technicianDelete,
 } from "../../redux/actions/technicianActions.js";
 import { deleteUser, listUsers } from "../../redux/actions/userActions.js";
+import {
+  listAllFeedbacks,
+  listTechnicianFeedbacks,
+  deleteFeedback,
+  // updateFeedback,
+} from "../../redux/actions/feedBackActions.js";
 
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
 import Table from "../Table";
 import OrderTable from "../OrderTable";
+import FeedbackTable from "../FeedbackTable";
 
 const MainContent = ({ variant, selectedItem, menuItems }) => {
   const userColumns = ["name", "_id", "email"];
@@ -29,6 +36,14 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
     "technicianName",
     "createdAt",
     "status",
+  ];
+  const feedbackColumns = [
+    "_id",
+    "userName",
+    "technicianName",
+    "stars",
+    "description",
+    "createdAt",
   ];
 
   const dispatch = useDispatch();
@@ -58,14 +73,24 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
   const { error: orderStatusUpdateError, success: orderStatusUpdateSuccess } =
     orderStatusUpdate;
 
+  const feedbackDelete = useSelector((state) => state.feedbackDelete);
+  const { error: feedbackDeleteError, success: feedbackDeleteSuccess } =
+    feedbackDelete;
+
+  const feedbackUpdate = useSelector((state) => state.feedbackUpdate);
+  const { error: feedbackUpdateError, success: feedbackUpdateSuccess } =
+    feedbackUpdate;
+
   const successMessage = (deleteSuccess ||
     technicianDeleteSuccess ||
-    orderDeleteSuccess) && {
+    orderDeleteSuccess ||
+    feedbackDeleteSuccess) && {
     status: "200",
     message: "Deleted Successfully!",
   };
 
-  const updateSuccessMessage = orderStatusUpdateSuccess && {
+  const updateSuccessMessage = (orderStatusUpdateSuccess ||
+    feedbackUpdateSuccess) && {
     status: "200",
     message: "Updated Successfully!",
   };
@@ -117,6 +142,22 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
     error: technicianOrdersError,
     technicianOrders,
   } = orderListTechnician;
+
+  const feedbackListAll = useSelector((state) => state.feedbackListAll);
+  const {
+    loading: allFeedbacksLoading,
+    error: allFeedbacksError,
+    allFeedbacks,
+  } = feedbackListAll;
+
+  const feedbackListTechnician = useSelector(
+    (state) => state.feedbackListTechnician
+  );
+  const {
+    loading: technicianFeedbacksLoading,
+    error: technicianFeedbacksError,
+    technicianFeedbacks,
+  } = feedbackListTechnician;
 
   const handleDeleteUser = (userId) => {
     if (window.confirm("Are You Sure?")) {
@@ -177,6 +218,32 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
     }
   };
 
+  const handleDeleteFeedback = (feedbackId) => {
+    if (window.confirm("Are You Sure?")) {
+      dispatch(deleteFeedback(feedbackId)).then(() => {
+        if (variant === "admin") {
+          dispatch(listAllFeedbacks(adminUserInfo.user._id));
+        }
+        if (variant === "technician") {
+          dispatch(listTechnicianFeedbacks(techUserInfo.user._id));
+        }
+      });
+    }
+  };
+
+  // const handleUpdateFeedback = (feedbackId) => {
+  //   if (window.confirm("Are You Sure?")) {
+  //     dispatch(updateFeedback(feedbackId)).then(() => {
+  //       if (variant === "admin") {
+  //         dispatch(listAllFeedbacks(adminUserInfo.user._id));
+  //       }
+  //       if (variant === "technician") {
+  //         dispatch(listTechnicianFeedbacks(techUserInfo.user._id));
+  //       }
+  //     });
+  //   }
+  // };
+
   return (
     <div className="min-h-screen w-10/12 bg-gradient-to-br from-gray-800 to-gray-700 p-4">
       {/* Main content */}
@@ -194,16 +261,19 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
           User Type: {userType}
         </h2>
       )}
-      {(deleteSuccess || technicianDeleteSuccess || orderDeleteSuccess) && (
-        <Message>{successMessage}</Message>
+      {(deleteSuccess ||
+        technicianDeleteSuccess ||
+        orderDeleteSuccess ||
+        feedbackDeleteSuccess) && <Message>{successMessage}</Message>}
+      {(orderStatusUpdateSuccess || feedbackUpdateSuccess) && (
+        <Message>{updateSuccessMessage}</Message>
       )}
-
-      {orderStatusUpdateSuccess && <Message>{updateSuccessMessage}</Message>}
       {orderStatusUpdateError && <Message>{orderStatusUpdateError}</Message>}
       {deleteError && <Message>{deleteError}</Message>}
       {technicianDeleteError && <Message>{technicianDeleteError}</Message>}
       {orderDeleteError && <Message>{orderDeleteError}</Message>}
-
+      {feedbackDeleteError && <Message>{feedbackDeleteError}</Message>}
+      {feedbackUpdateError && <Message>{feedbackUpdateError}</Message>}
       {selectedItem !== null && (
         <div>
           {/* {menuItems[selectedItem].name === "Admins" && (
@@ -315,10 +385,41 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
 
           {menuItems[selectedItem].name === "Reviews" && (
             <div>
-              <h2 className="text-2xl font-semibold mb-2">Users</h2>
-              {users.map((user) => (
-                <div key={user.id}>{user.name}</div>
-              ))}
+              {variant === "admin" && (
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">All Reviews</h3>
+                  {allFeedbacksLoading ? (
+                    <Loader />
+                  ) : allFeedbacksError ? (
+                    <Message>{allFeedbacksError}</Message>
+                  ) : (
+                    <FeedbackTable
+                      data={allFeedbacks}
+                      columns={feedbackColumns}
+                      handleDelete={handleDeleteFeedback}
+                      entityType="admin"
+                    />
+                  )}
+                </div>
+              )}
+
+              {variant === "technician" && (
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Your Reviews</h3>
+                  {technicianFeedbacksLoading ? (
+                    <Loader />
+                  ) : technicianFeedbacksError ? (
+                    <Message>{technicianFeedbacksError}</Message>
+                  ) : (
+                    <FeedbackTable
+                      data={technicianFeedbacks}
+                      columns={feedbackColumns}
+                      handleDelete={handleDeleteFeedback}
+                      entityType="technician"
+                    />
+                  )}
+                </div>
+              )}
             </div>
           )}
         </div>

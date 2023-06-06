@@ -35,7 +35,7 @@ const AdminLoginScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    //Dispatch Login
+    // Dispatch Login
     dispatch(adminLogin(email, password));
   };
 
@@ -45,7 +45,7 @@ const AdminLoginScreen = () => {
   };
 
   return (
-    <section className="min-h-screen flex flex-col justify-center items-center bg-gray-800 text-white p-20">
+    <section className="min-h-screen flex flex-col justify-center items-center bg-blue-900 text-white p-20">
       <div className="mx-auto max-w-screen-xl w-full flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
         {loading ? (
           <Loader />
@@ -69,7 +69,7 @@ const AdminLoginScreen = () => {
               >
                 <p className="text-center text-xl leading-relaxed">
                   Sign in to your Account <br />
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm text-gray-400">
                     You've been Missed!
                   </span>
                 </p>
@@ -91,7 +91,7 @@ const AdminLoginScreen = () => {
                         setEmail(e.target.value);
                       }}
                       required
-                      className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                      className="w-full text-white bg-gray-700 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
                     />
                     <span className="absolute inset-y-0 right-0 grid place-content-center px-4">
                       <svg
@@ -127,7 +127,7 @@ const AdminLoginScreen = () => {
                         setPassword(e.target.value);
                       }}
                       required
-                      className="w-full bg-gray-600 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
+                      className="w-full bg-gray-700 rounded-lg border-gray-400 p-4 pr-12 text-sm shadow-sm"
                     />
                     <span className="absolute inset-y-0 right-0 grid place-content-center px-4">
                       <i className="fas fa-lock h-4 w-4 text-gray-400"></i>
@@ -149,7 +149,7 @@ const AdminLoginScreen = () => {
                 <Button
                   type="submit"
                   variant="primary"
-                  className="w-full rounded-full"
+                  className="w-full rounded-full bg-blue-500 hover:bg-blue-600"
                 >
                   Login
                 </Button>

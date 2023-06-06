@@ -2,6 +2,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
+  listAllFeedbacks,
+  listTechnicianFeedbacks,
+} from "../../redux/actions/feedBackActions.js";
+import {
   listAllOrders,
   listTechnicianOrders,
   listUserOrders,
@@ -50,11 +54,17 @@ const SideBar = ({ variant, menuItems, selectedItem, handleItemClick }) => {
     if (variant === "admin" && name === "Orders") {
       dispatch(listAllOrders(adminUserInfo.user._id));
     }
+    if (variant === "admin" && name === "Reviews") {
+      dispatch(listAllFeedbacks(adminUserInfo.user._id));
+    }
     if (variant === "user" && name === "Orders") {
       dispatch(listUserOrders(userInfo.user._id));
     }
     if (variant === "technician" && name === "Orders") {
       dispatch(listTechnicianOrders(techUserInfo.user._id));
+    }
+    if (variant === "technician" && name === "Reviews") {
+      dispatch(listTechnicianFeedbacks(techUserInfo.user._id));
     }
   };
   return (

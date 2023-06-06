@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Button from "./Button";
 
-const Table = ({ data, columns, handleDelete, entityType }) => {
+const FeedbackTable = ({ data, columns, handleDelete, entityType }) => {
   return (
     <div className="overflow-x-auto">
       <table className="bg-gray-700 w-full table-auto border-collapse border-2 border-gray-400 rounded-lg text-center overflow-hidden whitespace-no-wrap">
@@ -11,8 +10,7 @@ const Table = ({ data, columns, handleDelete, entityType }) => {
             {columns.map((column) => (
               <th key={column}>{column.replace(/([A-Z])/g, " $1").trim()}</th>
             ))}
-            <th>Edit</th>
-            <th>Delete</th>
+            {entityType === "admin" && <th>Delete</th>}
           </tr>
         </thead>
         <tbody className="bg-gray-600 text-gray-100">
@@ -26,22 +24,18 @@ const Table = ({ data, columns, handleDelete, entityType }) => {
                   {row[column]}
                 </td>
               ))}
-              <td className="border border-gray-500">
-                <Link to={`/admin/edit/profile/${row._id}`}>
-                  <Button variant="primary" className="rounded-md">
-                    <i className="fas fa-edit"></i>
+
+              {entityType === "admin" && (
+                <td className="border border-gray-500">
+                  <Button
+                    variant="danger"
+                    className="rounded-md"
+                    onClick={() => handleDelete(row._id)}
+                  >
+                    <i className="fas fa-trash"></i>
                   </Button>
-                </Link>
-              </td>
-              <td className="border border-gray-500">
-                <Button
-                  variant="danger"
-                  className="rounded-md"
-                  onClick={() => handleDelete(row._id)}
-                >
-                  <i className="fas fa-trash"></i>
-                </Button>
-              </td>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>
@@ -50,4 +44,4 @@ const Table = ({ data, columns, handleDelete, entityType }) => {
   );
 };
 
-export default Table;
+export default FeedbackTable;

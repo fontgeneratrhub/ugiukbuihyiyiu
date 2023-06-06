@@ -12,6 +12,14 @@ import {
   adminUserUpdateProfileReducer,
 } from "./reducers/adminReducers.js";
 import {
+  feedbackCreateReducer,
+  feedbackDeleteReducer,
+  feedbackListAllReducer,
+  feedbackListTechnicianReducer,
+  feedbackListUserReducer,
+  feedbackUpdateReducer,
+} from "./reducers/feedBackReducers.js";
+import {
   orderCreateReducer,
   orderDeleteReducer,
   orderListAllReducer,
@@ -42,6 +50,12 @@ const reducer = combineReducers({
   adminUserLogin: adminUserLoginReducer,
   adminUserRegister: adminUserRegisterReducer,
   adminUserUpdateProfile: adminUserUpdateProfileReducer,
+  feedbackCreate: feedbackCreateReducer,
+  feedbackDelete: feedbackDeleteReducer,
+  feedbackListAll: feedbackListAllReducer,
+  feedbackListTechnician: feedbackListTechnicianReducer,
+  feedbackListUser: feedbackListUserReducer,
+  feedbackUpdate: feedbackUpdateReducer,
   orderCreate: orderCreateReducer,
   orderDelete: orderDeleteReducer,
   orderListAll: orderListAllReducer,

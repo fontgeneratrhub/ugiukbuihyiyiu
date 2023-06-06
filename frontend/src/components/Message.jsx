@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Message = ({ children }) => {
   const successStyles =
@@ -35,6 +35,22 @@ const Message = ({ children }) => {
       return "Unknown Status";
     }
   };
+
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setVisible(false);
+    }, 15000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
+  if (!visible) {
+    return null;
+  }
 
   let alertStyle = "";
   let icon = "";
