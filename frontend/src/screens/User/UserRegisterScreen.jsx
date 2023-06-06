@@ -17,7 +17,7 @@ const UserRegisterScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState(null);
+  // const [message, setMessage] = useState("");
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -41,14 +41,14 @@ const UserRegisterScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault(); //Dispatch Register
-    if (password != confirmPassword) {
-      setMessage({
-        status: "404",
-        message: "Passwords Do not Match!",
-      });
-    } else {
-      dispatch(register(name, email, password, confirmPassword));
-    }
+    // if (password != confirmPassword) {
+    //   setMessage({
+    //     status: "404",
+    //     message: "Passwords Do not Match!",
+    //   });
+    // } else {
+    dispatch(register(name, email, password, confirmPassword));
+    // }
   };
 
   return (
@@ -77,8 +77,8 @@ const UserRegisterScreen = () => {
                 Create New Account
               </p>
 
-              {message && <Message type="error">{message}</Message>}
-              {error && <Message type="error">{error}</Message>}
+              {/* {message && <Message type="error">{message}</Message>} */}
+              {error && <Message>{error}</Message>}
 
               <div className="w-full mt-4">
                 <label htmlFor="name" className="sr-only">

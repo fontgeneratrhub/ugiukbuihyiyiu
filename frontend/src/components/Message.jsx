@@ -41,7 +41,7 @@ const Message = ({ children }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setVisible(false);
-    }, 15000);
+    }, 8000);
 
     return () => {
       clearTimeout(timer);
