@@ -22,7 +22,7 @@ import UserRegisterScreen from "./screens/User/UserRegisterScreen";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/">
       <NavbarCmp />
       <Routes>
         <Route path="/" element={<HomeScreen />} exact />
