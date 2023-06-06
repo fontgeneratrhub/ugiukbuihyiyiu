@@ -19,6 +19,9 @@ import {
   TECHNICIAN_UPDATE_PROFILE_FAIL,
   TECHNICIAN_UPDATE_PROFILE_REQUEST,
   TECHNICIAN_UPDATE_PROFILE_SUCCESS,
+  TECHNICIAN_SUPSCRIPTION_FAIL,
+  TECHNICIAN_SUPSCRIPTION_REQUEST,
+  TECHNICIAN_SUPSCRIPTION_SUCCESS,
 } from "../constants/technicianConstants.js";
 
 import {
@@ -179,6 +182,47 @@ export const technicianUpdateProfile =
       });
     }
   };
+
+export const techincianSubscription = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: TECHNICIAN_SUPSCRIPTION_REQUEST });
+
+    const { data } = await axios.put(`/api/technician/update/${id}`, {
+      subscription: true,
+    });
+
+    dispatch({
+      type: TECHNICIAN_SUPSCRIPTION_SUCCESS,
+      payload: { user: data.technician },
+    });
+
+    dispatch({
+      type: TECHNICIAN_DETAILS_RESET,
+    });
+
+    dispatch({
+      type: TECHNICIAN_LOGIN_SUCCESS,
+      payload: { user: data.technician },
+    });
+    localStorage.setItem(
+      "techUserInfo",
+      JSON.stringify({
+        user: data.technician,
+      })
+    );
+  } catch (error) {
+    dispatch({
+      type: TECHNICIAN_SUPSCRIPTION_FAIL,
+      payload: {
+        status: error.response && error.response.status,
+        message:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      },
+    });
+  }
+};
 
 export const technicianDelete = (id) => async (dispatch, getState) => {
   try {

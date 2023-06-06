@@ -19,6 +19,8 @@ import TechRegisterScreen from "./screens/Technician/TechRegisterScreen";
 import UserDashboard from "./screens/User/UserDashboard";
 import UserLoginScreen from "./screens/User/UserLoginScreen";
 import UserRegisterScreen from "./screens/User/UserRegisterScreen";
+import Checkout from "./screens/CheckoutScreen";
+import Success from "./components/PaymentSuccess";
 
 function App() {
   return (
@@ -40,6 +42,8 @@ function App() {
         <Route path="/admin/register" element={<AdminRegisterScreen />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/edit/profile/:id" element={<EditProfileScreen />} />
+        <Route path="/checkout/:cost" element={<Checkout />} />
+        <Route path="/success" element={<Success />} />
         <Route path="*" element={<NotFoundScreen />} />
       </Routes>
       <Footer />

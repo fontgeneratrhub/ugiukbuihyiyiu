@@ -2,6 +2,11 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
+  deleteFeedback,
+  listAllFeedbacks,
+  listTechnicianFeedbacks,
+} from "../../redux/actions/feedBackActions.js";
+import {
   deleteOrder,
   listAllOrders,
   listTechnicianOrders,
@@ -13,18 +18,13 @@ import {
   technicianDelete,
 } from "../../redux/actions/technicianActions.js";
 import { deleteUser, listUsers } from "../../redux/actions/userActions.js";
-import {
-  listAllFeedbacks,
-  listTechnicianFeedbacks,
-  deleteFeedback,
-  // updateFeedback,
-} from "../../redux/actions/feedBackActions.js";
 
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
-import Table from "../Table";
-import OrderTable from "../OrderTable";
 import FeedbackTable from "../FeedbackTable";
+import OrderTable from "../OrderTable";
+import SubscriptionCard from "../SupscriptionCard.jsx";
+import Table from "../Table";
 
 const MainContent = ({ variant, selectedItem, menuItems }) => {
   let classes;
@@ -265,6 +265,7 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
       <h1 className="text-4xl text-center font-bold">
         Welcome {formattedUserName}!
       </h1>
+
       {userType && (
         <h2
           className={`text-lg text-center font-semibold mb-4 ${
@@ -276,6 +277,7 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
           User Type: {userType}
         </h2>
       )}
+
       {(deleteSuccess ||
         technicianDeleteSuccess ||
         orderDeleteSuccess ||
@@ -289,6 +291,17 @@ const MainContent = ({ variant, selectedItem, menuItems }) => {
       {orderDeleteError && <Message>{orderDeleteError}</Message>}
       {feedbackDeleteError && <Message>{feedbackDeleteError}</Message>}
       {feedbackUpdateError && <Message>{feedbackUpdateError}</Message>}
+
+      {techUserInfo && !techUserInfo.user.subscription ? (
+        <div className="flex flex-col sm:flex-row justify-evenly items-center">
+          <SubscriptionCard
+            plan="Monthly Plan"
+            price="1500"
+            subscriptionStatus={techUserInfo.user.subscription}
+          />
+        </div>
+      ) : null}
+
       {selectedItem !== null && (
         <div>
           {/* {menuItems[selectedItem].name === "Admins" && (

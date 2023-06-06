@@ -48,18 +48,8 @@ const technicianSchema = new mongoose.Schema(
       required: true,
     },
     subscription: {
-      type: {
-        type: String, // monthly? year?none
-        default: "none",
-      },
-      subscribed: {
-        type: Boolean,
-        default: false,
-      },
-      payment: {
-        type: String,
-        // required: true,
-      },
+      type: Boolean,
+      default: false,
     },
     address: {
       type: String,

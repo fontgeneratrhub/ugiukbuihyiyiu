@@ -35,6 +35,7 @@ import {
   technicianUserLoginReducer,
   technicianUserRegisterReducer,
   technicianUserUpdateProfileReducer,
+  technicianUserSubscriptionReducer,
 } from "./reducers/technicianReducers.js";
 import {
   logoutReducer,
@@ -69,6 +70,7 @@ const reducer = combineReducers({
   technicianUserUpdateProfile: technicianUserUpdateProfileReducer,
   technicianDetails: technicianDetailsReducer,
   technicianUserList: technicianUserListReducer,
+  technicianUserSubscription: technicianUserSubscriptionReducer,
   logout: logoutReducer,
   userDelete: userDeleteReducer,
   userDetails: userDetailsReducer,

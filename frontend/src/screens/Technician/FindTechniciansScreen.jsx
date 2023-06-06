@@ -42,7 +42,7 @@ const FindTechniciansScreen = () => {
 
   useEffect(() => {
     const sucscribedTechnicians = technicians.filter((technician) =>
-      technician.subscription.subscribed === true ? technician : null
+      technician.subscription === true ? technician : null
     );
     setFilteredTechnicians(sucscribedTechnicians);
     setNoTechniciansFound(technicians.length === 0);
@@ -72,12 +72,12 @@ const FindTechniciansScreen = () => {
         icon: "fas fa-arrow-down-a-z",
         link: "#",
       },
-      {
-        label: "Best Rating",
-        value: "best-rating",
-        icon: "fas fa-star",
-        link: "#",
-      },
+      // {
+      //   label: "Best Rating",
+      //   value: "best-rating",
+      //   icon: "fas fa-star",
+      //   link: "#",
+      // },
     ],
   };
 
@@ -103,11 +103,11 @@ const FindTechniciansScreen = () => {
           a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1
         );
         break;
-      case "best-rating":
-        sortedTechnicians.sort(
-          (a, b) => +b.rating.split(" ")[0] - +a.rating.split(" ")[0]
-        );
-        break;
+      // case "best-rating":
+      //   sortedTechnicians.sort(
+      //     (a, b) => +b.rating.split(" ")[0] - +a.rating.split(" ")[0]
+      //   );
+      //   break;
       default:
         break;
     }
@@ -124,7 +124,7 @@ const FindTechniciansScreen = () => {
     setLoadingSearch(true);
 
     const sucscribedTechnicians = technicians.filter((technician) =>
-      technician.subscription.subscribed === true ? technician : null
+      technician.subscription === true ? technician : null
     );
 
     let filtered = sucscribedTechnicians;

@@ -26,6 +26,9 @@ import {
   TECHNICIAN_UPDATE_PROFILE_REQUEST,
   TECHNICIAN_UPDATE_PROFILE_RESET,
   TECHNICIAN_UPDATE_PROFILE_SUCCESS,
+  TECHNICIAN_SUPSCRIPTION_FAIL,
+  TECHNICIAN_SUPSCRIPTION_REQUEST,
+  TECHNICIAN_SUPSCRIPTION_SUCCESS,
 } from "../constants/technicianConstants";
 
 export const technicianUserLoginReducer = (state = {}, action) => {
@@ -66,6 +69,19 @@ export const technicianUserUpdateProfileReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case TECHNICIAN_UPDATE_PROFILE_RESET:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const technicianUserSubscriptionReducer = (state = {}, action) => {
+  switch (action.type) {
+    case TECHNICIAN_SUPSCRIPTION_REQUEST:
+      return { loading: true };
+    case TECHNICIAN_SUPSCRIPTION_SUCCESS:
+      return { loading: false, success: true, techUserInfo: action.payload };
+    case TECHNICIAN_SUPSCRIPTION_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }
