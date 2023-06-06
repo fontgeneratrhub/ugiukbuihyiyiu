@@ -1,35 +1,34 @@
 import React from "react";
+import avi from "../../images/User-avatar.svg.png";
 
 const Testimonials = () => {
   const testimonials = [
     {
       id: 1,
-      name: "John Doe",
-      title: "CEO of XYZ Company",
-      image:
-        "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80",
+      name: "Esha",
+      title: "Software Engineer",
+      image: avi,
       rating: 5,
       comment:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt voluptatem alias ut provident sapiente repellendus.",
+        "I am so grateful for the convenience and efficiency of this website. It connected me with a skilled technician who fixed my device promptly. The whole process was seamless, and I highly recommend it to anyone in need of reliable technical assistance.",
     },
     {
       id: 2,
-      name: "Jane Doe",
-      title: "CEO of ABC Company",
-      image:
-        "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80",
-      rating: 4,
+      name: "Bilal",
+      title: "Marketing Manager",
+      image: avi,
+      rating: 3,
       comment:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt voluptatem alias ut provident sapiente repellendus.",
+        "Using this website to find a technician was a game-changer for me. I was skeptical at first, but the technician I found was knowledgeable and friendly. They resolved my technical issue with ease, and I didn't even have to leave my home. I will definitely rely on this service in the future.",
     },
     {
       id: 3,
-      name: "Bob Smith",
-      title: "CEO of DEF Company",
-      image:
-        "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80",
-      rating: 3,
-      comment: "Amet consectetur adipisicing elit.",
+      name: "Husnain",
+      title: "Small Business Owner",
+      image: avi,
+      rating: 4,
+      comment:
+        "I had a great experience using this website to find a technician for my device repair. The platform was user-friendly, and it didn't take long to find a qualified technician. They arrived on time and provided excellent service. The only reason I'm giving 4 stars is because the pricing was a bit higher than expected.",
     },
   ];
 

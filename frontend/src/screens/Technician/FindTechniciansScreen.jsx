@@ -202,10 +202,13 @@ const FindTechniciansScreen = () => {
                     <i className="fas fa-layer-group mr-2"></i>
                     Category: {technician.category.title}
                   </h2>
-                  <h2 className="text-yellow-400 text-lg font-bold mb-2">
-                    <i className="fas fa-star mr-2"></i>
-                    Rating: {technician.rating}
-                  </h2>
+
+                  {technician.rating && (
+                    <h2 className="text-yellow-400 text-lg font-bold mb-2">
+                      <i className="fas fa-star mr-2"></i>
+                      Rating: {technician.rating}
+                    </h2>
+                  )}
                   <h2 className="text-gray-300 text-sm font-light mb-2">
                     <i className="fas fa-clock mr-2"></i>
                     Experience: {technician.experience}

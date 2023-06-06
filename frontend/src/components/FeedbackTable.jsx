@@ -1,6 +1,5 @@
 import React from "react";
 import Button from "./Button";
-import Message from "./Message";
 
 const FeedbackTable = ({ data, columns, handleDelete, entityType }) => {
   return (
