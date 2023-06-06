@@ -14,15 +14,10 @@ const emailvalidator = require("email-validator");
 module.exports = {
   addAdmin: async (req, res) => {
     try {
-      let { name, email, password, confirmPassword } = req.body;
-      // let admin = connection();
-      // console.log(name, 'name');
-      // console.log(email, 'email');
-      // console.log(password, 'password');
-      // console.log(confirmPassword, 'confirmPassword');
+      let { name, email, password, confirmPassword, secretCode } = req.body;
 
       // check all fields are filled or not
-      if (!name || !email || !password || !confirmPassword) {
+      if (!name || !email || !password || !confirmPassword || !secretCode) {
         return res
           .status(400)
           .send({ status: "failed", message: "All fields are Required" });
@@ -43,31 +38,38 @@ module.exports = {
                 .status(400)
                 .send({ message: "Password must match with Confirm Password" });
             } else {
-              // encrypt the admin passsword for securituy and save New admin successfully
+              if (secretCode == 543210) {
+                // encrypt the admin passsword for securituy and save New admin successfully
 
-              const salt = await bcrypt.genSalt(Number(process.env.SALT));
-              const hashpswd = await bcrypt.hash(password, salt);
-              const newAdmin = new Admin({
-                name: name,
-                email: email,
-                password: hashpswd,
-              });
-              await newAdmin.save();
+                const salt = await bcrypt.genSalt(Number(process.env.SALT));
+                const hashpswd = await bcrypt.hash(password, salt);
+                const newAdmin = new Admin({
+                  name: name,
+                  email: email,
+                  password: hashpswd,
+                });
+                await newAdmin.save();
 
-              // Generate JWT Token
-              const token = jwt.sign(
-                { userID: newAdmin._id },
-                process.env.JWT_SECRET_KEY,
-                { expiresIn: "2d" }
-              );
+                // Generate JWT Token
+                const token = jwt.sign(
+                  { userID: newAdmin._id },
+                  process.env.JWT_SECRET_KEY,
+                  { expiresIn: "2d" }
+                );
 
-              console.log("Admin Added");
-              res.status(200).send({
-                status: "success",
-                message: "Registered Successfully",
-                user: newAdmin,
-                token: token,
-              });
+                console.log("Admin Added");
+                res.status(200).send({
+                  status: "success",
+                  message: "Registered Successfully",
+                  user: newAdmin,
+                  token: token,
+                });
+              } else {
+                res
+                  .status(400)
+                  .send({ status: "failed", message: "Invalid Secret Code" });
+                console.log("Invalid Secret Code");
+              }
             }
           }
         } else {
@@ -80,7 +82,6 @@ module.exports = {
       res.status(500).send({ message: "Server Error", Error: e });
     }
   },
-
   // login
   getAdmin: async (req, res) => {
     try {
