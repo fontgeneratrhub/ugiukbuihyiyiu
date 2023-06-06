@@ -132,7 +132,7 @@ const UserLoginScreen = () => {
                     </span>
                   </div>
 
-                  <div className="flex justify-between items-center w-full mt-4">
+                  {/* <div className="flex justify-between items-center w-full mt-4">
                     <div className="flex items-center">
                       <Link
                         onClick={forgetPwdHandler}
@@ -141,7 +141,7 @@ const UserLoginScreen = () => {
                         Forgot your password?
                       </Link>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <Button
                   type="submit"

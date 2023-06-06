@@ -133,7 +133,7 @@ const TechLoginScreen = () => {
                     </span>
                   </div>
 
-                  <div className="flex justify-between items-center w-full mt-4">
+                  {/* <div className="flex justify-between items-center w-full mt-4">
                     <div className="flex items-center">
                       <Link
                         onClick={forgetPwdHandler}
@@ -142,7 +142,7 @@ const TechLoginScreen = () => {
                         Forgot your password?
                       </Link>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
 
                 <Button
