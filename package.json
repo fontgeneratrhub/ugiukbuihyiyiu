@@ -9,7 +9,9 @@
     "client": "npm run dev --prefix frontend",
     "build": "cd frontend && npm run build --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "install": "cd frontend && npm install && cd .. && cd backend && npm install && cd .."
+    "data:import": "node backend/seeder",
+    "data:destroy": "node backend/seeder -d",
+    "install": "cd frontend && npm install -f && cd .. && cd backend && npm install -f && cd .."
   },
   "repository": {
     "type": "git",

@@ -1,7 +1,4 @@
-// const { string } = require("joi");
 const mongoose = require("mongoose");
-// const validator = require("validator");
-// const Joi = re quire("joi");
 
 const technicianSchema = new mongoose.Schema(
   {
@@ -61,17 +58,5 @@ const technicianSchema = new mongoose.Schema(
 
 // <============create collection============>
 const Technician = new mongoose.model("Technician", technicianSchema);
-
-// const validate = (data) => {
-//     const schema = Joi.object({
-//         name: Joi.string().required().min(3).label("Name"),
-//         email: Joi.string().email().required().label("Email address"),
-//         pswd: Joi.string().password().required().min(6).label("Password"),
-//         phone: Joi.string().required().label("Phone"),
-//         gender: Joi.string().required().label("Gender"),
-
-//     });
-//     return schema.validate(data);
-// };
 
 module.exports = { Technician };

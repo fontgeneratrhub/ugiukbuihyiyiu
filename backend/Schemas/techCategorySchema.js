@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-// const validator = require("validator");
-// const Joi = re quire("joi");
 
 const techCategorySchema = new mongoose.Schema(
   {
