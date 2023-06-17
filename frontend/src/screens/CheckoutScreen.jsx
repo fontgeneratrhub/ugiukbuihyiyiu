@@ -35,7 +35,9 @@ export default function Checkout() {
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     axios
-      .post("http://localhost:4000/api/checkout", { totalCost: totalCost })
+      .post("https://kariger-com-app-mern.vercel.app/api/checkout", {
+        totalCost: totalCost,
+      })
       .then((response) => {
         setClientSecret(response.data.clientSecret);
       })

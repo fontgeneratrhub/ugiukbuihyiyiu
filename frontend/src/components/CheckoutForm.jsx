@@ -59,7 +59,7 @@ export default function CheckoutForm({ totalCost }) {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:5173/success",
+        return_url: "https://kariger-com-app-mern.vercel.app/success",
       },
     });
 

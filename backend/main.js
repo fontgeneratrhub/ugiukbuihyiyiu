@@ -31,10 +31,6 @@ app.use(cors()); //  use  cors to run multiple servers
 app.use(express.json()); //  express's body parser to convetert data into JSON form
 app.use(bodyParser.json()); // to parse data in json
 
-app.get("/", (req, res) => {
-  res.send("API is running...");
-});
-
 app.use("/api/user", userRoutes); //user route
 app.use("/api/admin", adminRoutes); // Admin route
 app.use("/api/category", techCategoryRoutes); // Category route
