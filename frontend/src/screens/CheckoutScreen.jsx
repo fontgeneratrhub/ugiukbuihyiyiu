@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { useSelector } from "react-redux";
 import axios from "axios";
-import CheckoutForm from "../components/CheckoutForm";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+
+import CheckoutForm from "../components/CheckoutForm";
+
 import "./CheckoutScreen.css";
 
 // 4263982640269299

@@ -1,29 +1,12 @@
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { techincianSubscription } from "../redux/actions/technicianActions.js";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    paddingTop: theme.spacing(8),
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    minHeight: "100vh",
-    backgroundColor: theme.palette.background.default,
-  },
-  message: {
-    textAlign: "center",
-    fontSize: "24px",
-    fontWeight: "bold",
-  },
-}));
+import Button from "./Button";
 
 const Success = () => {
-  const classes = useStyles();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -39,11 +22,30 @@ const Success = () => {
   }, []);
 
   return (
-    <div className={classes.root}>
-      <Typography variant="h4" className={classes.message}>
-        Payment is Successfully transferred!
-      </Typography>
-    </div>
+    <section className="min-h-screen flex flex-row justify-center items-center bg-gray-800 text-white py-20">
+      <div className="mx-auto max-w-screen-xl w-full flex flex-col justify-center items-center px-4 sm:px-8 lg:px-6">
+        <div className="flex flex-col justify-center items-center">
+          <i className="fas fa-thumbs-up fa-beat fa-fade text-6xl text-gray-500 mb-4"></i>
+          <span className="text-gray-500 text-2xl sr-only">
+            Payment Success!
+          </span>
+        </div>
+
+        <h1 className="text-4xl text-center font-bold mt-4 mb-2">
+          Payment Successful!
+        </h1>
+
+        <p className="text-lg text-center mb-4 text-gray-500">
+          Payment is Successfully Transferred!
+        </p>
+        <Link to="/">
+          <Button variant="secondary" className="rounded-md mr-2">
+            <i className="fas fa-arrow-left mr-2"></i>
+            Go back to the Homepage
+          </Button>
+        </Link>
+      </div>
+    </section>
   );
 };
 
