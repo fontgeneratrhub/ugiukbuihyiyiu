@@ -2,7 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
-var bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
+const path = require("path");
 
 const connection = require("./dbConnection");
 
@@ -27,17 +28,29 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-app.use(cors()); //  use  cors to run multiple servers
-app.use(express.json()); //  express's body parser to convetert data into JSON form
-app.use(bodyParser.json()); // to parse data in json
+app.use(cors()); // use cors to run multiple servers
+app.use(express.json()); // express's body parser to convert data into JSON form
+app.use(bodyParser.json()); // to parse data in JSON
 
-app.use("/api/user", userRoutes); //user route
+app.use("/api/user", userRoutes); // User route
 app.use("/api/admin", adminRoutes); // Admin route
 app.use("/api/category", techCategoryRoutes); // Category route
 app.use("/api/technician", technicianRoutes); // Technician route
 app.use("/api/order", orderRoutes); // Order route
 app.use("/api/feedback", feedbackRoutes); // Feedback route
-app.use("/api", checkoutRoutes); //Checkout route
+app.use("/api", checkoutRoutes); // Checkout route
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/frontend", "dist")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running....");
+  });
+}
 
 const PORT = process.env.PORT || 4000;
 app.listen(
