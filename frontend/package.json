@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "description": "Frontend for Kariger.com app",
-  "homepage": "https://kariger-com.vercel.app/",
+  "homepage": "https://kariger-com-app-mern.vercel.app/",
   "private": true,
   "version": "1.0.0",
   "type": "module",

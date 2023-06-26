@@ -7,7 +7,7 @@
     "start": "node backend/main --prefix backend",
     "server": "nodemon backend/main --prefix backend",
     "client": "npm run dev --prefix frontend",
-    "build": "cd frontend && npm run build --prefix frontend",
+    "build": "cd frontend && npm run build",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node backend/seeder",
     "data:destroy": "node backend/seeder -d",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/junaidahmadalvi/kariger.com.git"
+    "url": "git+https://github.com/itxSaaad/kariger.com-app-mern.git"
   },
   "keywords": [
     "MERN",
@@ -24,12 +24,12 @@
     "React",
     "Node"
   ],
-  "author": "Junaid Ahmad",
+  "author": "Muhammad Saad",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/junaidahmadalvi/kariger.com/issues"
+    "url": "https://github.com/itxSaaad/kariger.com-app-mern/issues"
   },
-  "homepage": "https://github.com/junaidahmadalvi/kariger.com#readme",
+  "homepage": "https://github.com/itxSaaad/kariger.com-app-mern#readme",
   "dependencies": {
     "concurrently": "^6.4.0"
   },

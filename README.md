@@ -7,15 +7,15 @@
 <div align="center">
   <p align="center">
     <br />
-    <a href="https://github.com/junaidahmadalvi/kariger.com">
+    <a href="https://github.com/itxSaaad/kariger.com-app-mern">
     <strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://kariger-com.vercel.app/">View Demo</a>
+    <a href="https://kariger.com-app-mern.vercel.app/">View Demo</a>
     ·
-    <a href="https://github.com/junaidahmadalvi/kariger.com/issues">Report Bug</a>
+    <a href="https://github.com/itxSaaad/kariger.com-app-mern/issues">Report Bug</a>
     ·
-    <a href="https://github.com/junaidahmadalvi/kariger.com/issues">Request Feature</a>
+    <a href="https://github.com/itxSaaad/kariger.com-app-mern/issues">Request Feature</a>
   </p>
 </div>
 
@@ -27,7 +27,7 @@
 
 ## Live Preview Project
 
-[Live Preview](https://kariger-com.vercel.app/)
+[Live Preview](https://kariger-com-app-mern.vercel.app//)
 
 ## Features
 
@@ -84,8 +84,8 @@ You need to have Node.js and npm installed on your machine.
 Clone the repository to your local machine and navigate to the project directory.
 
 ```bash
-git clone https://github.com/junaidahmadalvi/kariger.com.git
-cd kariger.com
+git clone https://github.com/itxSaaad/kariger.com-app-mern.git
+cd kariger.com-app-mern
 ```
 
 Install the dependencies by running the following command:
@@ -118,11 +118,11 @@ Don't forget to give the project a star! Thanks again!
 - Junaid Ahmad - [@junaid-ahmad-a07950203](https://www.linkedin.com/in/junaid-ahmad-a07950203) - junaidahmad6469@gmail.com
 - Muhammad Saad - [@itxSaaad](https://www.linkedin.com/in/itxsaaad/) - saadstudent.cs@gmail.com
 
-Project Link: [https://github.com/junaidahmadalvi/kariger.com](https://github.com/junaidahmadalvi/kariger.com)
+Project Link: [https://github.com/itxSaaad/kariger.com-app-mern](https://github.com/itxSaaad/kariger.com-app-mern)
 
 ## License
 
-Kariger.com is licensed under the [Copyright License](./LICENSE)
+Kariger.com is licensed under the [Creative Commons Zero v1.0 Universal](./LICENSE)
 
 ## Support
 
@@ -133,13 +133,13 @@ Give ⭐️ if you like this project!
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/junaidahmadalvi/kariger.com.svg?style=for-the-badge
-[contributors-url]: https://github.com/junaidahmadalvi/kariger.com/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/junaidahmadalvi/kariger.com.svg?style=for-the-badge
-[forks-url]: https://github.com/junaidahmadalvi/kariger.com/network/members
-[stars-shield]: https://img.shields.io/github/stars/junaidahmadalvi/kariger.com.svg?style=for-the-badge
-[stars-url]: https://github.com/junaidahmadalvi/kariger.com/stargazers
-[issues-shield]: https://img.shields.io/github/issues/junaidahmadalvi/kariger.com.svg?style=for-the-badge
-[issues-url]: https://github.com/junaidahmadalvi/kariger.com/issues
-[license-shield]: https://img.shields.io/github/license/junaidahmadalvi/kariger.com.svg?style=for-the-badge
-[license-url]: https://github.com/junaidahmadalvi/kariger.com/blob/master/LICENSE.md
+[contributors-shield]: https://img.shields.io/github/contributors/itxSaaad/kariger.com-app-mern.svg?style=for-the-badge
+[contributors-url]: https://github.com/itxSaaad/kariger.com-app-mern/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/itxSaaad/kariger.com-app-mern.svg?style=for-the-badge
+[forks-url]: https://github.com/itxSaaad/kariger.com-app-mern/network/members
+[stars-shield]: https://img.shields.io/github/stars/itxSaaad/kariger.com-app-mern.svg?style=for-the-badge
+[stars-url]: https://github.com/itxSaaad/kariger.com-app-mern/stargazers
+[issues-shield]: https://img.shields.io/github/issues/itxSaaad/kariger.com-app-mern.svg?style=for-the-badge
+[issues-url]: https://github.com/itxSaaad/kariger.com-app-mern/issues
+[license-shield]: https://img.shields.io/github/license/itxSaaad/kariger.com-app-mern.svg?style=for-the-badge
+[license-url]: https://github.com/itxSaaad/kariger.com-app-mern/blob/main/LICENSE.md

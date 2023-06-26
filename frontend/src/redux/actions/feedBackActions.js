@@ -20,6 +20,9 @@ import {
   FEEDBACK_STATUS_UPDATE_SUCCESS,
 } from "../constants/feedBackConstants.js";
 
+const backendApiUrl =
+  `https://kariger-com-app-mern-backend.vercel.app` || `http://localhost:4000`;
+
 export const createFeedback =
   (userId, technicianId, description, stars) => async (dispatch, getState) => {
     try {
@@ -39,7 +42,7 @@ export const createFeedback =
       };
 
       const { data } = await axios.post(
-        "/api/feedback/add",
+        `${backendApiUrl}/api/feedback/add`,
         { userId, technicianId, description, stars },
         config
       );
@@ -68,7 +71,7 @@ export const deleteFeedback = (id) => async (dispatch) => {
       type: FEEDBACK_DELETE_REQUEST,
     });
 
-    await axios.delete(`/api/feedback/delete/${id}`);
+    await axios.delete(`${backendApiUrl}/api/feedback/delete/${id}`);
 
     dispatch({
       type: FEEDBACK_DELETE_SUCCESS,
@@ -103,9 +106,12 @@ export const listAllFeedbacks = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/feedback/showAll/${id}`, {
-      config,
-    });
+    const { data } = await axios.get(
+      `${backendApiUrl}/api/feedback/showAll/${id}`,
+      {
+        config,
+      }
+    );
 
     dispatch({
       type: FEEDBACK_LIST_SUCCESS,
@@ -135,11 +141,14 @@ export const listUserFeedbacks = (id) => async (dispatch, getState) => {
       userLogin: { userInfo },
     } = getState();
 
-    const { data } = await axios.get(`/api/user/userFeedbacks/${id}`, {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    });
+    const { data } = await axios.get(
+      `${backendApiUrl}/api/user/userFeedbacks/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+    );
 
     dispatch({
       type: FEEDBACK_LIST_USER_SUCCESS,
@@ -170,7 +179,7 @@ export const listTechnicianFeedbacks = (id) => async (dispatch, getState) => {
     // } = getState();
 
     const { data } = await axios.get(
-      `/api/technician/technicianFeedbacks/${id}`
+      `${backendApiUrl}/api/technician/technicianFeedbacks/${id}`
       // {
       //   headers: {
       //     Authorization: `Bearer ${techUserInfo.token}`,
@@ -202,7 +211,7 @@ export const updateFeedback = (id, status) => async (dispatch) => {
       type: FEEDBACK_STATUS_UPDATE_REQUEST,
     });
 
-    await axios.put(`/api/feedback/update/${id}`, { status });
+    await axios.put(`${backendApiUrl}/api/feedback/update/${id}`, { status });
 
     dispatch({
       type: FEEDBACK_STATUS_UPDATE_SUCCESS,

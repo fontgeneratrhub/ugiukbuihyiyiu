@@ -12,6 +12,9 @@ import {
   ADMIN_UPDATE_PROFILE_RESET,
 } from "../constants/adminConstants";
 
+const backendApiUrl =
+  `https://kariger-com-app-mern-backend.vercel.app` || `http://localhost:4000`;
+
 export const adminLogin = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: ADMIN_LOGIN_REQUEST });
@@ -23,7 +26,7 @@ export const adminLogin = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "/api/admin/login",
+      `${backendApiUrl}/api/admin/login`,
       { email, password },
       config
     );
@@ -62,7 +65,7 @@ export const adminRegister =
       };
 
       const { data } = await axios.post(
-        "/api/admin/signUp",
+        `${backendApiUrl}/api/admin/signUp`,
         { name, email, password, confirmPassword, secretCode },
         config
       );
@@ -110,7 +113,7 @@ export const adminUpdateProfile =
       };
 
       const { data } = await axios.put(
-        `/api/admin/update/${id}`,
+        `${backendApiUrl}/api/admin/update/${id}`,
         { email, name },
         config
       );

@@ -35,6 +35,9 @@ import {
   USER_UPDATE_PROFILE_SUCCESS,
 } from "../constants/userConstants.js";
 
+const backendApiUrl =
+  `https://kariger-com-app-mern-backend.vercel.app` || `http://localhost:4000`;
+
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: USER_LOGIN_REQUEST });
@@ -46,7 +49,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "/api/user/login",
+      `${backendApiUrl}/api/user/login`,
       { email, password },
       config
     );
@@ -101,7 +104,7 @@ export const register =
       };
 
       const { data } = await axios.post(
-        "/api/user/signUp",
+        `${backendApiUrl}/api/user/signUp`,
         { name, email, password, confirmPassword },
         config
       );
@@ -136,7 +139,7 @@ export const getUserDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`/api/user/single/${id}`);
+    const { data } = await axios.get(`${backendApiUrl}/api/user/single/${id}`);
 
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data.user });
   } catch (error) {
@@ -157,7 +160,10 @@ export const updateProfile = (email, name, id) => async (dispatch) => {
   try {
     dispatch({ type: USER_UPDATE_PROFILE_REQUEST });
 
-    const { data } = await axios.put(`/api/user/update/${id}`, { email, name });
+    const { data } = await axios.put(`${backendApiUrl}/api/user/update/${id}`, {
+      email,
+      name,
+    });
 
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,
@@ -200,7 +206,10 @@ export const listUsers = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/user/showAll/${id}`, config);
+    const { data } = await axios.get(
+      `${backendApiUrl}/api/user/showAll/${id}`,
+      config
+    );
 
     dispatch({ type: USER_LIST_SUCCESS, payload: data.users });
   } catch (error) {
@@ -231,7 +240,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/user/delete/${id}`, config);
+    await axios.delete(`${backendApiUrl}/api/user/delete/${id}`, config);
 
     dispatch({ type: USER_DELETE_SUCCESS });
 

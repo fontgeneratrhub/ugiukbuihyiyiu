@@ -30,6 +30,9 @@ import {
   TECHNICIAN_DELETE_SUCCESS,
 } from "../constants/adminConstants.js";
 
+const backendApiUrl =
+  `https://kariger-com-app-mern-backend.vercel.app` || `http://localhost:4000`;
+
 export const technicianLogin = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: TECHNICIAN_LOGIN_REQUEST });
@@ -41,7 +44,7 @@ export const technicianLogin = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "/api/technician/login",
+      `${backendApiUrl}/api/technician/login`,
       { email, password },
       config
     );
@@ -92,7 +95,7 @@ export const technicianRegister =
       };
 
       const { data } = await axios.post(
-        "/api/technician/signUp",
+        `${backendApiUrl}/api/technician/signUp`,
         {
           categoryId,
           name,
@@ -140,15 +143,18 @@ export const technicianUpdateProfile =
     try {
       dispatch({ type: TECHNICIAN_UPDATE_PROFILE_REQUEST });
 
-      const { data } = await axios.put(`/api/technician/update/${id}`, {
-        email,
-        name,
-        phone,
-        location,
-        cnic,
-        experience,
-        address,
-      });
+      const { data } = await axios.put(
+        `${backendApiUrl}/api/technician/update/${id}`,
+        {
+          email,
+          name,
+          phone,
+          location,
+          cnic,
+          experience,
+          address,
+        }
+      );
 
       dispatch({
         type: TECHNICIAN_UPDATE_PROFILE_SUCCESS,
@@ -186,9 +192,12 @@ export const techincianSubscription = (id) => async (dispatch) => {
   try {
     dispatch({ type: TECHNICIAN_SUPSCRIPTION_REQUEST });
 
-    const { data } = await axios.put(`/api/technician/update/${id}`, {
-      subscription: true,
-    });
+    const { data } = await axios.put(
+      `${backendApiUrl}/api/technician/update/${id}`,
+      {
+        subscription: true,
+      }
+    );
 
     dispatch({
       type: TECHNICIAN_SUPSCRIPTION_SUCCESS,
@@ -238,7 +247,7 @@ export const technicianDelete = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/technician/delete/${id}`, config);
+    await axios.delete(`${backendApiUrl}/api/technician/delete/${id}`, config);
 
     dispatch({
       type: TECHNICIAN_DELETE_SUCCESS,
@@ -261,7 +270,9 @@ export const getTechnicianDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: TECHNICIAN_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`/api/technician/single/${id}`);
+    const { data } = await axios.get(
+      `${backendApiUrl}/api/technician/single/${id}`
+    );
 
     dispatch({
       type: TECHNICIAN_DETAILS_SUCCESS,
@@ -285,7 +296,7 @@ export const listTechnicians = () => async (dispatch) => {
   try {
     dispatch({ type: TECHNICIAN_LIST_REQUEST });
 
-    const { data } = await axios.get("/api/technician/showAll");
+    const { data } = await axios.get(`${backendApiUrl}/api/technician/showAll`);
 
     dispatch({
       type: TECHNICIAN_LIST_SUCCESS,
@@ -309,7 +320,7 @@ export const listTechnicianCategories = () => async (dispatch) => {
   try {
     dispatch({ type: CATEGORY_LIST_REQUEST });
 
-    const { data } = await axios.get("/api/category/showAll");
+    const { data } = await axios.get(`${backendApiUrl}/api/category/showAll`);
 
     dispatch({
       type: CATEGORY_LIST_SUCCESS,

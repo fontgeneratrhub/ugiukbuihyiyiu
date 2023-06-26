@@ -21,6 +21,9 @@ import {
   ORDER_STATUS_UPDATE_SUCCESS,
 } from "../constants/orderConstants.js";
 
+const backendApiUrl =
+  `https://kariger-com-app-mern-backend.vercel.app` || `http://localhost:4000`;
+
 export const createOrder =
   (userId, technicianId) => async (dispatch, getState) => {
     try {
@@ -40,7 +43,7 @@ export const createOrder =
       };
 
       const { data } = await axios.post(
-        "/api/order/book",
+        `${backendApiUrl}/api/order/book`,
         { userId, technicianId },
         config
       );
@@ -69,7 +72,7 @@ export const deleteOrder = (id) => async (dispatch) => {
       type: ORDER_DELETE_REQUEST,
     });
 
-    await axios.delete(`/api/order/delete/${id}`);
+    await axios.delete(`${backendApiUrl}/api/order/delete/${id}`);
 
     dispatch({
       type: ORDER_DELETE_SUCCESS,
@@ -98,11 +101,14 @@ export const listAllOrders = (id) => async (dispatch, getState) => {
       adminUserLogin: { adminUserInfo },
     } = getState();
 
-    const { data } = await axios.get(`/api/order/showAll/${id}`, {
-      headers: {
-        Authorization: `Bearer ${adminUserInfo.token}`,
-      },
-    });
+    const { data } = await axios.get(
+      `${backendApiUrl}/api/order/showAll/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${adminUserInfo.token}`,
+        },
+      }
+    );
 
     dispatch({
       type: ORDER_LIST_SUCCESS,
@@ -132,11 +138,14 @@ export const listUserOrders = (id) => async (dispatch, getState) => {
       userLogin: { userInfo },
     } = getState();
 
-    const { data } = await axios.get(`/api/user/userOrders/${id}`, {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    });
+    const { data } = await axios.get(
+      `${backendApiUrl}/api/user/userOrders/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+    );
 
     dispatch({
       type: ORDER_LIST_USER_SUCCESS,
@@ -166,11 +175,14 @@ export const listTechnicianOrders = (id) => async (dispatch, getState) => {
       technicianUserLogin: { techUserInfo },
     } = getState();
 
-    const { data } = await axios.get(`/api/technician/technicianOrders/${id}`, {
-      headers: {
-        Authorization: `Bearer ${techUserInfo.token}`,
-      },
-    });
+    const { data } = await axios.get(
+      `${backendApiUrl}/api/technician/technicianOrders/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${techUserInfo.token}`,
+        },
+      }
+    );
 
     dispatch({
       type: ORDER_LIST_TECHNICIAN_SUCCESS,
@@ -196,7 +208,7 @@ export const updateOrderStatus = (id, status) => async (dispatch) => {
       type: ORDER_STATUS_UPDATE_REQUEST,
     });
 
-    await axios.put(`/api/order/update/${id}`, { status });
+    await axios.put(`${backendApiUrl}/api/order/update/${id}`, { status });
 
     dispatch({
       type: ORDER_STATUS_UPDATE_SUCCESS,
