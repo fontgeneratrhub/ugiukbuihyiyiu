@@ -11,7 +11,7 @@ const Jumbotron = () => {
   const { techUserInfo } = technicianUserLogin;
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-gray-800 to-gray-700 flex justify-center items-center ">
+    <section className="min-h-screen bg-gradient-to-br from-gray-800 to-gray-700 flex justify-center items-center">
       <div className="flex flex-col lg:flex-row items-center justify-center mx-auto pt-20 pb-6 px-4 lg:pb-0 lg:pt-12 sm:px-6 lg:px-10">
         <div className="w-full lg:w-1/2 px-4">
           <h1 className="text-5xl md:text-5xl font-bold text-white mb-6">

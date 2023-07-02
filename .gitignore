@@ -1,49 +1,77 @@
-# Logs and databases
+# Logs
+logs
 *.log
-*.sqlite
-*.sqlite3
-
-# OS-generated files
-.DS_Store
-Thumbs.db
-
-# IDE and editor generated files
-.idea/
-.vscode/
-*.swp
-*~
-
-# Dependency directories
-node_modules/
-jspm_packages/
-bower_components/
-
-# Distribution files
-/dist/
-/build/
-/public/assets/
-/public/bundles/
-/public/uploads/
-
-# Configuration files
-.env
-.env.local
-.env.*.local
-.env.test
-.env.production
-
-# Miscellaneous
-.sass-cache/
-logs/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Ignore all .js files in the /node_modules directory
-/node_modules/**/*.js
+# Node.js
+node_modules/
+npm-debug.log*
+yarn.lock
 
-# Ignore all .test.js files in the /test directory
-/test/**/*.test.js
+# Build output
+build/
+/frontend/dist/
 
-# Ignore all .snap files in the root directory
-*.snap
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Dependencies
+/frontend/node_modules/
+/backend/node_modules/
+
+
+# Testing
+/coverage/
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# Mac OS
+.DS_Store
+
+# Editor/IDE specific
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+.komodotools
+*_i.c
+*_e.c
+*.class
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-*
+.project
+.c9/
+nbproject/
+*~
+.svn/
+thumbs.db
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Jest coverage output
+/coverage/
+
+# Cypress videos and screenshots
+/cypress/videos/
+/cypress/screenshots/
+
+# Storybook build output
+/storybook-static/
+
+# .vercel 
+.vercel
