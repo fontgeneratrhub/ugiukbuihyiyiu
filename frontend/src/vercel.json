@@ -4,8 +4,9 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "build"  // or your actual output directory
+        "distDir": "build"
       }
     }
-  ]
+  ],
+  "buildCommand": "npm run build"
 }
