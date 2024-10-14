@@ -4,10 +4,10 @@
   "description": "A Technician Finding App - MERN",
   "private": true,
   "scripts": {
-    "start": "next start",
+    "start": "node backend/main --prefix backend",
     "server": "nodemon backend/main --prefix backend",
     "client": "npm run dev --prefix frontend",
-    "build": "next build",
+    "build": "cd frontend && npm run build",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node backend/seeder",
     "data:destroy": "node backend/seeder -d",
