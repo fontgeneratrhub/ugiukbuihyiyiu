@@ -7,7 +7,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host --open",
-    "build": "vite build",
+    "build": "[my-framework] build --output public",
     "preview": "vite preview"
   },
   "keywords": [
